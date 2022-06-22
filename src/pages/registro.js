@@ -1,28 +1,70 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
+import {
+  Avatar,
+  Button,
+  TextField,
+  Grid,
+  Box,
+  Typography,
+  Paper,
+} from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import styles from "../styles/textglobal.module.css";
-import Paper from "@mui/material/Paper";
+import Routes from "src/constants/routes";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import withoutAuth from "@/hocs/withoutAuth";
+import { useAuth } from "@/lib/auth";
 
-export default function SignInSide() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+const schema = yup.object({
+  email: yup
+    .string("El campo debe ser alfanumérico")
+    .email("Ingrese un correo válido")
+    .required("Este campo es requerido"),
+  name: yup.string().required("Este campo es requerido"),
+  last_name: yup.string().required("Este campo es requerido"),
+  password: yup
+    .string()
+    .min(6, "La contraseña debe tener al menos 6 caracteress")
+    .required("Este campo es requerido"),
+  password_confirmation: yup
+    .string()
+    .oneOf([yup.ref("password"), null], "Las contraseñas no coinciden")
+    .required("Este campo es requerido"),
+});
+
+const Register = () => {
+  const { register: doRegister } = useAuth();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = async (data) => {
+    console.log("data", data);
+    try {
+      const userData = await doRegister({ ...data, role: "ROLE_USER" });
+
+      console.log("userData", userData);
+    } catch (error) {
+      if (error.response) {
+        alert(error.response.message);
+        console.log(error.response);
+      } else if (error.request) {
+        console.log(error.request);
+      } else {
+        console.log("Error", error.message);
+      }
+      console.log(error.config);
+    }
   };
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
-      <CssBaseline />
       <Grid
         item
         xs={false}
@@ -58,13 +100,12 @@ export default function SignInSide() {
           <Box
             component="form"
             noValidate
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit(onSubmit)}
             sx={{ m: 5 }}
           >
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  autoComplete="given-name"
                   name="firstName"
                   required
                   fullWidth
@@ -72,6 +113,9 @@ export default function SignInSide() {
                   label="Ingresa tu nombre"
                   autoFocus
                   color="secondary"
+                  {...register("name")}
+                  error={!!errors.name}
+                  helperText={errors?.name?.message}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -81,8 +125,10 @@ export default function SignInSide() {
                   id="lastName"
                   label="Ingresa tu apellido"
                   name="lastName"
-                  autoComplete="family-name"
                   color="secondary"
+                  {...register("last_name")}
+                  error={!!errors.last_name}
+                  helperText={errors?.last_name?.message}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -94,6 +140,9 @@ export default function SignInSide() {
                   name="email"
                   autoComplete="email"
                   color="secondary"
+                  {...register("email")}
+                  error={!!errors.email}
+                  helperText={errors?.email?.message}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -105,6 +154,9 @@ export default function SignInSide() {
                   type="password"
                   id="password"
                   color="secondary"
+                  {...register("password")}
+                  error={!!errors.password}
+                  helperText={errors?.password?.message}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -116,6 +168,9 @@ export default function SignInSide() {
                   type="password"
                   id="password_confirmation"
                   color="secondary"
+                  {...register("password_confirmation")}
+                  error={!!errors.password_confirmation}
+                  helperText={errors?.password_confirmation?.message}
                 />
               </Grid>
             </Grid>
@@ -130,7 +185,7 @@ export default function SignInSide() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/login">
+                <Link href={Routes.LOGIN}>
                   <a className={styles.tx}>Ya tienenes cuenta? Inicia sesión</a>
                 </Link>
               </Grid>
@@ -140,4 +195,5 @@ export default function SignInSide() {
       </Grid>
     </Grid>
   );
-}
+};
+export default withoutAuth(Register);

@@ -1,29 +1,64 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
+import {
+  Avatar,
+  Button,
+  TextField,
+  Paper,
+  Box,
+  Grid,
+  Typography,
+} from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Link from "next/link";
-import styles from "../styles/textglobal.module.css";
+import NextLink from "next/link";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import styles from "../styles/Textglobal.module.css";
+import { useForm } from "react-hook-form";
+import Routes from "src/constants/routes";
+import withoutAuth from "@/hocs/withoutAuth";
+import { useAuth } from "@/lib/auth";
 
-export default function SignInSide() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+const schema = yup.object({
+  email: yup
+    .string("El campo debe ser alfanumérico")
+    .email("Ingrese un correo válido")
+    .required("Este campo es requerido"),
+  password: yup
+    .string("El campo debe ser alfanumérico")
+    .required("Este campo es requerido")
+    .min(6, "La contraseña debe tener al menos 6 caracteres"),
+});
+
+const Login = () => {
+  const { login } = useAuth();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = async (data) => {
+    console.log("data", data);
+    try {
+      const userData = await login(data);
+
+      console.log("userData", userData);
+    } catch (error) {
+      if (error.response) {
+        alert(error.response.message);
+        console.log(error.response);
+      } else if (error.request) {
+        console.log(error.request);
+      } else {
+        console.log("Error", error.message);
+      }
+      console.log(error.config);
+    }
   };
-
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
-      <CssBaseline />
       <Grid
         item
         xs={false}
@@ -40,7 +75,6 @@ export default function SignInSide() {
           backgroundPosition: "center",
         }}
       />
-
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <Box
           sx={{
@@ -60,7 +94,7 @@ export default function SignInSide() {
           <Box
             component="form"
             noValidate
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit(onSubmit)}
             sx={{ mt: 1 }}
           >
             <TextField
@@ -69,44 +103,47 @@ export default function SignInSide() {
               fullWidth
               id="email"
               label="Ingresa tu email"
-              name="email"
               autoComplete="email"
               autoFocus
               color="secondary"
+              {...register("email")}
+              error={!!errors.email}
+              helperText={errors?.email?.message}
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              name="password"
               label="Ingresa tu contraseña"
               type="password"
               id="password"
               autoComplete="current-password"
               color="secondary"
+              {...register("password")}
+              error={!!errors.password}
+              helperText={errors?.password?.message}
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              href="/"
               color="secondary"
             >
               Iniciar
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="/forgot-password">
+                <NextLink href={Routes.FORGOT_PASSWORD}>
                   <a a className={styles.tx}>
                     Olvidaste tu contraseña?
                   </a>
-                </Link>
+                </NextLink>
               </Grid>
               <Grid item>
-                <Link href="/register">
+                <NextLink href={Routes.REGISTER}>
                   <a className={styles.tx}>No tienes cuenta? Crea una</a>
-                </Link>
+                </NextLink>
               </Grid>
             </Grid>
           </Box>
@@ -114,4 +151,5 @@ export default function SignInSide() {
       </Grid>
     </Grid>
   );
-}
+};
+export default withoutAuth(Login);

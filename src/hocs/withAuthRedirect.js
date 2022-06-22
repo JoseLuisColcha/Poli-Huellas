@@ -1,11 +1,9 @@
 import { useAuth } from "@/lib/auth";
-import Loading from "@/components/Loading";
 import Routes from "../constants/routes";
 import { useRouter } from "next/router";
 
 export default function withAuthRedirect({
   WrappedComponent,
-  LoadingComponent = Loading,
   expectedAuth,
   location,
 }) {
@@ -14,7 +12,7 @@ export default function withAuthRedirect({
     const router = useRouter();
 
     if (user === null) {
-      return <LoadingComponent />;
+      return "Cargando...";
     }
 
     const isAuthenticated = !!user;
