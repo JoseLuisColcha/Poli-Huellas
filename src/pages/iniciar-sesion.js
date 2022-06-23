@@ -18,6 +18,7 @@ import Routes from "src/constants/routes";
 import withoutAuth from "@/hocs/withoutAuth";
 import { useAuth } from "@/lib/auth";
 
+
 const schema = yup.object({
   email: yup
     .string("El campo debe ser alfanumérico")

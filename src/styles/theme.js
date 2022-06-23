@@ -10,10 +10,10 @@ const theme = createTheme({
   palette: {
     type: "light",
     primary: {
-      main: "#651fff",
+      main: "#7E41A1",
     },
     secondary: {
-      main: "#651fff",
+      main: "#7E41A1",
     },
     error: {
       main: red.A400,
@@ -25,7 +25,6 @@ const theme = createTheme({
   overrides: {
     MuiTextField: {
       root: {
-        // backgroundColor: "#ccc",
         width: "100%",
       },
     },
