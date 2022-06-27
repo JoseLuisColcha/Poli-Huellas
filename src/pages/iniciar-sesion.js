@@ -12,12 +12,12 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import NextLink from "next/link";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import styles from "../styles/Textglobal.module.css";
+import styles from "../styles/textglobal.module.css";
 import { useForm } from "react-hook-form";
 import Routes from "src/constants/routes";
 import withoutAuth from "@/hocs/withoutAuth";
 import { useAuth } from "@/lib/auth";
-
+import {db} from '@/lib/firebase/client';
 
 const schema = yup.object({
   email: yup
@@ -41,11 +41,8 @@ const Login = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log("data", data);
     try {
       const userData = await login(data);
-
-      console.log("userData", userData);
     } catch (error) {
       if (error.response) {
         alert(error.response.message);

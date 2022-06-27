@@ -1,7 +1,12 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import api from "./api";
-import cookie from "js-cookie";
-import translateMessage from "../constants/messages";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
+import { Timestamp, doc, setDoc, getDoc, onSnapshot } from "firebase/firestore";
+import { auth, db } from "./firebase/client";
 
 export const AuthContext = createContext(null);
 
@@ -18,105 +23,98 @@ export const useAuth = () => {
 };
 
 function useAuthProvider() {
-  const [user, setUser] = useState(null);
-  const handleUser = (user) => {
-    if (user) {
-      setUser(user);
-      cookie.set("auth", true, {
-        expires: 1,
-      });
-
-      return user;
-    } else {
-      setUser(false);
-      cookie.remove("auth");
-      return false;
-    }
-  };
-
-  async function register(data) {
-    try {
-      const response = await api.post("/register", data);
-      console.log("response", response);
-      handleUser(response.data);
-      return response;
-    } catch (error) {
-      if (error.response) {
-        alert(translateMessage(error.response.data.message));
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
-        return Promise.reject(error.response);
-      } else if (error.request) {
-        console.log(error.request);
-      } else {
-        console.log("Error", error.message);
-      }
-      console.log(error.config);
-    }
-  }
-  async function login(data) {
-    try {
-      const response = await api.post("/login", data);
-      handleUser(response.data.user);
-      return response;
-    } catch (error) {
-      if (error.response) {
-        alert(translateMessage(error.response.data.message));
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
-        return error.response;
-      } else if (error.request) {
-        console.log(error.request);
-      } else {
-        console.log("Error", error.message);
-      }
-      console.log(error.config);
-    }
-  }
-  async function logout() {
-    try {
-      const response = await api.post("/logout");
-      handleUser(false);
-      return response;
-    } catch (error) {}
-  }
-  async function getAuthenticatedUser() {
-    try {
-      const response = await api.get("/user");
-      console.log("reponse user", response);
-      handleUser(response.data);
-      return response;
-    } catch (error) {
-      handleUser(false);
-      if (error.response) {
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
-        return error.response;
-      } else if (error.request) {
-        console.log(error.request);
-      } else {
-        console.log("Error", error.message);
-      }
-      console.log(error.config);
-    }
-  }
+  const [session, setSession] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  console.log({ currentUser });
 
   useEffect(() => {
-    console.log("RENDER AUTH", user);
-    try {
-      getAuthenticatedUser();
-    } catch (error) {
-      console.log("NO USER");
-    }
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+      try {
+        setSession(firebaseUser);
+        setLoading(false);
+      } catch (e) {
+        console.log("auth error", e);
+      }
+    });
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
+  useEffect(() => {
+    const callback = (doc) => {
+      const data = doc.data();
+      setCurrentUser({ ...data, uid: doc.id });
+    };
+    let unsub;
+    if (session) {
+      unsub = listenUser(callback, session.uid);
+    }
+    return () => unsub && unsub();
+  }, [session]);
+
+  const listenUser = (callback, uid) => {
+    const userRef = doc(db, `users/${uid}`);
+    const unsub = onSnapshot(userRef, callback);
+    return unsub;
+  };
+
+  async function singup({ email, password, name, lastName }) {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      await createUserDocument({
+        ...userCredential.user,
+        lastName,
+        displayName: name,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function createUserDocument(user) {
+    const userRef = doc(db, `users/${user.uid}`);
+    const userDoc = await getDoc(userRef);
+    if (!userDoc.exists()) {
+      await setDoc(userRef, {
+        uid: user.uid,
+        email: user.email,
+        lastName: user.lastName,
+        photoURL: user.photoURL,
+        displayName: user.displayName,
+        createdAt: Timestamp.fromDate(new Date()),
+      });
+    }
+  }
+
+  async function login({email, password}) {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      console.log('signin error', error);
+    }
+  }
+
+  async function logout() {
+    try {
+      await signOut(auth);
+      setCurrentUser(null);
+    } catch (error) {
+      console.log("signout error", error);
+    }
+  }
+
   return {
-    user,
-    isAuthenticated: !!user,
-    register,
+    session,
+    currentUser,
+    isAuthenticated: !!session,
+    loading,
+    singup,
     login,
     logout,
   };
