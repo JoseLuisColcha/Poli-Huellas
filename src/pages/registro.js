@@ -24,19 +24,19 @@ const schema = yup.object({
     .email("Ingrese un correo válido")
     .required("Este campo es requerido"),
   name: yup.string().required("Este campo es requerido"),
-  last_name: yup.string().required("Este campo es requerido"),
+  lastName: yup.string().required("Este campo es requerido"),
   password: yup
     .string()
     .min(6, "La contraseña debe tener al menos 6 caracteress")
     .required("Este campo es requerido"),
-  password_confirmation: yup
+  passwordConfirmation: yup
     .string()
     .oneOf([yup.ref("password"), null], "Las contraseñas no coinciden")
     .required("Este campo es requerido"),
 });
 
 const Register = () => {
-  const { register: doRegister } = useAuth();
+  const { singup } = useAuth();
   const {
     register,
     handleSubmit,
@@ -46,11 +46,9 @@ const Register = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log("data", data);
+    console.log("formData", data);
     try {
-      const userData = await doRegister({ ...data, role: "ROLE_USER" });
-
-      console.log("userData", userData);
+      await singup(data);
     } catch (error) {
       if (error.response) {
         alert(error.response.message);
@@ -106,8 +104,6 @@ const Register = () => {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  name="firstName"
-                  required
                   fullWidth
                   id="firstName"
                   label="Ingresa tu nombre"
@@ -120,20 +116,17 @@ const Register = () => {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  required
                   fullWidth
-                  id="lastName"
                   label="Ingresa tu apellido"
                   name="lastName"
                   color="secondary"
-                  {...register("last_name")}
-                  error={!!errors.last_name}
-                  helperText={errors?.last_name?.message}
+                  {...register("lastName")}
+                  error={!!errors.lastName}
+                  helperText={errors?.lastName?.message}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  required
                   fullWidth
                   id="email"
                   label="Ingresa tu email"
@@ -163,14 +156,13 @@ const Register = () => {
                 <TextField
                   required
                   fullWidth
-                  name="password_confirmation"
                   label="Confirmar tu contraseña"
                   type="password"
-                  id="password_confirmation"
+                  id="passwordConfirmation"
                   color="secondary"
-                  {...register("password_confirmation")}
-                  error={!!errors.password_confirmation}
-                  helperText={errors?.password_confirmation?.message}
+                  {...register("passwordConfirmation")}
+                  error={!!errors.passwordConfirmation}
+                  helperText={errors?.passwordConfirmation?.message}
                 />
               </Grid>
             </Grid>

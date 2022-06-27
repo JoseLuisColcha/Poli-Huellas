@@ -15,7 +15,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import Routes from "../constants/routes";
 import { useAuth } from "@/lib/auth";
-import Link from "next/Link";
+import Link from "next/link";
 
 const menuItems = [
   {
@@ -49,7 +49,8 @@ const menuItems = [
 ];
 
 export default function ResponsiveAppBar(props) {
-  const { user, logout, login } = useAuth();
+  const { currentUser, logout, session } = useAuth();
+  console.log({userfromNav: currentUser})
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -174,9 +175,9 @@ export default function ResponsiveAppBar(props) {
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              {user ? (
+              {session ? (
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="avatar-user" src="{user.avatar}" />
+                  <Avatar alt="avatar-user" src="{user.photoURL}" />
                 </IconButton>
               ) : (
                 <Link href={Routes.LOGIN}>

@@ -3,7 +3,6 @@ import Link from "next/link";
 import MuiLink from "@mui/material/Link";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import style from "../styles/Textglobal.module.css";
 import Routes from "src/constants/routes";
 import Image from "next/image";
 
@@ -141,8 +140,8 @@ export default function Home() {
                 one of the more obscure Latin words, consectetur, from a Lorem
                 Ipsum passage, and going through the cites of the word in
                 classical literature, discovered the undoubtable source. Lorem
-                Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus
-                Bonorum et Malorum"
+                Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus
+                Bonorum et Malorum
               </Typography>
             </Grid>
           </Grid>

@@ -7,20 +7,21 @@ export default function withAuthRedirect({
   expectedAuth,
   location,
 }) {
-  return (props) => {
-    const { user } = useAuth();
+  const WithAuthRedirect = (props) => {
+    const { session, loading } = useAuth();
     const router = useRouter();
 
-    if (user === null) {
+    if (loading) {
       return "Cargando...";
     }
 
-    const isAuthenticated = !!user;
+    const isAuthenticated = !!session;
     const shouldRedirect = expectedAuth !== isAuthenticated;
     if (shouldRedirect) {
       router.push(location || Routes.LOGIN);
-      return null;
+      return "Cargando...";
     }
     return <WrappedComponent {...props} />;
   };
+  return WithAuthRedirect;
 }
