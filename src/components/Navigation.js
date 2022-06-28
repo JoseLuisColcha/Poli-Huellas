@@ -11,10 +11,11 @@ import {
   Button,
   Tooltip,
   MenuItem,
+  Skeleton,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Routes from "../constants/routes";
-import { useAuth } from "@/lib/auth";
+import { SESSION_STATE, useAuth } from "@/lib/auth";
 import Link from "next/link";
 
 const menuItems = [
@@ -50,7 +51,6 @@ const menuItems = [
 
 export default function ResponsiveAppBar(props) {
   const { currentUser, logout, session } = useAuth();
-  console.log({userfromNav: currentUser})
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -177,12 +177,14 @@ export default function ResponsiveAppBar(props) {
             <Tooltip title="Open settings">
               {session ? (
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="avatar-user" src="{user.photoURL}" />
+                  <Avatar alt="avatar-user" src={`${currentUser?.photoURL}`} />
                 </IconButton>
-              ) : (
+              ) : session === SESSION_STATE.NO_LOGGED ? (
                 <Link href={Routes.LOGIN}>
                   <Button variant="contained">Iniciar sesión</Button>
                 </Link>
+              ) : (
+                <Skeleton variant="circular" width={40} height={40} />
               )}
             </Tooltip>
             <Menu
@@ -199,6 +201,7 @@ export default function ResponsiveAppBar(props) {
                 horizontal: "right",
               }}
               open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
             >
               <Link href={Routes.USERPROFILE}>
                 <MenuItem onClick={handleCloseUserMenu}>Perfil</MenuItem>

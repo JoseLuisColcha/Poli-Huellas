@@ -42,7 +42,7 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     try {
-      const userData = await login(data);
+      await login(data);
     } catch (error) {
       if (error.response) {
         alert(error.response.message);
@@ -55,6 +55,7 @@ const Login = () => {
       console.log(error.config);
     }
   };
+
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <Grid

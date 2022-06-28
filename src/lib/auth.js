@@ -8,6 +8,11 @@ import {
 import { Timestamp, doc, setDoc, getDoc, onSnapshot } from "firebase/firestore";
 import { auth, db } from "./firebase/client";
 
+export const SESSION_STATE = {
+  NO_KNOWN: undefined,
+  NO_LOGGED: null,
+}
+
 export const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
@@ -23,10 +28,9 @@ export const useAuth = () => {
 };
 
 function useAuthProvider() {
-  const [session, setSession] = useState(null);
-  const [currentUser, setCurrentUser] = useState(null);
+  const [session, setSession] = useState(SESSION_STATE.NO_KNOWN);
+  const [currentUser, setCurrentUser] = useState(SESSION_STATE.NO_KNOWN);
   const [loading, setLoading] = useState(true);
-  console.log({ currentUser });
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
@@ -73,7 +77,7 @@ function useAuthProvider() {
         displayName: name,
       });
     } catch (error) {
-      console.log(error);
+      console.log('create user error', error);
     }
   }
 
@@ -103,7 +107,7 @@ function useAuthProvider() {
   async function logout() {
     try {
       await signOut(auth);
-      setCurrentUser(null);
+      setCurrentUser(SESSION_STATE.NO_LOGGED);
     } catch (error) {
       console.log("signout error", error);
     }
