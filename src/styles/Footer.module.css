@@ -1,0 +1,19 @@
+.foot{
+
+    width:100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding:2rem 8%;
+    background-color:#0e0e0e;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.text{
+
+    text-align: center;
+    color: aliceblue;
+}
