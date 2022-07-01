@@ -17,9 +17,13 @@ export default function withAuthRedirect({
 
     const isAuthenticated = !!session;
     const shouldRedirect = expectedAuth !== isAuthenticated;
+
     if (shouldRedirect) {
-      router.push(location || Routes.LOGIN);
-      return "Cargando...";
+      if(session?.role === 'admin'){
+        router.push(Routes.ADMIN);
+        return 'cargando...'
+      }
+      router.push(location);
     }
     return <WrappedComponent {...props} />;
   };

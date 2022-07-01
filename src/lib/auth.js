@@ -4,14 +4,22 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  updateCurrentUser,
 } from "firebase/auth";
-import { Timestamp, doc, setDoc, getDoc, onSnapshot } from "firebase/firestore";
+import {
+  Timestamp,
+  doc,
+  setDoc,
+  getDoc,
+  onSnapshot,
+  updateDoc,
+} from "firebase/firestore";
 import { auth, db } from "./firebase/client";
 
 export const SESSION_STATE = {
   NO_KNOWN: undefined,
   NO_LOGGED: null,
-}
+};
 
 export const AuthContext = createContext(null);
 
@@ -35,7 +43,7 @@ function useAuthProvider() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       try {
-        setSession(firebaseUser);
+        setSession(addRoleToFirebaseUser(firebaseUser));
         setLoading(false);
       } catch (e) {
         console.log("auth error", e);
@@ -64,6 +72,13 @@ function useAuthProvider() {
     return unsub;
   };
 
+  const addRoleToFirebaseUser = (firebaseUser) => {
+    if (!firebaseUser) return null
+    const {email} = firebaseUser;
+    const role = email.startsWith('admin') ? 'admin' : 'user';
+    return {...firebaseUser, role};
+  }
+
   async function singup({ email, password, name, lastName }) {
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -74,10 +89,11 @@ function useAuthProvider() {
       await createUserDocument({
         ...userCredential.user,
         lastName,
-        displayName: name,
+        name,
+        displayName: `${name} ${lastName}`,
       });
     } catch (error) {
-      console.log('create user error', error);
+      console.log("create user error", error);
     }
   }
 
@@ -96,11 +112,11 @@ function useAuthProvider() {
     }
   }
 
-  async function login({email, password}) {
+  async function login({ email, password }) {
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
-      console.log('signin error', error);
+      console.log("signin error", error);
     }
   }
 
@@ -113,6 +129,15 @@ function useAuthProvider() {
     }
   }
 
+  async function updateUser(data) {
+    const userRef = doc(db, `users/${data.uid}`);
+    try{
+      await updateDoc(userRef, data);
+    } catch (error) {
+      console.log("update user error", error);
+    }
+  }
+
   return {
     session,
     currentUser,
@@ -121,5 +146,6 @@ function useAuthProvider() {
     singup,
     login,
     logout,
+    updateUser,
   };
 }

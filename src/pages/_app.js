@@ -1,9 +1,9 @@
 import "@/styles/globals.css";
 import { AuthProvider } from "@/lib/auth";
-import Navigation from "@/components/Navigation";
-import { CssBaseline, ThemeProvider, Container,Grid } from "@mui/material";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import Head from "next/head";
 import theme from "../styles/theme";
+import { MainLayout } from "@/components/Layout/MainLayout";
 
 function App({ Component, pageProps }) {
   return (
@@ -14,14 +14,9 @@ function App({ Component, pageProps }) {
       <AuthProvider>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <Navigation />
-          <Container maxWidth="lg">
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Component {...pageProps} />
-              </Grid>
-            </Grid>
-          </Container>
+          <MainLayout>
+            <Component {...pageProps} />
+          </MainLayout>
         </ThemeProvider>
       </AuthProvider>
     </>
