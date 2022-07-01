@@ -1,4 +1,3 @@
-import * as React from "react";
 import {
   AppBar,
   Box,
@@ -17,42 +16,27 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Routes from "../constants/routes";
 import { SESSION_STATE, useAuth } from "@/lib/auth";
 import Link from "next/link";
+import { useState } from "react";
 
 const menuItems = [
   {
-    title: "Inicio",
-    to: Routes.HOME,
+    title: "Publicaciones",
+    to: '#',
   },
   {
-    title: "Adopciones",
-    to: Routes.ADOPTIONS,
+    title: "Usuarios",
+    to: '#',
   },
   {
-    title: "Perros",
-    to: Routes.DOGS,
-  },
-  {
-    title: "Gatos",
-    to: Routes.CATS,
-  },
-  {
-    title: "Otros",
-    to: Routes.OTHER,
-  },
-  {
-    title: "¿Cómo adoptar?",
-    to: Routes.INSTRUCTIONS,
-  },
-  {
-    title: "Dar en adopción",
-    to: Routes.GIVE_PET,
+    title: "Formularios",
+    to: '#',
   },
 ];
 
-export default function ResponsiveAppBar(props) {
+export function AdminNav() {
   const { currentUser, logout, session } = useAuth();
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -129,7 +113,6 @@ export default function ResponsiveAppBar(props) {
               sx={{
                 display: { xs: "block", md: "none" },
               }}
-              autoFocus
             >
               {menuItems.map((item) => (
                 <Link href={item.to} key={item.title}>
