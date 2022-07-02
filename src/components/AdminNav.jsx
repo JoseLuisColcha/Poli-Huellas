@@ -1,3 +1,4 @@
+import * as React from "react";
 import {
   AppBar,
   Box,
@@ -11,32 +12,34 @@ import {
   Tooltip,
   MenuItem,
   Skeleton,
+  Tabs,
+  Tab,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Routes from "../constants/routes";
 import { SESSION_STATE, useAuth } from "@/lib/auth";
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/router";
 
 const menuItems = [
   {
-    title: "Publicaciones",
+    title: "Pubicaciones",
     to: '#',
   },
   {
     title: "Usuarios",
-    to: '#',
+    to: "#",
   },
   {
     title: "Formularios",
-    to: '#',
+    to: "#",
   },
 ];
 
-export function AdminNav() {
+export function AdminNav(props) {
   const { currentUser, logout, session } = useAuth();
-  const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -62,6 +65,7 @@ export function AdminNav() {
       console.log("error", error);
     }
   };
+  const router = useRouter();
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -113,6 +117,7 @@ export function AdminNav() {
               sx={{
                 display: { xs: "block", md: "none" },
               }}
+              autoFocus
             >
               {menuItems.map((item) => (
                 <Link href={item.to} key={item.title}>
@@ -134,27 +139,37 @@ export function AdminNav() {
               flexGrow: 1,
               fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: ".3rem",
+              letterSpacing: ".2rem",
               color: "inherit",
               textDecoration: "none",
+              fontSize: { xs: "1rem", md: "2rem" },
             }}
           >
             POLI HUELLAS
           </Typography>
           <Box
-            sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, mx: 14 }}
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", md: "flex", justifyContent: "center" },
+              mx: 3,
+            }}
           >
-            {menuItems.map((item) => (
-              <Link href={item.to} key={item.title}>
-                <Button
-                  key={item.title}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  {item.title}
-                </Button>
-              </Link>
-            ))}
+            <Tabs
+              value={router.pathname}
+              textColor="secondary"
+              indicatorColor="secondary"
+            >
+              {menuItems.map((item, index) => (
+                <Tab
+                  onClick={() => router.push(item.to)}
+                  key={item.to}
+                  value={item.to}
+                  label={item.title}
+                  sx={{ my: 1, color: "white", display: "block" }}
+                  tabIndex={index}
+                />
+              ))}
+            </Tabs>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -165,7 +180,7 @@ export function AdminNav() {
                 </IconButton>
               ) : session === SESSION_STATE.NO_LOGGED ? (
                 <Link href={Routes.LOGIN}>
-                  <Button variant="contained">Iniciar sesión</Button>
+                  <Button variant="contained" sx={{m: '0.3rem'}}>Iniciar sesión</Button>
                 </Link>
               ) : (
                 <Skeleton variant="circular" width={40} height={40} />
