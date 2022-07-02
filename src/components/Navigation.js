@@ -12,11 +12,14 @@ import {
   Tooltip,
   MenuItem,
   Skeleton,
+  Tabs,
+  Tab,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Routes from "../constants/routes";
 import { SESSION_STATE, useAuth } from "@/lib/auth";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const menuItems = [
   {
@@ -78,6 +81,7 @@ export default function ResponsiveAppBar(props) {
       console.log("error", error);
     }
   };
+  const router = useRouter();
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -151,27 +155,37 @@ export default function ResponsiveAppBar(props) {
               flexGrow: 1,
               fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: ".3rem",
+              letterSpacing: ".2rem",
               color: "inherit",
               textDecoration: "none",
+              fontSize: { xs: "1rem", md: "2rem" },
             }}
           >
             POLI HUELLAS
           </Typography>
           <Box
-            sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, mx: 14 }}
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", md: "flex", justifyContent: "center" },
+              mx: 3,
+            }}
           >
-            {menuItems.map((item) => (
-              <Link href={item.to} key={item.title}>
-                <Button
-                  key={item.title}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  {item.title}
-                </Button>
-              </Link>
-            ))}
+            <Tabs
+              value={router.pathname}
+              textColor="secondary"
+              indicatorColor="secondary"
+            >
+              {menuItems.map((item, index) => (
+                <Tab
+                  onClick={() => router.push(item.to)}
+                  key={item.to}
+                  value={item.to}
+                  label={item.title}
+                  sx={{ my: 1, color: "white", display: "block" }}
+                  tabIndex={index}
+                />
+              ))}
+            </Tabs>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -182,7 +196,7 @@ export default function ResponsiveAppBar(props) {
                 </IconButton>
               ) : session === SESSION_STATE.NO_LOGGED ? (
                 <Link href={Routes.LOGIN}>
-                  <Button variant="contained">Iniciar sesión</Button>
+                  <Button variant="contained" sx={{m: '0.3rem'}}>Iniciar sesión</Button>
                 </Link>
               ) : (
                 <Skeleton variant="circular" width={40} height={40} />
