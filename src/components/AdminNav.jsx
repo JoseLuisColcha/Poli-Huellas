@@ -23,7 +23,7 @@ import { useRouter } from "next/router";
 
 const menuItems = [
   {
-    title: "Pubicaciones",
+    title: "Publicaciones",
     to: '#',
   },
   {
