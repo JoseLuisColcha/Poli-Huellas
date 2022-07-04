@@ -5,8 +5,11 @@ import Logo from "../../../public/images/polihuella.png";
 import Image from "next/image";
 import Link from "next/link";
 import Routes from "src/constants/routes";
+import { useAuth } from "@/lib/auth";
 
 export default function MainSection() {
+  const {session} = useAuth();
+
   return (
     <Grid
       sx={{
@@ -18,17 +21,19 @@ export default function MainSection() {
     >
       <Grid item xs={12} sm={6} order={{ xs: 2, sm: 1 }}>
         <Box>
-          <Image src={Logo} width={600} height={350} />
+          <Image alt="logo" src={Logo} width={600} height={350} />
         </Box>
         <Typography variant="h5" color="inherit" sx={{ marginLeft: 5 }}>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta,
           dicta!
         </Typography>
-        <Link href={Routes.REGISTER} passHref>
-          <Button size="large" variant="contained" sx={{ margin: 5 }}>
-            Registrate
-          </Button>
-        </Link>
+        {!session && (
+          <Link href={Routes.REGISTER} passHref>
+            <Button size="large" variant="contained" sx={{ margin: 5 }}>
+              Registrate
+            </Button>
+          </Link>
+        )}
       </Grid>
       <Grid
         container
@@ -39,7 +44,7 @@ export default function MainSection() {
         order={{ xs: 1, sm: 2 }}
       >
         <Box>
-          <Image src={Pet} width={450} height={350} />
+          <Image alt="mascota" src={Pet} width={450} height={350} />
         </Box>
       </Grid>
     </Grid>

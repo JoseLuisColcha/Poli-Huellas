@@ -29,7 +29,14 @@ export default function withAuthRedirect({
     if (shouldRedirect) {
       if (session?.role === "admin") {
         router.push(Routes.ADMIN);
-        return "cargando...";
+        return (
+          <Backdrop
+            sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={true}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
+        );
       }
       router.push(location);
     }
