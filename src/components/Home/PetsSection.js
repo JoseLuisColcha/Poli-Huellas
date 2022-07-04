@@ -51,7 +51,7 @@ export default function PetsSection() {
         {pets.map((item) => {
           return (
             <CardActionArea sx={{ maxWidth: "300px", my: 5 }}>
-              <Link href={item.to} key={item.type}>
+              <Link href={item.to}>
                 <Card variant="inlined">
                   <CardMedia
                     component="img"
