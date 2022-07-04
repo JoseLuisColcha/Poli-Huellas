@@ -24,7 +24,21 @@ import { useRouter } from "next/router";
 const menuItems = [
   {
     title: "Pubicaciones",
-    to: '#',
+    to: "#",
+    subItems: [
+      {
+        title: "Gatos",
+        to: "#",
+      },
+      {
+        title: "Perros",
+        to: "#",
+      },
+      {
+        title: "Otros",
+        to: "#",
+      },
+    ],
   },
   {
     title: "Usuarios",
@@ -66,6 +80,23 @@ export function AdminNav(props) {
     }
   };
   const router = useRouter();
+
+  const [tabItemAnchorEl, setTabItemAnchorEl] = React.useState(null);
+
+  const [openTabMenu, setOpenTabMenu] = React.useState(false);
+
+  const handleTabClick = (e, item) => {
+    if(!item.subItems) return router.push(item.to); 
+    router.push(item.to);
+    setTabItemAnchorEl(e.currentTarget);
+    setOpenTabMenu(true);
+  };
+
+  const handleCloseTabMenu = () => {
+    setTabItemAnchorEl(null);
+    setOpenTabMenu(false);
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -160,14 +191,36 @@ export function AdminNav(props) {
               indicatorColor="secondary"
             >
               {menuItems.map((item, index) => (
-                <Tab
-                  onClick={() => router.push(item.to)}
-                  key={item.to}
-                  value={item.to}
-                  label={item.title}
-                  sx={{ my: 1, color: "white", display: "block" }}
-                  tabIndex={index}
-                />
+                <>
+                  <Tab
+                    onClick={(e) => handleTabClick(e, item)}
+                    key={item.to}
+                    value={item.to}
+                    label={item.title}
+                    sx={{ my: 1, color: "white", display: "block" }}
+                    tabIndex={index}
+                  />
+                  {item.subItems && (
+                    <Menu
+                      id="tab-item-menu"
+                      anchorEl={tabItemAnchorEl}
+                      open={openTabMenu}
+                      onClose={handleCloseTabMenu}
+                      MenuListProps={{
+                        "aria-labelledby": "basic-button",
+                      }}
+                    >
+                      {item.subItems.map((subItem) => (
+                        <MenuItem
+                          key={subItem.title}
+                          onClick={handleCloseTabMenu}
+                        >
+                          {subItem.title}
+                        </MenuItem>
+                      ))}
+                    </Menu>
+                  )}
+                </>
               ))}
             </Tabs>
           </Box>
@@ -180,7 +233,9 @@ export function AdminNav(props) {
                 </IconButton>
               ) : session === SESSION_STATE.NO_LOGGED ? (
                 <Link href={Routes.LOGIN}>
-                  <Button variant="contained" sx={{m: '0.3rem'}}>Iniciar sesión</Button>
+                  <Button variant="contained" sx={{ m: "0.3rem" }}>
+                    Iniciar sesión
+                  </Button>
                 </Link>
               ) : (
                 <Skeleton variant="circular" width={40} height={40} />
