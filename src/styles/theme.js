@@ -18,9 +18,7 @@ const theme = createTheme({
     error: {
       main: red.A400,
     },
-    background: {
-      default: "#f9f9f9",
-    },
+
   },
   overrides: {
     MuiTextField: {
