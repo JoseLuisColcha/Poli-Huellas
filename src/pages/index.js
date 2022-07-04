@@ -4,9 +4,9 @@ import MainSection from "@/components/Home/MainSection";
 import PetsSection from "@/components/Home/PetsSection";
 import SearchPetSection from "@/components/Home/SearchPetSection";
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
 
 export default function Home() {
+  
   return (
     <div>
       <Head>

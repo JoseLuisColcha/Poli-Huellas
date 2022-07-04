@@ -90,7 +90,7 @@ const EditUserInfoModal = ({
             fullWidth
             variant="outlined"
             sx={{ width: "45%", mt: "1rem" }}
-            color="secondary"
+            color="primary"
             onClick={handleClose}
           >
             Cerrar
@@ -100,7 +100,7 @@ const EditUserInfoModal = ({
             fullWidth
             variant="contained"
             sx={{ width: "45%", mt: "1rem" }}
-            color="secondary"
+            color="primary"
           >
             Guardar
           </Button>
