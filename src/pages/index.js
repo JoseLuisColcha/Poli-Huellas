@@ -5,8 +5,11 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Routes from "src/constants/routes";
 import Image from "next/image";
+import { useAuth } from "@/lib/auth";
 
 export default function Home() {
+  const {session} = useAuth();
+  
   return (
     <div className={styles.container}>
       <Head>
@@ -32,11 +35,17 @@ export default function Home() {
                     Exercitationem, ipsum architecto? Accusamus vitae pariatur
                     quae eius alias omnis placeat quo?
                   </Typography>
-                  <Link href={Routes.REGISTER} passHref>
-                    <Button size="large" variant="contained" color="secondary">
-                      Registrate
-                    </Button>
-                  </Link>
+                  {session && (
+                    <Link href={Routes.REGISTER} passHref>
+                      <Button
+                        size="large"
+                        variant="contained"
+                        color="secondary"
+                      >
+                        Registrate
+                      </Button>
+                    </Link>
+                  )}
                 </Grid>
               </Grid>
             </Grid>

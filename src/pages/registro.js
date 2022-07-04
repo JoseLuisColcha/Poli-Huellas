@@ -89,7 +89,7 @@ const Register = () => {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -108,7 +108,7 @@ const Register = () => {
                   id="firstName"
                   label="Ingresa tu nombre"
                   autoFocus
-                  color="secondary"
+                  color="primary"
                   {...register("name")}
                   error={!!errors.name}
                   helperText={errors?.name?.message}
@@ -119,7 +119,7 @@ const Register = () => {
                   fullWidth
                   label="Ingresa tu apellido"
                   name="lastName"
-                  color="secondary"
+                  color="primary"
                   {...register("lastName")}
                   error={!!errors.lastName}
                   helperText={errors?.lastName?.message}
@@ -132,7 +132,7 @@ const Register = () => {
                   label="Ingresa tu email"
                   name="email"
                   autoComplete="email"
-                  color="secondary"
+                  color="primary"
                   {...register("email")}
                   error={!!errors.email}
                   helperText={errors?.email?.message}
@@ -146,7 +146,7 @@ const Register = () => {
                   label="Ingresa tu contraseña"
                   type="password"
                   id="password"
-                  color="secondary"
+                  color="primary"
                   {...register("password")}
                   error={!!errors.password}
                   helperText={errors?.password?.message}
@@ -159,7 +159,7 @@ const Register = () => {
                   label="Confirmar tu contraseña"
                   type="password"
                   id="passwordConfirmation"
-                  color="secondary"
+                  color="primary"
                   {...register("passwordConfirmation")}
                   error={!!errors.passwordConfirmation}
                   helperText={errors?.passwordConfirmation?.message}
@@ -171,7 +171,7 @@ const Register = () => {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              color="secondary"
+              color="primary"
             >
               Registrar
             </Button>
