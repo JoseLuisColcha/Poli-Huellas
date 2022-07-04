@@ -13,14 +13,12 @@ const theme = createTheme({
       main: "#7E41A1",
     },
     secondary: {
-      main: "#7E41A1",
+      main: "#d0b3ff",
     },
     error: {
       main: red.A400,
     },
-    background: {
-      default: "#f9f9f9",
-    },
+
   },
   overrides: {
     MuiTextField: {

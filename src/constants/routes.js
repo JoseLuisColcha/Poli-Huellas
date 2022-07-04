@@ -13,6 +13,7 @@ const publicRoutes = {
 const privateRoutes = {
   HOME: "/",
   USERPROFILE: "/perfil-de-usuario",
+  ADMIN: "/admin/perfil",
 };
 
 const Routes = {
