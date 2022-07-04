@@ -5,13 +5,7 @@ export const UserLayout = ({ children }) => {
   return (
     <>
       <Navigation />
-      <Container maxWidth="lg">
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            {children}
-          </Grid>
-        </Grid>
-      </Container>
+      <Container maxWidth="lg">{children}</Container>
     </>
   );
 };
