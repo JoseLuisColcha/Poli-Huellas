@@ -23,36 +23,20 @@ import { useRouter } from "next/router";
 
 const menuItems = [
   {
-    title: "Inicio",
-    to: Routes.HOME,
+    title: "Publicaciones",
+    to: '#',
   },
   {
-    title: "Adopciones",
-    to: Routes.ADOPTIONS,
+    title: "Usuarios",
+    to: "#",
   },
   {
-    title: "Perros",
-    to: Routes.DOGS,
-  },
-  {
-    title: "Gatos",
-    to: Routes.CATS,
-  },
-  {
-    title: "Otros",
-    to: Routes.OTHER,
-  },
-  {
-    title: "¿Cómo adoptar?",
-    to: Routes.INSTRUCTIONS,
-  },
-  {
-    title: "Dar en adopción",
-    to: Routes.GIVE_PET,
+    title: "Formularios",
+    to: "#",
   },
 ];
 
-export default function ResponsiveAppBar(props) {
+export function AdminNav(props) {
   const { currentUser, logout, session } = useAuth();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
