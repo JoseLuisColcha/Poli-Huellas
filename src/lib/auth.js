@@ -15,6 +15,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { auth, db } from "./firebase/client";
+import { useAlert } from "./alert";
 
 export const SESSION_STATE = {
   NO_KNOWN: undefined,
@@ -39,6 +40,7 @@ function useAuthProvider() {
   const [session, setSession] = useState(SESSION_STATE.NO_KNOWN);
   const [currentUser, setCurrentUser] = useState(SESSION_STATE.NO_KNOWN);
   const [loading, setLoading] = useState(true);
+  const {addAlert} = useAlert();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
@@ -116,7 +118,8 @@ function useAuthProvider() {
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
-      console.log("signin error", error);
+      console.log("signin error", {error});
+      addAlert('error al iniciar sesión')
     }
   }
 
