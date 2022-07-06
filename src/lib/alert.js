@@ -4,20 +4,34 @@ import { createContext, useContext, useState } from "react";
 export const AlertContext = createContext(null);
 
 export function AlertProvider({ children }) {
-  const { addAlert, alerts } = useAlertProvider();
+  const { addAlert, alerts, setAlerts } = useAlertProvider();
+
+  const handleClose = (index) => {
+    const newAlerts = alerts.map((alt, i) =>
+      i === index ? { ...alt, open: false } : alt
+    );
+    setAlerts(newAlerts);
+  };
+
   return (
     <AlertContext.Provider value={{ addAlert }}>
       {children}
       {alerts &&
-        alerts.map((alert) => {
+        alerts.map((alert, index) => {
           return (
-            <Snackbar key={alert} open={true} autoHideDuration={6000}>
+            <Snackbar
+              key={index}
+              open={alert.open}
+              autoHideDuration={alert.duration || 6000}
+              message={alert.text}
+              onClose={() => handleClose(index)}
+            >
               <Alert
-                // onClose={handleClose}
-                severity="success"
+                onClose={() => handleClose(index)}
+                severity={alert.severity}
                 sx={{ width: "100%" }}
               >
-                {alert}
+                {alert.text}
               </Alert>
             </Snackbar>
           );
@@ -37,11 +51,14 @@ export const useAlert = () => {
 function useAlertProvider() {
   const [alerts, setAlerts] = useState([]);
 
+  const addAlert = ({ open = true, ...rest }) => {
+    setAlerts([...alerts, { ...rest, open }]);
+  };
+
   const alertProvider = {
-    addAlert: (alert) => {
-      setAlerts([...alerts, alert]);
-    },
+    addAlert,
     alerts,
+    setAlerts,
   };
 
   return alertProvider;
