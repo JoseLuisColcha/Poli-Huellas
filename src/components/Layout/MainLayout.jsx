@@ -4,7 +4,6 @@ import { UserLayout } from "./UserLayout";
 
 export const MainLayout = ({ children }) => {
   const { session } = useAuth();
-  console.log(session)
   return session?.role === "admin" ? (
     <AdminLayout>{children}</AdminLayout>
   ) : (
