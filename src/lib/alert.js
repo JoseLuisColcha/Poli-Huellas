@@ -6,7 +6,10 @@ export const AlertContext = createContext(null);
 export function AlertProvider({ children }) {
   const { addAlert, alerts, setAlerts } = useAlertProvider();
 
-  const handleClose = (index) => {
+  const handleClose = (index, event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
     const newAlerts = alerts.map((alt, i) =>
       i === index ? { ...alt, open: false } : alt
     );
@@ -24,7 +27,7 @@ export function AlertProvider({ children }) {
               open={alert.open}
               autoHideDuration={alert.duration || 6000}
               message={alert.text}
-              onClose={() => handleClose(index)}
+              onClose={(event, reason) => handleClose(index, event, reason)}
             >
               <Alert
                 onClose={() => handleClose(index)}
