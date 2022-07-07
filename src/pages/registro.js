@@ -46,21 +46,9 @@ const Register = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log("formData", data);
-    try {
-      await singup(data);
-    } catch (error) {
-      if (error.response) {
-        alert(error.response.message);
-        console.log(error.response);
-      } else if (error.request) {
-        console.log(error.request);
-      } else {
-        console.log("Error", error.message);
-      }
-      console.log(error.config);
-    }
+    await singup(data);
   };
+  
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <Grid
