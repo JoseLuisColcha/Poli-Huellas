@@ -1,0 +1,55 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 20px;
+}
+.select{
+    border-radius: 8px;
+    width:80%
+}
+.card{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width:80%
+}
+.question_container{
+    padding-bottom: 20px;
+}
+.button_container{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding-top: 20px;
+}
+.submit_button{
+    background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%);
+    border-radius: 28px;
+    width: 151px;
+    height: 56px;
+    color: #FFFFFF;
+}
+.form_container{
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    border: 1px solid #C2C6CC;
+    border-radius: 8px;
+}
+.dialog_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.dialog_text{
+    font-size: 32px;
+    font-weight: 700;
+    color: #666666;
+    padding-top: 20px;
+}
