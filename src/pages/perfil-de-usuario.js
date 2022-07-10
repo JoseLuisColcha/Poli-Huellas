@@ -52,7 +52,7 @@ function Profile() {
             sx={{ width: 100, height: 100 }}
             src={currentUser?.photoURL}
           >
-            {currentUser?.displayName.charAt(0)}
+            {currentUser?.displayName?.charAt(0)}
           </Avatar>
         </Grid>
         <Grid container>
