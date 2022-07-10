@@ -4,6 +4,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import Head from "next/head";
 import theme from "../styles/theme";
 import { MainLayout } from "@/components/Layout/MainLayout";
+import { AlertProvider } from "@/lib/alert";
 
 function App({ Component, pageProps }) {
   return (
@@ -11,14 +12,16 @@ function App({ Component, pageProps }) {
       <Head>
         <title>Poli Huellas</title>
       </Head>
-      <AuthProvider>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <MainLayout>
-            <Component {...pageProps} />
-          </MainLayout>
-        </ThemeProvider>
-      </AuthProvider>
+      <AlertProvider>
+        <AuthProvider>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <MainLayout>
+              <Component {...pageProps} />
+            </MainLayout>
+          </ThemeProvider>
+        </AuthProvider>
+      </AlertProvider>
     </>
   );
 }

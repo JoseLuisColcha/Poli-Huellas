@@ -17,7 +17,7 @@ import { useForm } from "react-hook-form";
 import Routes from "src/constants/routes";
 import withoutAuth from "@/hocs/withoutAuth";
 import { useAuth } from "@/lib/auth";
-import {db} from '@/lib/firebase/client';
+import { db } from "@/lib/firebase/client";
 
 const schema = yup.object({
   email: yup
@@ -41,19 +41,7 @@ const Login = () => {
   });
 
   const onSubmit = async (data) => {
-    try {
-      await login(data);
-    } catch (error) {
-      if (error.response) {
-        alert(error.response.message);
-        console.log(error.response);
-      } else if (error.request) {
-        console.log(error.request);
-      } else {
-        console.log("Error", error.message);
-      }
-      console.log(error.config);
-    }
+    await login(data);
   };
 
   return (
