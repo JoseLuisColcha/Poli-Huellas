@@ -75,13 +75,11 @@ export default function ResponsiveAppBar(props) {
 
   const handleLogout = async () => {
     handleCloseUserMenu();
-    try {
-      await logout();
-    } catch (error) {
-      console.log("error", error);
-    }
+    await logout();
   };
+
   const router = useRouter();
+  
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
