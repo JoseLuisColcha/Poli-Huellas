@@ -15,6 +15,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { auth, db } from "./firebase/client";
+import { useAlert } from "./alert";
 
 export const SESSION_STATE = {
   NO_KNOWN: undefined,
@@ -39,15 +40,12 @@ function useAuthProvider() {
   const [session, setSession] = useState(SESSION_STATE.NO_KNOWN);
   const [currentUser, setCurrentUser] = useState(SESSION_STATE.NO_KNOWN);
   const [loading, setLoading] = useState(true);
+  const { addAlert } = useAlert();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-      try {
-        setSession(addRoleToFirebaseUser(firebaseUser));
-        setLoading(false);
-      } catch (e) {
-        console.log("auth error", e);
-      }
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      setSession(addRoleToFirebaseUser(firebaseUser));
+      setLoading(false);
     });
     return () => {
       unsubscribe();
@@ -73,11 +71,11 @@ function useAuthProvider() {
   };
 
   const addRoleToFirebaseUser = (firebaseUser) => {
-    if (!firebaseUser) return null
-    const {email} = firebaseUser;
-    const role = email.startsWith('admin') ? 'admin' : 'user';
-    return {...firebaseUser, role};
-  }
+    if (!firebaseUser) return null;
+    const { email } = firebaseUser;
+    const role = email.startsWith("admin") ? "admin" : "user";
+    return { ...firebaseUser, role };
+  };
 
   async function singup({ email, password, name, lastName }) {
     try {
@@ -92,7 +90,9 @@ function useAuthProvider() {
         name,
         displayName: `${name} ${lastName}`,
       });
+      addAlert({ text: 'Usuario registrado con éxito', severity: "success", duration: 6000 })
     } catch (error) {
+      addAlert({ text: 'Error al registrar un usuario', severity: "error", duration: 6000 })
       console.log("create user error", error);
     }
   }
@@ -115,8 +115,14 @@ function useAuthProvider() {
   async function login({ email, password }) {
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      addAlert({ text: 'Inicio de sesión exitoso', severity: "success", duration: 6000 })
     } catch (error) {
-      console.log("signin error", error);
+      console.log("signin error", { error });
+      addAlert({
+        text: "Error al iniciar sesión",
+        severity: "error",
+        duration: 6000,
+      });
     }
   }
 
@@ -124,16 +130,28 @@ function useAuthProvider() {
     try {
       await signOut(auth);
       setCurrentUser(SESSION_STATE.NO_LOGGED);
+      addAlert({ text: 'Cierre de sesión exitoso', severity: "success", duration: 6000 })
     } catch (error) {
+      addAlert({
+        text: "Error al cerrar sesión",
+        severity: "error",
+        duration: 6000,
+      });
       console.log("signout error", error);
     }
   }
 
   async function updateUser(data) {
     const userRef = doc(db, `users/${data.uid}`);
-    try{
+    try {
       await updateDoc(userRef, data);
+      addAlert({ text: 'Usuario actualizado con éxito', severity: "success", duration: 6000 })
     } catch (error) {
+      addAlert({
+        text: "Error al actualizar usuario",
+        severity: "error",
+        duration: 6000,
+      });
       console.log("update user error", error);
     }
   }

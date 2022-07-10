@@ -73,11 +73,7 @@ export function AdminNav(props) {
 
   const handleLogout = async () => {
     handleCloseUserMenu();
-    try {
-      await logout();
-    } catch (error) {
-      console.log("error", error);
-    }
+    await logout();
   };
   const router = useRouter();
 
