@@ -17,7 +17,6 @@ import { useForm } from "react-hook-form";
 import Routes from "src/constants/routes";
 import withoutAuth from "@/hocs/withoutAuth";
 import { useAuth } from "@/lib/auth";
-import { db } from "@/lib/firebase/client";
 
 const schema = yup.object({
   email: yup
