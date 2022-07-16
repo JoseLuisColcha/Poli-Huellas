@@ -1,7 +1,7 @@
 import { Grid, Box, Typography } from "@mui/material";
 import Pets from "../../../public/images/pets.png";
 import Image from "next/image";
-import styles from "../../styles/Home.module.css";
+import styles from "../../styles/TextGlobal.module.css";
 
 export default function InformationSection() {
   return (

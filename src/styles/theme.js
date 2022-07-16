@@ -2,11 +2,7 @@ import { createTheme } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
 
 const theme = createTheme({
-  typography: {
-    h3: {
-      marginBottom: "12px",
-    },
-  },
+
   palette: {
     type: "light",
     primary: {
