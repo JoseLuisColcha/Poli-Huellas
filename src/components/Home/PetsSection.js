@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import Routes from "../../constants/routes";
-import styles from "../../styles/Home.module.css";
+import styles from "../../styles/TextGlobal.module.css";
 
 export default function PetsSection() {
   const pets = [
