@@ -78,9 +78,9 @@ export default function Giveadoption() {
   }
 
   const onSubmit = async (data) => {
-    const {answerOne, answerTwo, answerThree, answerFour, petType, petSize, petAge, petSex, extraDescription} = data;
+    const {answerOne, answerTwo, answerThree, answerFour, petType, petName, petSize, petAge, petSex, extraDescription} = data;
     try {
-      await newPost(answerOne, answerTwo, answerThree, answerFour, petType, petSize, petAge, petSex, imgURL, extraDescription, currentUser.uid);
+      await newPost(answerOne, answerTwo, answerThree, answerFour, petType, petName, petSize, petAge, petSex, imgURL, extraDescription, currentUser.uid);
       setOpen(true);
     } catch (error) {
       if (error.response) {
@@ -216,6 +216,20 @@ export default function Giveadoption() {
               label="Ingrese el tipo de la mascota"
               {...register("petType")}
               helperText="Ej. perro, gato, etc."
+            />
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className={styles.question_container}>
+          <Grid item xs={8}>
+            <Typography>Nombre de la mascota</Typography>
+          </Grid>
+          <Grid item xs={4}>
+            <TextField
+              className={styles.select}
+              id="petAge"
+              label="Ingrese el nombre de la mascota"
+              {...register("petName")}
+              helperText="Ingrese el nombre que tiene o como quisieras llamarlo"
             />
           </Grid>
         </Grid>

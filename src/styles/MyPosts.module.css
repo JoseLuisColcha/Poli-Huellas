@@ -1,0 +1,17 @@
+.pet_image{
+    width: 85px;
+    height: 85px;
+    border-radius:150px;
+}
+.container{
+    width: 100%;
+    padding: 20px;
+}
+.name{
+    font-size: 18px;
+    font-weight: 700;
+    color : #B224EF;
+}
+.icons{
+    color : #B224EF;
+}

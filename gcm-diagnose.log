@@ -1,0 +1,200 @@
+﻿Diagnose log at 2022-07-10T04:16:25Z
+
+Executable: /usr/local/share/gcm-core/git-credential-manager-core
+Version: 2.0.696+4365b917da
+
+------------
+Diagnostic: Environment
+Skipped: False
+Success: True
+Exception: None
+Log:
+OSType: Linux
+OSVersion: Linux snuc-NUC 5.13.0-52-generic #59~20.04.1-Ubuntu SMP Thu Jun 16 21:21:28 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+Reading environment variables... OK
+ Variables:
+MANDATORY_PATH=/usr/share/gconf/ubuntu.mandatory.path
+XDG_CURRENT_DESKTOP=Unity
+SHELL=/bin/bash
+XDG_SESSION_TYPE=x11
+HOME=/home/snuc
+LESSCLOSE=/usr/bin/lesspipe %s %s
+QT_ACCESSIBILITY=1
+TERM_PROGRAM=vscode
+DISPLAY=:0
+NVM_CD_FLAGS=
+SSH_AGENT_PID=1277
+LESSOPEN=| /usr/bin/lesspipe %s
+PATH=/home/snuc/.yarn/bin:/home/snuc/.config/yarn/global/node_modules/.bin:/home/snuc/.local/bin:/home/snuc/.yarn/bin:/home/snuc/.config/yarn/global/node_modules/.bin:/home/snuc/.nvm/versions/node/v16.15.0/bin:/home/snuc/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/go/bin:/home/snuc/.go/bin:/usr/local/go/bin:/home/snuc/.go/bin
+XMODIFIERS=@im=ibus
+DESKTOP_SESSION=ubuntu
+USER=snuc
+USERNAME=snuc
+GIT_ASKPASS=/usr/share/code/resources/app/extensions/git/dist/askpass.sh
+QT_IM_MODULE=ibus
+LOGNAME=snuc
+VSCODE_GIT_ASKPASS_MAIN=/usr/share/code/resources/app/extensions/git/dist/askpass-main.js
+CHROME_DESKTOP=code-url-handler.desktop
+GNOME_SHELL_SESSION_MODE=ubuntu
+DEFAULTS_PATH=/usr/share/gconf/ubuntu.default.path
+XDG_DATA_DIRS=/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+WINDOWPATH=2
+IM_CONFIG_PHASE=1
+GIO_LAUNCHED_DESKTOP_FILE_PID=9882
+XDG_MENU_PREFIX=gnome-
+DBUS_STARTER_BUS_TYPE=session
+XDG_SESSION_DESKTOP=ubuntu
+INVOCATION_ID=6d34306b4d3342959520c04904bee71d
+JOURNAL_STREAM=8:38576
+XDG_SESSION_CLASS=user
+GDK_BACKEND=x11
+PWD=/home/snuc/Documents/Poli-Huellas
+GTK_MODULES=gail:atk-bridge
+VSCODE_GIT_IPC_HANDLE=/run/user/1000/vscode-git-e9507efc91.sock
+MANAGERPID=997
+XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg
+VSCODE_GIT_ASKPASS_EXTRA_ARGS=--ms-enable-electron-run-as-node
+LANG=en_US.UTF-8
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+SESSION_MANAGER=local/snuc-NUC:@/tmp/.ICE-unix/1315,unix/snuc-NUC:/tmp/.ICE-unix/1315
+NVM_INC=/home/snuc/.nvm/versions/node/v16.15.0/include/node
+SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+XDG_RUNTIME_DIR=/run/user/1000
+ORIGINAL_XDG_CURRENT_DESKTOP=ubuntu:GNOME
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus,guid=763fe1fe5a79ea5526a6a4a462ca2aa8
+VSCODE_GIT_ASKPASS_NODE=/usr/share/code/code
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+NVM_DIR=/home/snuc/.nvm
+DBUS_STARTER_ADDRESS=unix:path=/run/user/1000/bus,guid=763fe1fe5a79ea5526a6a4a462ca2aa8
+NVM_BIN=/home/snuc/.nvm/versions/node/v16.15.0/bin
+GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1
+GIO_LAUNCHED_DESKTOP_FILE=/usr/share/applications/code.desktop
+SHLVL=1
+TERM_PROGRAM_VERSION=1.69.0
+COLORTERM=truecolor
+_=/usr/local/bin/git-credential-manager-core
+XAUTHORITY=/run/user/1000/gdm/Xauthority
+GDMSESSION=ubuntu
+TERM=xterm-256color
+
+
+------------
+Diagnostic: File system
+Skipped: False
+Success: True
+Exception: None
+Log:
+Temporary directory is '/tmp/'...
+Checking basic file I/O...
+Writing to temporary file '/tmp/ee184be3b375f662a201df5c'... OK
+Reading from temporary file '/tmp/ee184be3b375f662a201df5c'... OK
+Deleting temporary file '/tmp/ee184be3b375f662a201df5c'... OK
+Testing IFileSystem instance...
+UserHomePath: /home/snuc
+UserDataDirectoryPath: /home/snuc/.gcm
+GetCurrentDirectory(): /home/snuc/Documents/Poli-Huellas
+
+------------
+Diagnostic: Networking
+Skipped: False
+Success: True
+Exception: None
+Log:
+Checking basic networking and HTTP stack...
+Creating HTTP client... OK
+IsNetworkAvailable: True
+Sending HEAD request to http://example.com... OK
+Sending HEAD request to https://example.com... OK
+Acquiring free TCP port... OK
+Testing local HTTP loopback connections...
+Creating new HTTP listener for http://localhost:34061/... OK
+Waiting for loopback connection... OK
+Writing response... OK
+Waiting for response data... OK
+Loopback connection data OK
+Testing with IHttpClientFactory created HTTP client...
+Creating HTTP client... OK
+IsNetworkAvailable: True
+Sending HEAD request to http://example.com... OK
+Sending HEAD request to https://example.com... OK
+Acquiring free TCP port... OK
+Testing local HTTP loopback connections...
+Creating new HTTP listener for http://localhost:37517/... OK
+Waiting for loopback connection... OK
+Writing response... OK
+Waiting for response data... OK
+Loopback connection data OK
+
+------------
+Diagnostic: Git
+Skipped: False
+Success: True
+Exception: None
+Log:
+Getting Git version... OK
+Git version is '2.25.1'
+Locating current repository... OK
+Git repository at '/home/snuc/Documents/Poli-Huellas/.git'
+Listing all Git configuration... OK
+Git configuration:
+file:/home/snuc/.gitconfig	user.name=FreddyJR1995
+file:/home/snuc/.gitconfig	user.email=reddy.valverde@epn.edu.ec
+file:/home/snuc/.gitconfig	credential.credentialstore=cache
+file:/home/snuc/.gitconfig	credential.helper=
+file:/home/snuc/.gitconfig	credential.helper=/usr/local/share/gcm-core/git-credential-manager-core
+file:/home/snuc/.gitconfig	credential.https://dev.azure.com.usehttppath=true
+file:.git/config	core.repositoryformatversion=0
+file:.git/config	core.filemode=true
+file:.git/config	core.bare=false
+file:.git/config	core.logallrefupdates=true
+file:.git/config	remote.origin.url=https://github.com/JoseLuisColcha/Poli-Huellas.git
+file:.git/config	remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+file:.git/config	branch.dev.remote=origin
+file:.git/config	branch.dev.merge=refs/heads/dev
+file:.git/config	branch.auth.remote=origin
+file:.git/config	branch.auth.merge=refs/heads/auth
+file:.git/config	user.name=JoseLuisColcha
+file:.git/config	user.email=jose.colcha@epn.edu.ec
+file:.git/config	credential.credentialstore=cache
+
+
+------------
+Diagnostic: Credential storage
+Skipped: False
+Success: True
+Exception: None
+Log:
+ICredentialStore instance is of type: CredentialStore
+Writing test credential... OK
+Reading test credential... OK
+Deleting test credential... OK
+
+------------
+Diagnostic: Microsoft authentication (AAD/MSA)
+Skipped: False
+Success: True
+Exception: None
+Log:
+Broker not supported.
+Flow type is: Auto
+Gathering MSAL token cache data... OK
+CacheDirectory: /home/snuc/.local/.IdentityService
+CacheFileName: msal.cache
+CacheFilePath: /home/snuc/.local/.IdentityService/msal.cache
+KeyringCollection: 
+KeyringSchemaName: 
+KeyringSecretLabel: 
+KeyringAttribute1: (,)
+KeyringAttribute2: (,)
+Creating cache helper... OK
+Verifying MSAL token cache persistence... OK
+
+------------
+Diagnostic: GitHub API
+Skipped: False
+Success: True
+Exception: None
+Log:
+Using 'https://github.com/' as API target.
+Querying '/meta' endpoint... OK
+
