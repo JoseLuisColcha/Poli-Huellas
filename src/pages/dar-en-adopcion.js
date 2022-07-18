@@ -283,7 +283,7 @@ export default function Giveadoption() {
               variant="outlined"
               component="label"
             >
-              Seleccionar Archivo
+              Seleccionar Imagen
               <input
                 type="file"
                 accept=".png,.jpg,.jpeg"
