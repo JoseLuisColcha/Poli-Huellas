@@ -11,12 +11,28 @@ import { Person, Phone, LocationOn } from "@mui/icons-material";
 import { useAuth } from "@/lib/auth";
 import withAuth from "@/hocs/withAuth";
 import EditUserInfoModal from "@/components/Modals/EditUserInfoModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 
-function Profile() {
-  const { currentUser, updateUser } = useAuth();
+function Profile(props) {
+  const { query: { id } } = useRouter()
+  const { updateUser, listenUser } = useAuth();
+  const [userDataProfile, setUserDataProfile] = useState(null);
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const callback = (doc) => {
+      const data = doc.data();
+      setUserDataProfile({ ...data, uid: doc.id });
+    };
+    let unsub;
+    if (id) {
+      unsub = listenUser(callback, id);
+    }
+    return () => unsub && unsub();
+  }, [id, listenUser])
+
   const {
     register,
     formState: { errors },
@@ -26,7 +42,7 @@ function Profile() {
   const onSubmit = async (data) => {
     const convertedData = {
       ...data,
-      uid: currentUser.uid,
+      uid: userDataProfile.uid,
       displayName: `${data.name} ${data.lastName}`,
     };
     await updateUser(convertedData);
@@ -36,10 +52,10 @@ function Profile() {
   const handleOpenModal = () => {
     setOpen(true);
     reset({
-      name: currentUser?.name,
-      lastName: currentUser?.lastName,
-      location: currentUser?.location,
-      phoneNumber: currentUser?.phoneNumber,
+      name: userDataProfile?.name,
+      lastName: userDataProfile?.lastName,
+      location: userDataProfile?.location,
+      phoneNumber: userDataProfile?.phoneNumber,
     });
   };
 
@@ -50,9 +66,9 @@ function Profile() {
           <Avatar
             alt="username"
             sx={{ width: 100, height: 100 }}
-            src={currentUser?.photoURL}
+            src={userDataProfile?.photoURL}
           >
-            {currentUser?.displayName?.charAt(0)}
+            {userDataProfile?.displayName?.charAt(0)}
           </Avatar>
         </Grid>
         <Grid container>
@@ -63,19 +79,19 @@ function Profile() {
             <ListItemIcon>
               <Person color="primary" />
             </ListItemIcon>
-            <ListItemText primary={currentUser?.displayName} />
+            <ListItemText primary={userDataProfile?.displayName} />
           </ListItem>
           <ListItem disablePadding>
             <ListItemIcon>
               <Phone color="primary" />
             </ListItemIcon>
-            <ListItemText primary={currentUser?.phoneNumber} />
+            <ListItemText primary={userDataProfile?.phoneNumber} />
           </ListItem>
           <ListItem disablePadding>
             <ListItemIcon>
               <LocationOn color="primary" />
             </ListItemIcon>
-            <ListItemText primary={currentUser?.location} />
+            <ListItemText primary={userDataProfile?.location} />
           </ListItem>
         </Grid>
         <Grid container direction="row" justifyContent={"center"} margin={2}>
