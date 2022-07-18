@@ -26,7 +26,7 @@ function Users() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {users?.filter(user => user.uid !== currentUser.uid).map((user) => (
+          {users?.filter(user => user?.uid !== currentUser?.uid).map((user) => (
             <TableRow
               key={user.name}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

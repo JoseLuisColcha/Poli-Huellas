@@ -12,7 +12,7 @@ const publicRoutes = {
 const privateRoutes = {
   HOME: "/",
   USERPROFILE: "/perfil-de-usuario",
-  ADMIN: "/admin/perfil",
+  ADMIN_USERS: "/admin/usuarios",
   GIVE_PET: "/dar-en-adopcion",
 };
 

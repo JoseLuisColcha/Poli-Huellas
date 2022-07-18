@@ -28,7 +28,7 @@ export default function withAuthRedirect({
 
     if (shouldRedirect) {
       if (session?.role === "admin") {
-        router.push(Routes.ADMIN);
+        router.push(Routes.ADMIN_USERS);
         return (
           <Backdrop
             sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
