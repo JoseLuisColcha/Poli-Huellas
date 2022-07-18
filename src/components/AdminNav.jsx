@@ -42,22 +42,25 @@ const menuItems = [
   },
   {
     title: "Usuarios",
-    to: "#",
-  },
-  {
-    title: "Formularios",
-    to: "#",
+    to: "/admin/usuarios",
   },
 ];
 
-export function AdminNav(props) {
+const INITIAL_TAB_MENU_STATE = {
+  anchorEl: null,
+  item: null,
+}
+
+export function AdminNav() {
   const { currentUser, logout, session } = useAuth();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [tabMenuState, setTabMenuState] = React.useState(INITIAL_TAB_MENU_STATE);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -75,22 +78,16 @@ export function AdminNav(props) {
     handleCloseUserMenu();
     await logout();
   };
+
   const router = useRouter();
 
-  const [tabItemAnchorEl, setTabItemAnchorEl] = React.useState(null);
-
-  const [openTabMenu, setOpenTabMenu] = React.useState(false);
-
   const handleTabClick = (e, item) => {
-    if(!item.subItems) return router.push(item.to); 
-    router.push(item.to);
-    setTabItemAnchorEl(e.currentTarget);
-    setOpenTabMenu(true);
+    if (!item.subItems) router.push(item.to);
+    setTabMenuState({ anchorEl: e.currentTarget, item });
   };
 
   const handleCloseTabMenu = () => {
-    setTabItemAnchorEl(null);
-    setOpenTabMenu(false);
+    setTabMenuState(INITIAL_TAB_MENU_STATE);
   };
 
   return (
@@ -187,38 +184,34 @@ export function AdminNav(props) {
               indicatorColor="secondary"
             >
               {menuItems.map((item, index) => (
-                <>
-                  <Tab
-                    onClick={(e) => handleTabClick(e, item)}
-                    key={item.to}
-                    value={item.to}
-                    label={item.title}
-                    sx={{ my: 1, color: "white", display: "block" }}
-                    tabIndex={index}
-                  />
-                  {item.subItems && (
-                    <Menu
-                      id="tab-item-menu"
-                      anchorEl={tabItemAnchorEl}
-                      open={openTabMenu}
-                      onClose={handleCloseTabMenu}
-                      MenuListProps={{
-                        "aria-labelledby": "basic-button",
-                      }}
-                    >
-                      {item.subItems.map((subItem) => (
-                        <MenuItem
-                          key={subItem.title}
-                          onClick={handleCloseTabMenu}
-                        >
-                          {subItem.title}
-                        </MenuItem>
-                      ))}
-                    </Menu>
-                  )}
-                </>
+                <Tab
+                  onClick={(e) => handleTabClick(e, item)}
+                  key={item.to}
+                  value={item.to}
+                  label={item.title}
+                  sx={{ my: 1, color: "white", display: "block" }}
+                  tabIndex={index}
+                />
               ))}
             </Tabs>
+            <Menu
+              id="tab-item-menu"
+              anchorEl={tabMenuState.anchorEl}
+              open={!!tabMenuState.anchorEl && !!tabMenuState.item.subItems}
+              onClose={handleCloseTabMenu}
+              MenuListProps={{
+                "aria-labelledby": "basic-button",
+              }}
+            >
+              {tabMenuState?.item?.subItems?.map((subItem) => (
+                <MenuItem
+                  key={subItem.title}
+                  onClick={handleCloseTabMenu}
+                >
+                  {subItem.title}
+                </MenuItem>
+              ))}
+            </Menu>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -253,7 +246,7 @@ export function AdminNav(props) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <Link href={Routes.USERPROFILE}>
+              <Link href={Routes.ADMIN_USERS}>
                 <MenuItem onClick={handleCloseUserMenu}>Perfil</MenuItem>
               </Link>
               <MenuItem onClick={handleLogout}>Cerrar sesión</MenuItem>

@@ -216,7 +216,7 @@ export default function ResponsiveAppBar(props) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <Link href={Routes.USERPROFILE}>
+              <Link href={`/perfil-de-usuario/${session?.uid}`}>
                 <MenuItem onClick={handleCloseUserMenu}>Perfil</MenuItem>
               </Link>
               <MenuItem onClick={handleLogout}>Cerrar sesión</MenuItem>
