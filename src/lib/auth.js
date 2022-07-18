@@ -123,6 +123,7 @@ function useAuthProvider() {
         lastName: user.lastName,
         photoURL: user.photoURL,
         displayName: user.displayName,
+        role: "user",
         createdAt: Timestamp.fromDate(new Date()),
       });
     }

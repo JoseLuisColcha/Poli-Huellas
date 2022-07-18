@@ -3,7 +3,7 @@ import { Timestamp, addDoc, collection } from "firebase/firestore";
 import {ref, uploadBytesResumable } from "firebase/storage";
 import QUESTIONS from "src/constants/questions";
 
-export const newPost = async (answerOne, answerTwo, answerThree, answerFour, petType, petSize, petAge, petSex, petPhoto, extraDescription, userID) => {
+export const newPost = async (answerOne, answerTwo, answerThree, answerFour, petType, petName, petSize, petAge, petSex, petPhoto, extraDescription, userID) => {
     try{
         await addDoc(collection(db, "posts"), {
             form: [
@@ -13,6 +13,7 @@ export const newPost = async (answerOne, answerTwo, answerThree, answerFour, pet
                 {"question": QUESTIONS.GIVE_Q4, "answer": answerFour},
             ],
             petType: petType,
+            petName: petName,
             petSize: petSize,
             petAge: petAge,
             petSex: petSex,

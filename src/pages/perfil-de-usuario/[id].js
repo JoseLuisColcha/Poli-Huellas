@@ -6,6 +6,8 @@ import {
   ListItemText,
   ListItemIcon,
   Button,
+  Stack,
+  Divider,
 } from "@mui/material";
 import { Person, Phone, LocationOn } from "@mui/icons-material";
 import { useAuth } from "@/lib/auth";
@@ -13,6 +15,8 @@ import withAuth from "@/hocs/withAuth";
 import EditUserInfoModal from "@/components/Modals/EditUserInfoModal";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { getMyPosts } from "@/lib/posts";
+import { MyPostCard } from "@/components/MyPostCard";
 import { useRouter } from "next/router";
 
 function Profile(props) {
@@ -20,6 +24,7 @@ function Profile(props) {
   const { updateUser, listenUser } = useAuth();
   const [userDataProfile, setUserDataProfile] = useState(null);
   const [open, setOpen] = useState(false);
+  const [myPosts, setMyPosts] = useState([]);
 
   useEffect(() => {
     const callback = (doc) => {
@@ -39,6 +44,15 @@ function Profile(props) {
     handleSubmit,
     reset,
   } = useForm();
+
+  useEffect(() => {
+    const getPosts = async () => {
+      const posts = await getMyPosts(id);
+      setMyPosts(posts);
+    }
+    getPosts();
+  }, [id]);
+
   const onSubmit = async (data) => {
     const convertedData = {
       ...data,
@@ -60,7 +74,7 @@ function Profile(props) {
   };
 
   return (
-    <Grid container margin={0}>
+    <Grid container margin={0} spacing={2}>
       <Grid xs={12} sm={2}>
         <Grid marginY={4} container direction="column" alignItems="center">
           <Avatar
@@ -102,7 +116,11 @@ function Profile(props) {
       </Grid>
 
       <Grid xs={12} sm={10} container direction="column" alignItems="center">
-        List of posts
+        <Typography style={{'fontSize':'32px', 'fontWeight':700}}>Tus Publicaciones</Typography>
+        <Divider variant="inset" style={{'border':'1px solid #C2C6CC', 'width':'90%'}} />
+          {myPosts?.map((post, index) => (
+            <MyPostCard key={index} post={post} />
+          ))}
       </Grid>
 
       <EditUserInfoModal

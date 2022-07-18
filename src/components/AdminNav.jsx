@@ -246,7 +246,7 @@ export function AdminNav() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <Link href={Routes.ADMIN}>
+              <Link href={Routes.ADMIN_USERS}>
                 <MenuItem onClick={handleCloseUserMenu}>Perfil</MenuItem>
               </Link>
               <MenuItem onClick={handleLogout}>Cerrar sesión</MenuItem>
