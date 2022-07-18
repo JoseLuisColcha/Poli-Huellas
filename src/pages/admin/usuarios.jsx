@@ -13,7 +13,7 @@ import {Visibility, Delete} from '@mui/icons-material'
 import { useRouter } from "next/router";
 
 function Users() {
-  const { users } = useAuth();
+  const { users, currentUser } = useAuth();
   const router = useRouter()
   return (
     <TableContainer component={Paper} sx={{ mt: '1.5rem' }}>
@@ -26,7 +26,7 @@ function Users() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {users?.map((user) => (
+          {users?.filter(user => user.uid !== currentUser.uid).map((user) => (
             <TableRow
               key={user.name}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -36,8 +36,8 @@ function Users() {
               </TableCell>
               <TableCell align="center">{user.email}</TableCell>
               <TableCell sx={{display: 'flex', justifyContent: 'space-around'}}>
-                <Visibility color="primary" titleAccess="Ver usuario" onClick={() => router.push(`/perfil-de-usuario/${user.uid}`)}/>
-                <Delete color="error" titleAccess="Eliminar"/>
+                <Visibility sx={{cursor: "pointer"}} color="primary" titleAccess="Ver usuario" onClick={() => router.push(`/perfil-de-usuario/${user.uid}`)}/>
+                <Delete sx={{cursor: "pointer"}} color="error" titleAccess="Eliminar"/>
               </TableCell>
             </TableRow>
           ))}
