@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    color: #B224EF;
+    font-size: 26px;
+    font-weight: 700;
+    padding: 0px 0px 20px;
+}
+
+.container_carrusel {
+    justify-content: center;
+    align-items: center;
+    padding: 50px 40px 0px;
+}
+
+.button_carrusel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 0px 0px;
+
+}
+
+.swiper-button-prev {
+    left: 30;
+    color: #B224EF;
+
+}
+.swiper_button-next {
+    left: 30;
+    color: #B224EF;
+
+}
