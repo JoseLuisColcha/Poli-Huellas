@@ -46,7 +46,7 @@ const ResetPassword = () => {
 
   return (
     <Grid container direction="row" alignItems="center" spacing={8}>
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={12} md={6}>
         <Grid item xs={12} className={styles.item_container}>
           <Typography variant="h4" align="center">
             ¿Olvidaste tu
@@ -108,9 +108,10 @@ const ResetPassword = () => {
       </Grid>
       <Grid
         item
-        xs={6}
+        xs={12}
+        sm={12}
+        md={6}
         justifyContent="center"
-        className={styles.item_container}
       >
         <Image
           src="/images/pet8.jpg"
