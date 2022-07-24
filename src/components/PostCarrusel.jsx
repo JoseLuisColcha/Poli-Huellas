@@ -22,7 +22,7 @@ export default function PostCarrusel(props) {
     };
     getPostsPets();
   }, []);
-  console.log({ postsPets });
+
   return (
     <Container className={styles.container_carrusel}>
       <Typography className={styles.title} variant="h5" color="inherit">
