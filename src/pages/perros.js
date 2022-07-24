@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'
-import { getPostsByType } from '@/lib/posts';
+import { getPosts } from '@/lib/posts';
 import { PetCard } from '@/components/PetCard';
 import { CircularProgress, FormControl, FormLabel, Grid, RadioGroup, Stack, Typography, FormControlLabel, Radio } from '@mui/material';
 import Image from 'next/image';
@@ -11,7 +11,7 @@ export default function Gatos() {
 
   useEffect(() => {
     const getDogPosts = async () => {
-      const posts = await getPostsByType("Perro");
+      const posts = await getPosts("Perro");
       setDogPosts(posts);
     }
     getDogPosts();
