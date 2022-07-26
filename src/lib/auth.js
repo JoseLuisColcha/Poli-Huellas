@@ -133,6 +133,7 @@ function useAuthProvider() {
         uid: user.uid,
         email: user.email,
         lastName: user.lastName,
+        name: user.name,
         photoURL: user.photoURL,
         displayName: user.displayName,
         role: "user",
