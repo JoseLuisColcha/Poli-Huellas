@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { getDownloadURL } from "firebase/storage";
 import Routes from "src/constants/routes";
 import QUESTIONS from "src/constants/questions";
+import withAuth from "@/hocs/withAuth";
 
 const schema = yup.object({
   petAge: yup
@@ -19,7 +20,7 @@ const schema = yup.object({
   petType: yup.string().required("Este campo es requerido"),
 });
 
-export default function Giveadoption() {
+function Giveadoption() {
 
   const {
     register,
@@ -363,3 +364,5 @@ export default function Giveadoption() {
     </>
   );
 }
+
+export default withAuth(Giveadoption)
