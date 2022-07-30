@@ -6,7 +6,7 @@ const publicRoutes = {
   DOGS: "/perros",
   OTHER: "/otros",
   INSTRUCTIONS: "/instrucciones-de-adopcion",
-  FORGOT_PASSWORD: "/resetear-contrasenia",
+  FORGOT_PASSWORD: "/contrasenia-olvidada",
 };
 
 const privateRoutes = {
