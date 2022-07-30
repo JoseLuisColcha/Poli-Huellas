@@ -1,13 +1,15 @@
 import { Avatar, Card, CardContent, Typography } from '@mui/material';
 import React from 'react'
 import styles from '../styles/PetCard.module.css';
+import NextLink from "next/link";
 
 export const PetCard = (props) => {
     const { postId, petName, petAge, petSex, petImage } = props;
   return (
     <>
     {postId && petAge && petSex && petImage ?
-    <Card className={styles.card_container}>
+    <NextLink href={`/post/${postId}`}>
+      <Card className={styles.card_container} >
         <CardContent className={styles.card_container}>
             <Avatar
                 className={styles.pet_image}
@@ -21,6 +23,7 @@ export const PetCard = (props) => {
             <Typography className={styles.text}><span className={styles.label}>Sexo: </span> {petSex}</Typography>
         </CardContent>
     </Card>
+    </NextLink>
     : ""}
     </>
   )
