@@ -5,7 +5,7 @@ import styles from '../../styles/Comments.module.css';
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { postComment } from '@/lib/posts';
+import { addComment } from '@/lib/comments';
 
 const schema = yup.object({
     comment: yup
@@ -27,7 +27,7 @@ function SendComment(props) {
     const onSubmit = async (data) => {
         const {comment} = data;
         try{
-            await postComment (comment, currentUser.uid, postId);
+            await addComment (comment, currentUser.uid, postId);
         }catch (error) {
             if (error.response) {
               alert(error.response.message);
