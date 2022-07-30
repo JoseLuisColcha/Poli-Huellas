@@ -38,7 +38,6 @@ export default function Giveadoption() {
 
   useEffect(() => {
     if (task) {
-      console.log("task", task);
       task?.on('state_changed',
         (snapshot) => {
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -68,7 +67,6 @@ export default function Giveadoption() {
     if (file !== undefined) {
       setFile(file);
       const task = uploadPetImage(file, currentUser.uid);
-      console.log("task of file", task);
       setTask(task);
       setImageName(file.name);
     }
