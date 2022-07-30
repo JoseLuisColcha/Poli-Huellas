@@ -1,0 +1,16 @@
+.submit_button{
+    background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%);
+    border-radius: 30px;
+    width: 100px;
+    height: 30px;
+    color: #FFFFFF;
+    padding: 10px;
+}
+.cancel_button{
+    border: 1px solid #B224EF;
+    border-radius: 30px;
+    padding: 10px;
+    width: 100px;
+    height: 30px;
+    padding:10px;
+}

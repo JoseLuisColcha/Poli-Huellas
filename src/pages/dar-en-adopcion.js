@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { getDownloadURL } from "firebase/storage";
 import Routes from "src/constants/routes";
 import QUESTIONS from "src/constants/questions";
+import PETTYPE from "src/constants/petType";
 
 const schema = yup.object({
   petAge: yup
@@ -207,16 +208,23 @@ export default function Giveadoption() {
         </Grid>
         <Grid container spacing={2} className={styles.question_container}>
           <Grid item xs={8}>
-            <Typography>Tipo de mascota</Typography>
+          <Typography>Tipo de mascota</Typography>
           </Grid>
           <Grid item xs={4}>
             <TextField
-              className={styles.select}
-              id="petType"
-              label="Ingrese el tipo de la mascota"
-              {...register("petType")}
-              helperText="Ej. perro, gato, etc."
-            />
+            className={styles.select}
+            id="petType"
+            select
+            defaultValue=""
+            label="Seleccionar una opción"
+            {...register("petType")}
+              helperText="Seleccione el tipo de mascota"
+            >
+              <MenuItem value="" disabled><em>Seleccione</em></MenuItem>
+              <MenuItem value={PETTYPE.GATO}>{PETTYPE.GATO}</MenuItem>
+              <MenuItem value={PETTYPE.PERRO}>{PETTYPE.PERRO}</MenuItem>
+              <MenuItem value={PETTYPE.OTROS}>{PETTYPE.OTROS}</MenuItem>
+            </TextField>
           </Grid>
         </Grid>
         <Grid container spacing={2} className={styles.question_container}>

@@ -1,9 +1,10 @@
 import React,{useEffect, useState} from 'react'
 import { getPostsByType } from '@/lib/posts';
 import { PetCard } from '@/components/PetCard';
-import { CircularProgress, FormControl, FormLabel, Grid, RadioGroup, Stack, Typography, FormControlLabel, Radio } from '@mui/material';
+import { CircularProgress, FormControl, FormLabel, Grid, RadioGroup, Stack, Typography, FormControlLabel, Radio, Divider, Box } from '@mui/material';
 import Image from 'next/image';
 import styles from '../styles/PetPages.module.css';
+import PETTYPE from 'src/constants/petType';
 
 export default function Gatos() {
 
@@ -11,7 +12,7 @@ export default function Gatos() {
 
   useEffect(() => {
     const getDogPosts = async () => {
-      const posts = await getPostsByType("Perro");
+      const posts = await getPostsByType(PETTYPE.PERRO);
       setDogPosts(posts);
     }
     getDogPosts();
@@ -19,7 +20,7 @@ export default function Gatos() {
   
   return (
     <>
-      <Grid container className={styles.container}>
+      <Box container className={styles.container}>
       <Image
           src="/images/perro-banner.jpg"
           alt="cover"
@@ -28,7 +29,9 @@ export default function Gatos() {
         />
       <Typography className={styles.title}>Sabías que?</Typography>
       <Typography className={styles.text}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Typography>
-      </Grid>
+      </Box>
+      <br/>
+      <br/>
       <Grid container spacing={2}>
         <Grid item xs={2}>
           <FormControl>
@@ -50,13 +53,13 @@ export default function Gatos() {
           </FormControl>
         </Grid>
         <Grid item xs={10}>
-          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 1, sm: 2, md: 4 }}>
+          <Grid container direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 1, sm: 2, md: 4 }} >
             {dogPosts ? dogPosts?.map((post,index) => 
               <PetCard key={index} postId={post.id} petName={post.petName} petAge={post.petAge} petSex={post.petSex} petImage={post.image} />
             ):
             <CircularProgress />
           }
-          </Stack>
+          </Grid>
         </Grid>
       </Grid>
     </>
