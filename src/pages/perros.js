@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from 'react'
-import { getPostsByType } from '@/lib/posts';
+import { getPosts } from '@/lib/posts';
 import { PetCard } from '@/components/PetCard';
-import { CircularProgress, FormControl, FormLabel, Grid, RadioGroup, Stack, Typography, FormControlLabel, Radio, Divider, Box } from '@mui/material';
+import { CircularProgress, FormControl, FormLabel, Grid, RadioGroup, Typography, FormControlLabel, Radio, Box } from '@mui/material';
 import Image from 'next/image';
 import styles from '../styles/PetPages.module.css';
 import PETTYPE from 'src/constants/petType';
@@ -12,7 +12,7 @@ export default function Gatos() {
 
   useEffect(() => {
     const getDogPosts = async () => {
-      const posts = await getPostsByType(PETTYPE.PERRO);
+      const posts = await getPosts(PETTYPE.PERRO);
       setDogPosts(posts);
     }
     getDogPosts();

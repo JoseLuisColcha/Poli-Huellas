@@ -32,7 +32,7 @@ function Users() {
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {user.name}
+                {user.displayName}
               </TableCell>
               <TableCell align="center">{user.email}</TableCell>
               <TableCell sx={{display: 'flex', justifyContent: 'space-around'}}>

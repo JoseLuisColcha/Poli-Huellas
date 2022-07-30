@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'
-import { getPostsByType } from '@/lib/posts';
+import { getPosts } from '@/lib/posts';
 import { PetCard } from '@/components/PetCard';
 import {CircularProgress, Grid, Box, Typography } from '@mui/material';
 import Image from 'next/image';
@@ -12,7 +12,7 @@ export default function Otros() {
 
   useEffect(() => {
     const getOtherPosts = async () => {
-      const posts = await getPostsByType(PETTYPE.OTROS);
+      const posts = await getPosts(PETTYPE.OTROS);
       setOtherPosts(posts);
     }
     getOtherPosts();
