@@ -24,15 +24,16 @@ function Post() {
       {
         postData ?
           <>
-            <Grid container>
-              <Grid item xs={12} sm={4} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <Grid container style={{margin:"20px"}}>
+              <Grid item xs={12} sm={4} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                 <PostCover petImage={postData.image} petName={postData.petName} userId={postData.userID} />
               </Grid>
               <Grid item xs={12} sm={8} sx={{ justifyContent: "center", alignItems: "center" }}>
-                <PostInformation petName={postData.petName} petSex={postData.petSex} petAge={postData.petAge} petSize={postData.petSize} description={postData.description} />
+                <PostInformation petName={postData.petName} petSex={postData.petSex} petAge={postData.petAge} petSize={postData.petSize} description={postData.description} userId={postData.userID} />
               </Grid>
             </Grid>
-            <Comments postId={id} /></>
+            <Comments postId={id} />
+          </>
           : ""
       }
     </>
