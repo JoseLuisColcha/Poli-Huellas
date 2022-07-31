@@ -1,9 +1,12 @@
 import { Button, Card, CardContent, Typography } from '@mui/material';
 import React from 'react'
 import styles from '../../styles/PostDetails.module.css';
+import { useAuth } from "@/lib/auth";
 
 function PostInformation(props) {
-    const {petName, petSex, petAge, petSize, description} = props;
+    const {petName, petSex, petAge, petSize, description, userId} = props;
+    const {currentUser} = useAuth();
+    const isOwner = currentUser && currentUser.uid === userId;
   return (
     <>
      <Card>
@@ -15,7 +18,12 @@ function PostInformation(props) {
             <Typography className={styles.text} sx={{color:"#484848"}}><span className={styles.label}>Tamaño: </span> {petSize}</Typography>
             <Typography className={[styles.text,styles.label]}>Descripción: </Typography>
             <Typography className={styles.text} sx={{color:"#484848"}}>{description}</Typography>
-            <p align="right"><Button className={styles.button}>Contactar</Button></p>
+            {
+              !isOwner ?
+              <p align="right"><Button className={styles.button}>Contactar</Button></p>
+              :
+               ""
+            }
         </CardContent>
      </Card>
     </>
