@@ -14,6 +14,7 @@ const privateRoutes = {
   USERPROFILE: "/perfil-de-usuario",
   ADMIN_USERS: "/admin/usuarios",
   GIVE_PET: "/dar-en-adopcion",
+  POST: "/post",
 };
 
 const Routes = {
