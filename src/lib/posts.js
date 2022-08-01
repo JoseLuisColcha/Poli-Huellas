@@ -19,7 +19,7 @@ export const getPosts = async (petType) => {
 
 export const getMyPosts = async (userId) => {
   try {
-    const q = query(collection(db, "posts"), where("userID", "==", userId));
+    const q = query(collection(db, "posts"), where("userId", "==", userId));
     const querySnapshot = await getDocs(q);
     const data = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
     return data;
@@ -33,6 +33,16 @@ export const getPost = async (postId) => {
   const docSnap = await getDoc(docRef);
   if (docSnap.exists()) {
     return { ...docSnap.data(), id: docSnap.id };
+  } else {
+    console.log("No such document!");
+  }
+}
+
+export const isPostOwner = async ({postId, userId}) => {
+  const docRef = doc(db, "posts", postId);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    return docSnap.data().userId === userId;
   } else {
     console.log("No such document!");
   }

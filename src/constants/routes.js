@@ -11,7 +11,7 @@ const publicRoutes = {
 
 const privateRoutes = {
   HOME: "/",
-  USERPROFILE: "/perfil-de-usuario",
+  USERPROFILE: (userId) => `/perfil-de-usuario/${userId}`,
   ADMIN_USERS: "/admin/usuarios",
   GIVE_PET: "/dar-en-adopcion",
   POST: "/post",
