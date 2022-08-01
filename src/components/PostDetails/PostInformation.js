@@ -17,7 +17,6 @@ import React, { useEffect, useState } from "react";
 import styles from "../../styles/PostDetails.module.css";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useAuth } from "@/lib/auth";
-import { isPostOwner } from "@/lib/posts";
 
 function PostInformation({
   id,
@@ -27,19 +26,12 @@ function PostInformation({
   petSize,
   description,
   adoptionRequests,
+  postUserId,
 }) {
   const router = useRouter();
   const { session } = useAuth();
-  const [isUserPostOwner, setIsUserPostOwner] = useState(false);
-  const hasUserSentRequest = adoptionRequests.some(request => request.user.uid === session?.uid);
-
-  useEffect(() => {
-    const checkIsUserPostOwner = async () => {
-      const isOwner = await isPostOwner({ userId: session?.uid, postId: id });
-      setIsUserPostOwner(isOwner);
-    }
-    session && checkIsUserPostOwner();
-  }, [session]);
+  const isUserPostOwner = session?.uid === postUserId;
+  const hasUserSentRequest = adoptionRequests.some(request => request?.user?.uid === session?.uid);
 
   return (
     <>

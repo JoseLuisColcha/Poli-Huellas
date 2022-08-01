@@ -37,13 +37,3 @@ export const getPost = async (postId) => {
     console.log("No such document!");
   }
 }
-
-export const isPostOwner = async ({postId, userId}) => {
-  const docRef = doc(db, "posts", postId);
-  const docSnap = await getDoc(docRef);
-  if (docSnap.exists()) {
-    return docSnap.data().userId === userId;
-  } else {
-    console.log("No such document!");
-  }
-}
