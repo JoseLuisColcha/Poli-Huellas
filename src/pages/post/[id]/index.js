@@ -60,6 +60,7 @@ function Post() {
                 petSize={postData.petSize}
                 description={postData.description}
                 adoptionRequests={adoptionRequestsByPostId}
+                postUserId={postData.userId}
               />
             </Grid>
           </Grid>
