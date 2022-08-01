@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { getDownloadURL } from "firebase/storage";
 import Routes from "src/constants/routes";
 import QUESTIONS from "src/constants/questions";
+import PETTYPE from "src/constants/petType";
 import withAuth from "@/hocs/withAuth";
 
 const schema = yup.object({
@@ -38,7 +39,6 @@ function Giveadoption() {
 
   useEffect(() => {
     if (task) {
-      console.log("task", task);
       task?.on('state_changed',
         (snapshot) => {
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -68,7 +68,6 @@ function Giveadoption() {
     if (file !== undefined) {
       setFile(file);
       const task = uploadPetImage(file, currentUser.uid);
-      console.log("task of file", task);
       setTask(task);
       setImageName(file.name);
     }
@@ -208,16 +207,23 @@ function Giveadoption() {
         </Grid>
         <Grid container spacing={2} className={styles.question_container}>
           <Grid item xs={8}>
-            <Typography>Tipo de mascota</Typography>
+          <Typography>Tipo de mascota</Typography>
           </Grid>
           <Grid item xs={4}>
             <TextField
-              className={styles.select}
-              id="petType"
-              label="Ingrese el tipo de la mascota"
-              {...register("petType")}
-              helperText="Ej. perro, gato, etc."
-            />
+            className={styles.select}
+            id="petType"
+            select
+            defaultValue=""
+            label="Seleccionar una opción"
+            {...register("petType")}
+              helperText="Seleccione el tipo de mascota"
+            >
+              <MenuItem value="" disabled><em>Seleccione</em></MenuItem>
+              <MenuItem value={PETTYPE.GATO}>{PETTYPE.GATO}</MenuItem>
+              <MenuItem value={PETTYPE.PERRO}>{PETTYPE.PERRO}</MenuItem>
+              <MenuItem value={PETTYPE.OTROS}>{PETTYPE.OTROS}</MenuItem>
+            </TextField>
           </Grid>
         </Grid>
         <Grid container spacing={2} className={styles.question_container}>

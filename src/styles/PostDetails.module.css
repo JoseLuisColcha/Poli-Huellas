@@ -1,0 +1,39 @@
+.pet_image{
+    width: 245px;
+    height: 250px;
+    border-radius:150px;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.title{
+    color: #B224EF;
+    font-size: 24px;
+    font-weight: 700;
+}
+.cover{
+    background: rgba(178, 36, 239, 0.1);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.label{
+    color: #B224EF;
+}
+.text{
+    font-size: 22px;
+    font-weight: 500;
+}
+.textHead{
+    font-size: 48px;
+    font-weight: 700;
+}
+.button{
+    background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%);
+    border-radius: 28px;
+    width: 151px;
+    height: 56px;
+    color: #FFFFFF;
+}
