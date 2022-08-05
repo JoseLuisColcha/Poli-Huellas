@@ -13,10 +13,11 @@ import {
   Typography,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "../../styles/PostDetails.module.css";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useAuth } from "@/lib/auth";
+import { useAdoptionRequest } from "@/hooks/useAdoptionRequest";
 
 function PostInformation({
   id,
@@ -25,13 +26,14 @@ function PostInformation({
   petAge,
   petSize,
   description,
-  adoptionRequests,
   postUserId,
+  petType,
 }) {
+  const { adoptionRequestsByPostId } = useAdoptionRequest({ postId: id });
   const router = useRouter();
   const { session } = useAuth();
   const isUserPostOwner = session?.uid === postUserId;
-  const hasUserSentRequest = adoptionRequests.some(request => request?.user?.uid === session?.uid);
+  const hasUserSentRequest = adoptionRequestsByPostId?.some(request => request?.user?.uid === session?.uid);
 
   return (
     <>
@@ -63,7 +65,7 @@ function PostInformation({
               <p align="right">
                 <Button
                   className={styles.button}
-                  onClick={() => router.push(`${id}/solicitar-adopcion`)}
+                  onClick={() => router.push(`${id}/solicitar-adopcion?petType=${petType}`)}
                   disabled={hasUserSentRequest}
                 >
                   {hasUserSentRequest ? "Solicitud enviada" : "Solicitar adopción"}
@@ -71,35 +73,49 @@ function PostInformation({
               </p>
             )
           }
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <Typography>Solicitudes de adopción</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              {
-                adoptionRequests && adoptionRequests.map((adoptionRequest, index) => (
-                  <ListItem
-                    key={index}
-                    disablePadding
-                  >
-                    <ListItemButton disabled={!isUserPostOwner} onClick={() => router.push(`${id}/solicitar-adopcion?userId=${adoptionRequest.user.uid}`)}>
-                      <ListItemAvatar>
-                        <Avatar
-                          alt={`Avatar n°`}
-                          src={adoptionRequest.user?.photoURL}
-                        />
-                      </ListItemAvatar>
-                      <ListItemText primary={adoptionRequest.user?.displayName} />
-                    </ListItemButton>
-                  </ListItem>
-                ))
-              }
-            </AccordionDetails>
-          </Accordion>
+          {
+            adoptionRequestsByPostId?.length > 0 ? (
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
+                  <Typography>Solicitudes de adopción</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  {
+                    adoptionRequestsByPostId.map((adoptionRequest, index) => (
+                      <ListItem
+                        key={index}
+                        disablePadding
+                      >
+                        <ListItemButton disabled={!isUserPostOwner} onClick={() => router.push(`${id}/solicitar-adopcion?userId=${adoptionRequest.user.uid}&petType=${petType}`)}>
+                          <ListItemAvatar>
+                            <Avatar
+                              alt={`Avatar n°`}
+                              src={adoptionRequest.user?.photoURL}
+                            />
+                          </ListItemAvatar>
+                          <ListItemText primary={adoptionRequest.user?.displayName} />
+                        </ListItemButton>
+                      </ListItem>
+                    ))
+                  }
+                </AccordionDetails>
+              </Accordion>
+            ) : (
+              <Accordion>
+                <AccordionSummary
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                  disabled={true}
+                >
+                  <Typography>Sin solicitudes</Typography>
+                </AccordionSummary>
+              </Accordion>
+            )
+          }
         </CardContent>
       </Card>
     </>

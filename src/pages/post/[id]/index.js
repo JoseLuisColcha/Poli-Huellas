@@ -15,7 +15,6 @@ function Post() {
     query: { id },
   } = router;
   const [postData, setPostData] = useState(null);
-  const { adoptionRequestsByPostId } = useAdoptionRequest({ postId: id });
 
   useEffect(() => {
     const getPostData = async () => {
@@ -59,8 +58,8 @@ function Post() {
                 petAge={postData.petAge}
                 petSize={postData.petSize}
                 description={postData.description}
-                adoptionRequests={adoptionRequestsByPostId}
                 postUserId={postData.userId}
+                petType={postData.petType}
               />
             </Grid>
           </Grid>
