@@ -6,6 +6,7 @@ import {
   Button,
   Card,
   CardContent,
+  Grid,
   ListItem,
   ListItemAvatar,
   ListItemButton,
@@ -28,6 +29,7 @@ function PostInformation({
   description,
   postUserId,
   petType,
+  setOpenPostForm,
 }) {
   const { adoptionRequestsByPostId } = useAdoptionRequest({ postId: id });
   const router = useRouter();
@@ -61,7 +63,7 @@ function PostInformation({
             {description}
           </Typography>
           {
-            !isUserPostOwner && session && (
+            !isUserPostOwner && session?.role === 'user' && (
               <p align="right">
                 <Button
                   className={styles.button}
@@ -74,8 +76,23 @@ function PostInformation({
             )
           }
           {
+            !isUserPostOwner && session?.role === 'admin' && (
+              <Grid
+                container
+                sx={{ justifyContent: { xs: "center", md: "flex-end" }, gap: "1rem" }}
+              >
+                <Button
+                  className={styles.button}
+                  onClick={() => setOpenPostForm(true)}
+                >
+                  Ver formulario
+                </Button>
+              </Grid>
+            )
+          }
+          {
             adoptionRequestsByPostId?.length > 0 ? (
-              <Accordion>
+              <Accordion sx={{marginTop: '1rem'}}>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel1a-content"
@@ -105,7 +122,7 @@ function PostInformation({
                 </AccordionDetails>
               </Accordion>
             ) : (
-              <Accordion>
+              <Accordion sx={{marginTop: '1rem'}}>
                 <AccordionSummary
                   aria-controls="panel1a-content"
                   id="panel1a-header"

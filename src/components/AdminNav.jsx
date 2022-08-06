@@ -14,12 +14,14 @@ import {
   Skeleton,
   Tabs,
   Tab,
+  Collapse,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Routes from "../constants/routes";
 import { SESSION_STATE, useAuth } from "@/lib/auth";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
 
 const menuItems = [
   {
@@ -28,15 +30,15 @@ const menuItems = [
     subItems: [
       {
         title: "Gatos",
-        to: "#",
+        to: Routes.CATS,
       },
       {
         title: "Perros",
-        to: "#",
+        to: Routes.DOGS,
       },
       {
         title: "Otros",
-        to: "#",
+        to: Routes.OTHER,
       },
     ],
   },
@@ -49,13 +51,21 @@ const menuItems = [
 const INITIAL_TAB_MENU_STATE = {
   anchorEl: null,
   item: null,
-}
+};
+
+const INITIAL_COLLAPSE_MENU_STATE = {
+  open: false,
+  items: [],
+};
 
 export function AdminNav() {
   const { currentUser, logout, session } = useAuth();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [tabMenuState, setTabMenuState] = React.useState(INITIAL_TAB_MENU_STATE);
+  const [tabMenuState, setTabMenuState] = React.useState(
+    INITIAL_TAB_MENU_STATE
+  );
+  const [collapse, setCollapse] = React.useState(INITIAL_COLLAPSE_MENU_STATE);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -143,13 +153,45 @@ export function AdminNav() {
               }}
               autoFocus
             >
-              {menuItems.map((item) => (
-                <Link href={item.to} key={item.title}>
-                  <MenuItem key={item.title} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{item.title}</Typography>
-                  </MenuItem>
-                </Link>
-              ))}
+              {menuItems.map((item) =>
+                item.subItems ? (
+                  <>
+                    <MenuItem
+                      key={item.title}
+                      onClick={() =>
+                        setCollapse((prevState) => ({
+                          items: item.subItems,
+                          open: !prevState.open,
+                        }))
+                      }
+                    >
+                      {item.title}
+                      {collapse.open ? <ExpandLess /> : <ExpandMore />}
+                    </MenuItem>
+                    <Collapse in={collapse.open} timeout="auto" unmountOnExit>
+                      {collapse.items.map((item) => (
+                        <Link href={item.to} key={item.title}>
+                          <MenuItem
+                            key={item.title}
+                            sx={{ pl: 4 }}
+                            onClick={handleCloseNavMenu}
+                          >
+                            <Typography textAlign="center">
+                              {item.title}
+                            </Typography>
+                          </MenuItem>
+                        </Link>
+                      ))}
+                    </Collapse>
+                  </>
+                ) : (
+                  <Link href={item.to} key={item.title}>
+                    <MenuItem key={item.title} onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center">{item.title}</Typography>
+                    </MenuItem>
+                  </Link>
+                )
+              )}
             </Menu>
           </Box>
           <Typography
@@ -202,14 +244,14 @@ export function AdminNav() {
               MenuListProps={{
                 "aria-labelledby": "basic-button",
               }}
+              autoFocus
             >
               {tabMenuState?.item?.subItems?.map((subItem) => (
-                <MenuItem
-                  key={subItem.title}
-                  onClick={handleCloseTabMenu}
-                >
-                  {subItem.title}
-                </MenuItem>
+                <Link href={subItem.to} key={subItem.title}>
+                  <MenuItem key={subItem.title} onClick={handleCloseTabMenu}>
+                    {subItem.title}
+                  </MenuItem>
+                </Link>
               ))}
             </Menu>
           </Box>
@@ -246,9 +288,6 @@ export function AdminNav() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <Link href={Routes.ADMIN_USERS}>
-                <MenuItem onClick={handleCloseUserMenu}>Perfil</MenuItem>
-              </Link>
               <MenuItem onClick={handleLogout}>Cerrar sesión</MenuItem>
             </Menu>
           </Box>

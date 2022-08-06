@@ -1,11 +1,24 @@
 import { db } from "@/lib/firebase/client";
-import { collection, query, where, getDocs, getDoc, doc, addDoc, Timestamp, onSnapshot, orderBy } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  getDoc,
+  doc,
+  orderBy,
+  updateDoc,
+} from "firebase/firestore";
 
-export const getPosts = async (petType) => {
+export const getPosts = async (petType, status) => {
+  const constraints = [
+    petType && where("petType", "==", petType),
+    status && where("status", "==", status),
+    orderBy("createdAt", "desc"),
+  ].filter((c) => c);
+
   try {
-    const q = petType
-      ? query(collection(db, "posts"), where("petType", "==", petType))
-      : query(collection(db, "posts"));
+    const q = query(collection(db, "posts"), ...constraints);
     const querySnapshot = await getDocs(q);
     const data = querySnapshot.docs.map((doc) => ({
       ...doc.data(),
@@ -21,12 +34,15 @@ export const getMyPosts = async (userId) => {
   try {
     const q = query(collection(db, "posts"), where("userId", "==", userId));
     const querySnapshot = await getDocs(q);
-    const data = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+    const data = querySnapshot.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
     return data;
   } catch (e) {
     console.log(e);
   }
-}
+};
 
 export const getPost = async (postId) => {
   const docRef = doc(db, "posts", postId);
@@ -36,4 +52,9 @@ export const getPost = async (postId) => {
   } else {
     console.log("No such document!");
   }
-}
+};
+
+export const updatePost = async ({ data, id }) => {
+  const docRef = doc(db, "posts", id);
+  await updateDoc(docRef, data);
+};
