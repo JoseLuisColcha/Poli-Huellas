@@ -19,7 +19,7 @@ export const getPosts = async (petType) => {
 
 export const getMyPosts = async (userId) => {
   try {
-    const q = query(collection(db, "posts"), where("userID", "==", userId));
+    const q = query(collection(db, "posts"), where("userId", "==", userId));
     const querySnapshot = await getDocs(q);
     const data = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
     return data;

@@ -18,25 +18,15 @@ import { useForm } from "react-hook-form";
 import { getMyPosts } from "@/lib/posts";
 import { MyPostCard } from "@/components/MyPostCard";
 import { useRouter } from "next/router";
+import { useUserProfileInformation } from "@/hooks/useUserProfileInformation";
 
-function Profile(props) {
-  const { query: { id } } = useRouter()
-  const { updateUser, listenUser } = useAuth();
-  const [userDataProfile, setUserDataProfile] = useState(null);
+function Profile() {
+  const { query: { id: userId } } = useRouter()
+  const { updateUser, session } = useAuth();
   const [open, setOpen] = useState(false);
   const [myPosts, setMyPosts] = useState([]);
 
-  useEffect(() => {
-    const callback = (doc) => {
-      const data = doc.data();
-      setUserDataProfile({ ...data, uid: doc.id });
-    };
-    let unsub;
-    if (id) {
-      unsub = listenUser(callback, id);
-    }
-    return () => unsub && unsub();
-  }, [id, listenUser])
+  const { userDataProfile } = useUserProfileInformation({ userId });
 
   const {
     register,
@@ -47,11 +37,11 @@ function Profile(props) {
 
   useEffect(() => {
     const getPosts = async () => {
-      const posts = await getMyPosts(id);
+      const posts = await getMyPosts(userId);
       setMyPosts(posts);
     }
     getPosts();
-  }, [id]);
+  }, [userId]);
 
   const onSubmit = async (data) => {
     const convertedData = {
@@ -116,7 +106,7 @@ function Profile(props) {
       </Grid>
 
       <Grid xs={12} sm={10} container direction="column" alignItems="center">
-        <Typography style={{'fontSize':'32px', 'fontWeight':700}}>Tus Publicaciones</Typography>
+        <Typography style={{'fontSize':'32px', 'fontWeight':700}}>{userId === session?.uid ? 'Tus Publicaciones' : 'Publicaciones'}</Typography>
         <Divider variant="inset" style={{'border':'1px solid #C2C6CC', 'width':'90%'}} />
           {myPosts?.map((post, index) => (
             <MyPostCard key={index} post={post} />
