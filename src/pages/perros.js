@@ -5,18 +5,21 @@ import { CircularProgress, FormControl, FormLabel, Grid, RadioGroup, Typography,
 import Image from 'next/image';
 import styles from '../styles/PetPages.module.css';
 import PETTYPE from 'src/constants/petType';
+import { useAuth } from '@/lib/auth';
 
 export default function Gatos() {
 
   const [dogPosts, setDogPosts] = useState();
+  const {session} = useAuth();
 
   useEffect(() => {
     const getDogPosts = async () => {
-      const posts = await getPosts(PETTYPE.PERRO);
+      const status = session ? session?.role === "user" ? "ACCEPTED" : undefined : 'ACCEPTED';
+      const posts = await getPosts(PETTYPE.PERRO, status);
       setDogPosts(posts);
     }
     getDogPosts();
-  }, []);
+  }, [session]);
   
   return (
     <>

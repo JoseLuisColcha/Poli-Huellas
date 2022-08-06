@@ -1,20 +1,21 @@
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
-import { getPost } from "@/lib/posts";
-import {
-  Grid,
-} from "@mui/material";
+import { getPost, updatePost } from "@/lib/posts";
+import { Grid } from "@mui/material";
 import PostCover from "@/components/PostDetails/PostCover";
 import PostInformation from "@/components/PostDetails/PostInformation";
 import Comments from "@/components/PostDetails/Comments";
-import { useAdoptionRequest } from "@/hooks/useAdoptionRequest";
+import { PostInfoFormModal } from "@/components/Modals/PostInfoFormModal";
+import { useAlert } from "@/lib/alert";
 
 function Post() {
   const router = useRouter();
+  const {addAlert} = useAlert();
   const {
     query: { id },
   } = router;
   const [postData, setPostData] = useState(null);
+  const [openPostForm, setOpenPostForm] = useState(false);
 
   useEffect(() => {
     const getPostData = async () => {
@@ -24,9 +25,29 @@ function Post() {
     id && getPostData();
   }, [id]);
 
+  const handleAction = async (action) => {
+    try{
+       await updatePost({ data: { status: action }, id});
+       addAlert({
+        text: "Publicación actualizada",
+        severity: "success",
+        duration: 6000,
+      }); 
+    } catch(e){
+      console.log({e})
+      addAlert({
+        text: "Error al actualizar la publicación",
+        severity: "error",
+        duration: 6000,
+      });
+    }
+  }
+
+  const handleClosePostFormModal = () => setOpenPostForm(false);
+
   return (
     <>
-      {postData ? (
+      {postData && (
         <>
           <Grid container>
             <Grid
@@ -60,13 +81,19 @@ function Post() {
                 description={postData.description}
                 postUserId={postData.userId}
                 petType={postData.petType}
+                setOpenPostForm={setOpenPostForm}
               />
             </Grid>
           </Grid>
           <Comments postId={id} />
+          <PostInfoFormModal
+            open={openPostForm}
+            handleClose={handleClosePostFormModal}
+            formInfo={postData.form}
+            handleAction={handleAction}
+            postStatus={postData.status}
+          />
         </>
-      ) : (
-        ""
       )}
     </>
   );

@@ -5,18 +5,21 @@ import {CircularProgress, Grid, Box, Typography } from '@mui/material';
 import Image from 'next/image';
 import styles from '../styles/PetPages.module.css';
 import PETTYPE from 'src/constants/petType';
+import { useAuth } from '@/lib/auth';
 
 export default function Otros() {
 
   const [otherPosts, setOtherPosts] = useState();
+  const {session} = useAuth();
 
   useEffect(() => {
     const getOtherPosts = async () => {
-      const posts = await getPosts(PETTYPE.OTROS);
+      const status = session ? session?.role === "user" ? "ACCEPTED" : undefined : 'ACCEPTED';
+      const posts = await getPosts(PETTYPE.OTROS, status);
       setOtherPosts(posts);
     }
     getOtherPosts();
-  }, []);
+  }, [session]);
   
   return (
     <>
