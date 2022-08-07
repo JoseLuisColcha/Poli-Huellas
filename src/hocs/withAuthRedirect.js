@@ -28,7 +28,7 @@ export default function withAuthRedirect({
 
     if (shouldRedirect) {
       if (session?.role === "admin") {
-        router.push(Routes.ADMIN);
+        router.push(Routes.ADMIN_USERS);
         return (
           <Backdrop
             sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -39,6 +39,19 @@ export default function withAuthRedirect({
         );
       }
       router.push(location);
+    } else{
+      if(router.pathname.startsWith('/admin') && session?.role !== "admin") {
+        console.log('entroo admin redirect')
+        router.push(Routes.HOME);
+        return (
+          <Backdrop
+            sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={true}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
+        );
+      }
     }
     return <WrappedComponent {...props} />;
   };

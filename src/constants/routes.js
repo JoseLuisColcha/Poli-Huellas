@@ -6,14 +6,15 @@ const publicRoutes = {
   DOGS: "/perros",
   OTHER: "/otros",
   INSTRUCTIONS: "/instrucciones-de-adopcion",
-  FORGOT_PASSWORD: "/resetear-contrasenia",
+  FORGOT_PASSWORD: "/contrasenia-olvidada",
 };
 
 const privateRoutes = {
   HOME: "/",
-  USERPROFILE: "/perfil-de-usuario",
-  ADMIN: "/admin/perfil",
+  USERPROFILE: (userId) => `/perfil-de-usuario/${userId}`,
+  ADMIN_USERS: "/admin/usuarios",
   GIVE_PET: "/dar-en-adopcion",
+  POST: "/post",
 };
 
 const Routes = {

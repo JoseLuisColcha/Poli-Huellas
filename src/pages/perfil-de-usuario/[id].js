@@ -6,27 +6,47 @@ import {
   ListItemText,
   ListItemIcon,
   Button,
+  Stack,
+  Divider,
 } from "@mui/material";
 import { Person, Phone, LocationOn } from "@mui/icons-material";
 import { useAuth } from "@/lib/auth";
 import withAuth from "@/hocs/withAuth";
 import EditUserInfoModal from "@/components/Modals/EditUserInfoModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { getMyPosts } from "@/lib/posts";
+import { MyPostCard } from "@/components/MyPostCard";
+import { useRouter } from "next/router";
+import { useUserProfileInformation } from "@/hooks/useUserProfileInformation";
 
 function Profile() {
-  const { currentUser, updateUser } = useAuth();
+  const { query: { id: userId } } = useRouter()
+  const { updateUser, session } = useAuth();
   const [open, setOpen] = useState(false);
+  const [myPosts, setMyPosts] = useState([]);
+
+  const { userDataProfile } = useUserProfileInformation({ userId });
+
   const {
     register,
     formState: { errors },
     handleSubmit,
     reset,
   } = useForm();
+
+  useEffect(() => {
+    const getPosts = async () => {
+      const posts = await getMyPosts(userId);
+      setMyPosts(posts);
+    }
+    getPosts();
+  }, [userId]);
+
   const onSubmit = async (data) => {
     const convertedData = {
       ...data,
-      uid: currentUser.uid,
+      uid: userDataProfile.uid,
       displayName: `${data.name} ${data.lastName}`,
     };
     await updateUser(convertedData);
@@ -36,23 +56,23 @@ function Profile() {
   const handleOpenModal = () => {
     setOpen(true);
     reset({
-      name: currentUser?.name,
-      lastName: currentUser?.lastName,
-      location: currentUser?.location,
-      phoneNumber: currentUser?.phoneNumber,
+      name: userDataProfile?.name,
+      lastName: userDataProfile?.lastName,
+      location: userDataProfile?.location,
+      phoneNumber: userDataProfile?.phoneNumber,
     });
   };
 
   return (
-    <Grid container margin={0}>
+    <Grid container margin={0} spacing={2}>
       <Grid xs={12} sm={2}>
         <Grid marginY={4} container direction="column" alignItems="center">
           <Avatar
             alt="username"
             sx={{ width: 100, height: 100 }}
-            src={currentUser?.photoURL}
+            src={userDataProfile?.photoURL}
           >
-            {currentUser?.displayName?.charAt(0)}
+            {userDataProfile?.displayName?.charAt(0)}
           </Avatar>
         </Grid>
         <Grid container>
@@ -63,19 +83,19 @@ function Profile() {
             <ListItemIcon>
               <Person color="primary" />
             </ListItemIcon>
-            <ListItemText primary={currentUser?.displayName} />
+            <ListItemText primary={userDataProfile?.displayName} />
           </ListItem>
           <ListItem disablePadding>
             <ListItemIcon>
               <Phone color="primary" />
             </ListItemIcon>
-            <ListItemText primary={currentUser?.phoneNumber} />
+            <ListItemText primary={userDataProfile?.phoneNumber} />
           </ListItem>
           <ListItem disablePadding>
             <ListItemIcon>
               <LocationOn color="primary" />
             </ListItemIcon>
-            <ListItemText primary={currentUser?.location} />
+            <ListItemText primary={userDataProfile?.location} />
           </ListItem>
         </Grid>
         <Grid container direction="row" justifyContent={"center"} margin={2}>
@@ -86,7 +106,11 @@ function Profile() {
       </Grid>
 
       <Grid xs={12} sm={10} container direction="column" alignItems="center">
-        List of posts
+        <Typography style={{'fontSize':'32px', 'fontWeight':700}}>{userId === session?.uid ? 'Tus Publicaciones' : 'Publicaciones'}</Typography>
+        <Divider variant="inset" style={{'border':'1px solid #C2C6CC', 'width':'90%'}} />
+          {myPosts?.map((post, index) => (
+            <MyPostCard key={index} post={post} />
+          ))}
       </Grid>
 
       <EditUserInfoModal
