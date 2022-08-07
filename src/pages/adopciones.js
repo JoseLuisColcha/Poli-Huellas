@@ -20,7 +20,7 @@ export default function Adoptions() {
       path: Routes.CATS,
     },
     {
-      typePet: "Ave",
+      typePet: "Otro",
       title: " Otros mascotas en adopción",
       path: Routes.OTHER,
     },

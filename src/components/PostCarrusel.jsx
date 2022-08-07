@@ -9,19 +9,22 @@ import Link from "next/link";
 import CarruselPetCard from "./CarruselPetCard";
 import styles from "../styles/Adoptions.module.css";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useAuth } from "@/lib/auth";
 
 export default function PostCarrusel(props) {
   const { typePet, path, title } = props;
   const [postsPets, setPostsPets] = useState();
   const numSliders = [0, 1, 2, 3];
+  const {session} = useAuth()
 
   useEffect(() => {
     const getPostsPets = async () => {
-      const posts = await getPosts(typePet);
+      const status = session ? session?.role === "user" ? "ACCEPTED" : undefined : 'ACCEPTED';
+      const posts = await getPosts(typePet, status);
       setPostsPets(posts);
     };
     getPostsPets();
-  }, []);
+  }, [session]);
 
   return (
     <Container className={styles.container_carrusel}>
@@ -50,6 +53,7 @@ export default function PostCarrusel(props) {
                     petName={post.petName}
                     petImage={post.image}
                     petSex={post.petSex}
+                    petId={post.id}
                   />
                 </SwiperSlide>
               </>
