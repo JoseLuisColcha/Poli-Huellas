@@ -37,3 +37,11 @@
     height: 56px;
     color: #FFFFFF;
 }
+
+.reject_button {
+    background: linear-gradient(90deg, #ef2457 0%, #e7b529 100%);
+    border-radius: 28px;
+    width: 151px;
+    height: 56px;
+    color: #FFFFFF;
+  }
