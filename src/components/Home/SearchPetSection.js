@@ -3,7 +3,7 @@ import Huella from "../../../public/images/huella.png";
 import Image from "next/image";
 import Link from "next/link";
 import Routes from "src/constants/routes";
-import styles from "../../styles/Home.module.css";
+import styles from "../../styles/TextGlobal.module.css";
 
 export default function SearchPetSection() {
   return (
