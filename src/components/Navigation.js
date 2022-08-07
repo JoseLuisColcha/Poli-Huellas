@@ -16,10 +16,13 @@ import {
   Tab,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import Routes from "../constants/routes";
 import { SESSION_STATE, useAuth } from "@/lib/auth";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { listtenNotifications } from "@/lib/notifications";
+import Notification from "./Notification";
 
 const menuItems = [
   {
@@ -56,6 +59,19 @@ export default function ResponsiveAppBar(props) {
   const { currentUser, logout, session } = useAuth();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNotifications, setAnchorElNotifications] = React.useState(null);
+  const [notifications, setNotifications] = React.useState([]);
+
+  React.useEffect(() => {
+    if (currentUser != null) {
+      const cb = (snapshot) => {
+        const notis = snapshot.docs
+        setNotifications(notis.map(doc => ({ ...doc.data(), id: doc.id })))
+      }
+      const unsub = listtenNotifications({ receiverId: currentUser?.uid, callback: cb });
+      return () => unsub();
+    }
+  }, [currentUser]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -63,6 +79,9 @@ export default function ResponsiveAppBar(props) {
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
+  const handleOpenNotificationsMenu = (event) => {
+    setAnchorElNotifications(event.currentTarget);
+  }
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
@@ -72,6 +91,11 @@ export default function ResponsiveAppBar(props) {
     setAnchorElUser(null);
     handleCloseNavMenu();
   };
+
+  const handleCloseNotificationsMenu = () => {
+    setAnchorElNotifications(null);
+    handleCloseNavMenu();
+  }
 
   const handleLogout = async () => {
     handleCloseUserMenu();
@@ -187,6 +211,38 @@ export default function ResponsiveAppBar(props) {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
+          <Tooltip title="Notifications">
+              {session ? (
+                <IconButton onClick={handleOpenNotificationsMenu} sx={{ p: 0, width:"40px", height:"40px", marginRight:"10px", background:"#C2C6CC", color:"#FFFFFF" }}>
+                  <NotificationsIcon />
+                </IconButton>
+              ) : session === SESSION_STATE.NO_LOGGED ? (
+                <p/>
+              ) : (
+                <Skeleton variant="circular" width={40} height={40} />
+              )}
+            </Tooltip>
+            <Menu
+              sx={{ mt: "45px" }}
+              id="menu-appbar"
+              anchorEl={anchorElNotifications}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorElNotifications)}
+              onClose={handleCloseNotificationsMenu}
+            >
+              {notifications.map((noti) => (
+                <Notification key={noti.id} notification={noti} />
+              ))}
+            </Menu>
+
             <Tooltip title="Open settings">
               {session ? (
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
