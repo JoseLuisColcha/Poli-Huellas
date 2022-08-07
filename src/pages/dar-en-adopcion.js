@@ -10,6 +10,8 @@ import { useForm } from "react-hook-form";
 import { getDownloadURL } from "firebase/storage";
 import Routes from "src/constants/routes";
 import QUESTIONS from "src/constants/questions";
+import PETTYPE from "src/constants/petType";
+import withAuth from "@/hocs/withAuth";
 
 const schema = yup.object({
   petAge: yup
@@ -19,7 +21,7 @@ const schema = yup.object({
   petType: yup.string().required("Este campo es requerido"),
 });
 
-export default function Giveadoption() {
+function Giveadoption() {
 
   const {
     register,
@@ -37,7 +39,6 @@ export default function Giveadoption() {
 
   useEffect(() => {
     if (task) {
-      console.log("task", task);
       task?.on('state_changed',
         (snapshot) => {
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -67,7 +68,6 @@ export default function Giveadoption() {
     if (file !== undefined) {
       setFile(file);
       const task = uploadPetImage(file, currentUser.uid);
-      console.log("task of file", task);
       setTask(task);
       setImageName(file.name);
     }
@@ -78,9 +78,9 @@ export default function Giveadoption() {
   }
 
   const onSubmit = async (data) => {
-    const {answerOne, answerTwo, answerThree, answerFour, petType, petSize, petAge, petSex, extraDescription} = data;
+    const {answerOne, answerTwo, answerThree, answerFour, petType, petName, petSize, petAge, petSex, extraDescription} = data;
     try {
-      await newPost(answerOne, answerTwo, answerThree, answerFour, petType, petSize, petAge, petSex, imgURL, extraDescription, currentUser.uid);
+      await newPost(answerOne, answerTwo, answerThree, answerFour, petType, petName, petSize, petAge, petSex, imgURL, extraDescription, currentUser.uid);
       setOpen(true);
     } catch (error) {
       if (error.response) {
@@ -207,15 +207,36 @@ export default function Giveadoption() {
         </Grid>
         <Grid container spacing={2} className={styles.question_container}>
           <Grid item xs={8}>
-            <Typography>Tipo de mascota</Typography>
+          <Typography>Tipo de mascota</Typography>
+          </Grid>
+          <Grid item xs={4}>
+            <TextField
+            className={styles.select}
+            id="petType"
+            select
+            defaultValue=""
+            label="Seleccionar una opción"
+            {...register("petType")}
+              helperText="Seleccione el tipo de mascota"
+            >
+              <MenuItem value="" disabled><em>Seleccione</em></MenuItem>
+              <MenuItem value={PETTYPE.GATO}>{PETTYPE.GATO}</MenuItem>
+              <MenuItem value={PETTYPE.PERRO}>{PETTYPE.PERRO}</MenuItem>
+              <MenuItem value={PETTYPE.OTROS}>{PETTYPE.OTROS}</MenuItem>
+            </TextField>
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className={styles.question_container}>
+          <Grid item xs={8}>
+            <Typography>Nombre de la mascota</Typography>
           </Grid>
           <Grid item xs={4}>
             <TextField
               className={styles.select}
-              id="petType"
-              label="Ingrese el tipo de la mascota"
-              {...register("petType")}
-              helperText="Ej. perro, gato, etc."
+              id="petAge"
+              label="Ingrese el nombre de la mascota"
+              {...register("petName")}
+              helperText="Ingrese el nombre que tiene o como quisieras llamarlo"
             />
           </Grid>
         </Grid>
@@ -283,7 +304,7 @@ export default function Giveadoption() {
               variant="outlined"
               component="label"
             >
-              Seleccionar Archivo
+              Seleccionar Imagen
               <input
                 type="file"
                 accept=".png,.jpg,.jpeg"
@@ -349,3 +370,5 @@ export default function Giveadoption() {
     </>
   );
 }
+
+export default withAuth(Giveadoption)

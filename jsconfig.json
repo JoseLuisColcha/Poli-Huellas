@@ -5,7 +5,8 @@
       "@/components/*": ["src/components/*"],
       "@/lib/*": ["src/lib/*"],
       "@/styles/*": ["src/styles/*"],
-      "@/hocs/*": ["src/hocs/*"]
+      "@/hocs/*": ["src/hocs/*"],
+      "@/hooks/*": ["src/hooks/*"]
     }
   }
 }
