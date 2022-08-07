@@ -32,7 +32,8 @@ function Post() {
         text: "Publicación actualizada",
         severity: "success",
         duration: 6000,
-      }); 
+      });
+      handleClosePostFormModal()
     } catch(e){
       console.log({e})
       addAlert({
