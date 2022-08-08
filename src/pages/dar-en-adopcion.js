@@ -12,6 +12,8 @@ import Routes from "src/constants/routes";
 import QUESTIONS from "src/constants/questions";
 import PETTYPE from "src/constants/petType";
 import withAuth from "@/hocs/withAuth";
+import { createNotification } from "@/lib/notifications";
+import NOTIFICATIONS from "src/constants/notifications";
 
 const schema = yup.object({
   petAge: yup
@@ -73,8 +75,14 @@ function Giveadoption() {
     }
   };
 
-  const handleClose = () => {
+  const handleClose = async () => {
+    try{
+      await createNotification(currentUser.uid, NOTIFICATIONS.NEW_POST);
+    }catch(e){
+      console.log(e);
+    }
     setOpen(false);
+    
   }
 
   const onSubmit = async (data) => {

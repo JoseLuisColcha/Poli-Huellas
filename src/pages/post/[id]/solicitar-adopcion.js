@@ -4,6 +4,7 @@ import {
 } from "@/lib/adoption-requests";
 import { useAlert } from "@/lib/alert";
 import { useAuth } from "@/lib/auth";
+import { getPost} from "@/lib/posts";
 import {
   Box,
   Button,
@@ -25,6 +26,8 @@ import Routes from "src/constants/routes";
 import { useAdoptionRequest } from "@/hooks/useAdoptionRequest";
 import styles from "../../../styles/AdoptionRequest.module.css";
 import { UserInformation } from "@/components/UserInformation";
+import NOTIFICATIONS from "src/constants/notifications";
+import { createNotification } from "@/lib/notifications";
 
 const ADOPTION_REQUEST_QUESTIONS = [
   {
@@ -151,7 +154,7 @@ const PET_IMAGES_SRC = {
 
 function AdoptionRequest() {
   const [questions, setQuestions] = useState(ADOPTION_REQUEST_QUESTIONS);
-  const { session } = useAuth();
+  const { session, currentUser } = useAuth();
   const { query, push } = useRouter();
   const { userAdoptionRequestByPostId } = useAdoptionRequest({
     postId: query.id,
@@ -159,11 +162,20 @@ function AdoptionRequest() {
   });
   const { addAlert } = useAlert();
   const [openDialog, setOpenDialog] = useState(false);
+  const [postData, setPostData] = useState();
 
   useEffect(() => {
     if (userAdoptionRequestByPostId)
       setQuestions(userAdoptionRequestByPostId?.formData);
   }, [userAdoptionRequestByPostId]);
+
+  useEffect(() => {
+    const getPostData = async () => {
+      const post = await getPost(query.id);
+      setPostData(post);
+    };
+    query.id && getPostData();
+  }, [query.id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -214,11 +226,17 @@ function AdoptionRequest() {
     return newQuestions.some(({ error: { exists } }) => exists);
   };
 
-  const handleCloseDialog = () => {
+  const handleCloseDialog = async () => {
+    try{
+      await createNotification(postData?.userId, `${currentUser?.displayName} ${NOTIFICATIONS.ADOPTION}`);
+    }catch(e){
+      console.log(e);
+    }
     setOpenDialog(false);
     push(Routes.USERPROFILE(session.uid));
   };
 
+  console.log(currentUser.displayName)
   const updateAdoptionReqStatus = async (status) => {
     try {
       await updateAdoptionRequestStatus({
