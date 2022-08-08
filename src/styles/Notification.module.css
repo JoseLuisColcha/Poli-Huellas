@@ -1,0 +1,13 @@
+.container{
+    background-color: #F8EEFE;
+    width: 500px;
+}
+.date_text{
+    font-size: 12px;
+    color: #9A9A9A;
+}
+.notification_text{
+    font-size: 14px;
+    color: #484848;
+    white-space: normal;
+}
