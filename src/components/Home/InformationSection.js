@@ -1,23 +1,22 @@
 import { Grid, Box, Typography } from "@mui/material";
 import Pets from "../../../public/images/pets.png";
 import Image from "next/image";
-import styles from "../../styles/TextGlobal.module.css";
+import styles from "../../styles/homePage.module.css";
 
 export default function InformationSection() {
   return (
     <>
-      <Grid sx={{ p: 6 }}>
+      <Grid>
         <Grid item xs={12} sm={8}>
-          <Typography variant="h3" align="center" sx={{ p: 6 }}>
-            ¿Porqué <span className={styles.txtcolor}>adoptar</span> es
+          <Typography className={styles.text_title_information}>
+            ¿Porqué <span className={styles.text_title_span}>adoptar</span> es
             importante?
           </Typography>
-          <Typography variant="h6" color="inherit" sx={{ marginLeft: 5 }}>
-            text. It has roots in a piece of classical Latin literature from 45
-            BC, making it over 2000 years old. Richard McClintock, a Latin
-            professor at Hampden-Sydney College in Virginia, looked up one of
-            the more obscure Latin words, consectetur, from a Lorem Ipsum
-            passage, and going through
+          <Typography className={styles.text_information}>
+            Un animal doméstico puede ser adoptado de un albergue o de un hogar
+            de paso y en ambos casos, al adoptar, estamos salvando la vida de la
+            mascota abandonada y de un nuevo animal doméstico en estado de
+            calle.
           </Typography>
         </Grid>
         <Grid container item xs={12} sm={12} justifyContent="center">

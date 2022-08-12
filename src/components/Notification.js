@@ -1,6 +1,6 @@
 import React from 'react'
 import {MenuItem, Typography, Grid, ListItem, ListItemText} from "@mui/material";
-import styles from "../styles/Notification.module.css";
+import styles from "../styles/notification.module.css";
 
 function Notification(props) {
     const {notification} = props;

@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import { useUserProfileInformation } from "../hooks/useUserProfileInformation";
+import styles from "../styles/userInformation.module.css";
 
 export const UserInformation = ({ userId }) => {
   const { userDataProfile } = useUserProfileInformation({ userId });
@@ -18,10 +19,14 @@ export const UserInformation = ({ userId }) => {
 
   return (
     <Grid xs={12} sm={2}>
+      <Typography className={styles.text_title}>
+        Información y formulario completado del{" "}
+        <span className={styles.text_title_span}>adoptante</span>
+      </Typography>
       <Grid marginY={2} container direction="column" alignItems="center">
         <Avatar
           alt="username"
-          sx={{ width: 100, height: 100 }}
+          sx={{ width: 150, height: 150 }}
           src={userDataProfile?.photoURL}
         >
           {userDataProfile?.displayName?.charAt(0)}
@@ -29,7 +34,7 @@ export const UserInformation = ({ userId }) => {
       </Grid>
       <Grid container direction="column" alignItems="center">
         <Typography variant="h6" noWrap>
-          Adoptador
+          Adoptante
         </Typography>
         <List>
           <ListItem disablePadding>
@@ -54,7 +59,7 @@ export const UserInformation = ({ userId }) => {
       </Grid>
       <Grid container justifyContent="center">
         <Button
-          variant="contained"
+          className={styles.button_view_profile}
           onClick={() =>
             router.push(`/perfil-de-usuario/${userDataProfile.uid}`)
           }

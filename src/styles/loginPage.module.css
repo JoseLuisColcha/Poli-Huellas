@@ -1,0 +1,13 @@
+.button_start {
+    background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%);
+    border-radius: 28px;
+    width: 100%;
+    height: 40px;
+    color: #FFFFFF;
+    margin-top:25px;
+    margin-bottom:20px;
+}
+
+.text_link {
+    color: #7E41A1;
+}

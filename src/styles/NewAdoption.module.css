@@ -1,55 +1,103 @@
-.container{
+.container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 20px;
+    padding: 40px;
 }
-.select{
+
+.banner_container {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    overflow: hidden;
+}
+
+.select {
     border-radius: 8px;
-    width:80%
+    width: 80%
 }
-.card{
+
+.card {
     background: #FFFFFF;
     box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    width:80%
+    width: 80%
 }
-.question_container{
+
+.question_container {
     padding-bottom: 20px;
+
 }
-.button_container{
+
+.button_container {
     display: flex;
     justify-content: right;
     align-items: center;
     padding-top: 20px;
 }
-.submit_button{
+
+.submit_button {
     background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%);
     border-radius: 28px;
     width: 151px;
     height: 56px;
     color: #FFFFFF;
 }
-.form_container{
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-top: 20px;
+
+.upload_image_button {
+    height: 50px;
+    width: 80%
+}
+
+.form_container {
+    padding-left: 80px;
+    padding-right: 30px;
+    padding-top: 40px;
     padding-bottom: 20px;
     margin-bottom: 30px;
     border: 1px solid #C2C6CC;
-    border-radius: 8px;
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
-.dialog_container{
+
+.dialog_container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-.dialog_text{
+
+.description_text {
+    width: 100%;
+    margin-right: 35px;
+    margin-left: 10px;
+}
+
+.dialog_text {
     font-size: 32px;
     font-weight: 700;
     color: #666666;
     padding-top: 20px;
+}
+
+.text_span {
+    color: #a11adb;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.title_banner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    font-size: 30px;
+    color: white;
+}
+.icon_pet{
+    color: #B224EF;
 }

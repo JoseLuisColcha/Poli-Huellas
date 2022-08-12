@@ -1,8 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Box, Typography, Button, Stack, Grid, Container, MenuItem, TextField, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions} from "@mui/material";
+import {
+  Box,
+  Typography,
+  Button,
+  Stack,
+  Grid,
+  Container,
+  MenuItem,
+  TextField,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+} from "@mui/material";
 import { useAuth } from "@/lib/auth";
-import Image from 'next/image';
-import styles from "../styles/NewAdoption.module.css";
+import Image from "next/image";
+import styles from "../styles/newAdoption.module.css";
 import { uploadPetImage, newPost } from "@/lib/giveAdoption";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -14,6 +28,8 @@ import PETTYPE from "src/constants/petType";
 import withAuth from "@/hocs/withAuth";
 import { createNotification } from "@/lib/notifications";
 import NOTIFICATIONS from "src/constants/notifications";
+import PetsIcon from "@mui/icons-material/Pets";
+import UploadIcon from "@mui/icons-material/Upload";
 
 const schema = yup.object({
   petAge: yup
@@ -24,7 +40,6 @@ const schema = yup.object({
 });
 
 function Giveadoption() {
-
   const {
     register,
     handleSubmit,
@@ -41,16 +56,18 @@ function Giveadoption() {
 
   useEffect(() => {
     if (task) {
-      task?.on('state_changed',
+      task?.on(
+        "state_changed",
         (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log('Upload is ' + progress + '% done');
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
           switch (snapshot.state) {
-            case 'paused':
-              console.log('Upload is paused');
+            case "paused":
+              console.log("Upload is paused");
               break;
-            case 'running':
-              console.log('Upload is running');
+            case "running":
+              console.log("Upload is running");
               break;
           }
         },
@@ -76,19 +93,42 @@ function Giveadoption() {
   };
 
   const handleClose = async () => {
-    try{
+    try {
       await createNotification(currentUser.uid, NOTIFICATIONS.NEW_POST);
-    }catch(e){
+    } catch (e) {
       console.log(e);
     }
     setOpen(false);
-    
-  }
+  };
 
   const onSubmit = async (data) => {
-    const {answerOne, answerTwo, answerThree, answerFour, petType, petName, petSize, petAge, petSex, extraDescription} = data;
+    const {
+      answerOne,
+      answerTwo,
+      answerThree,
+      answerFour,
+      petType,
+      petName,
+      petSize,
+      petAge,
+      petSex,
+      extraDescription,
+    } = data;
     try {
-      await newPost(answerOne, answerTwo, answerThree, answerFour, petType, petName, petSize, petAge, petSex, imgURL, extraDescription, currentUser.uid);
+      await newPost(
+        answerOne,
+        answerTwo,
+        answerThree,
+        answerFour,
+        petType,
+        petName,
+        petSize,
+        petAge,
+        petSex,
+        imgURL,
+        extraDescription,
+        currentUser.uid
+      );
       setOpen(true);
     } catch (error) {
       if (error.response) {
@@ -103,68 +143,83 @@ function Giveadoption() {
     }
   };
 
-
   return (
     <>
-      <Container className={styles.container}>
+      <Container className={styles.banner_container}>
         <Image
-          src="/images/pet19.jpg"
+          src="/images/banner-form-post.jpg"
           alt="cover"
-          width="1080px"
-          height="491px"
+          width="3840px"
+          height="1240px"
         />
+        <Typography className={styles.title_banner}>
+          Formulario para publicar una
+          <span className={styles.text_span}> mascota </span>
+        </Typography>
       </Container>
       <Container className={styles.container}>
         <Stack direction="row" spacing={1}>
-          <Image
-            src="/images/huella.png"
-            alt="fingerprint"
-            width="60px"
-            height="23.34px"
-          />
-          <Typography>Por favor, completa el presente formulario si deseas dar una mascota en adopción.</Typography>
+          <PetsIcon className={styles.icon_pet} />
+          <Typography>
+            Por favor, completa el presente formulario si deseas dar una mascota
+            en adopción.
+          </Typography>
         </Stack>
       </Container>
-      <Box className={styles.form_container} component="form" noValidate onSubmit={handleSubmit(onSubmit)}>
-
+      <Box
+        className={styles.form_container}
+        component="form"
+        noValidate
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <Grid container spacing={2} className={styles.question_container}>
-          <Grid item xs={8}>
+          <Grid item xs={12} sm={6} md={8}>
             <Typography>{QUESTIONS.GIVE_Q1}</Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12} sm={6} md={4}>
             <TextField
-            className={styles.select}
-            id="question-one"
-            select
-            defaultValue=""
-            label="Seleccionar una opción"
-            {...register("answerOne")}
-            helperText={QUESTIONS.GIVE_Q1}
+              className={styles.select}
+              id="question-one"
+              select
+              defaultValue=""
+              label="Seleccionar una opción"
+              {...register("answerOne")}
+              helperText={QUESTIONS.GIVE_Q1}
             >
-              <MenuItem value="" disabled><em>Seleccione</em></MenuItem>
-              <MenuItem value="Rescatado de la calle">Rescatado de la calle</MenuItem>
+              <MenuItem value="" disabled>
+                <em>Seleccione</em>
+              </MenuItem>
+              <MenuItem value="Rescatado de la calle">
+                Rescatado de la calle
+              </MenuItem>
               <MenuItem value="Alergías">Alergías</MenuItem>
-              <MenuItem value="Cambio de domicilio">Cambio de domicilio</MenuItem>
-              <MenuItem value="No permiten mascotas en lugar de residencia">No permiten mascotas en lugar de residencia</MenuItem>
+              <MenuItem value="Cambio de domicilio">
+                Cambio de domicilio
+              </MenuItem>
+              <MenuItem value="No permiten mascotas en lugar de residencia">
+                No permiten mascotas en lugar de residencia
+              </MenuItem>
             </TextField>
           </Grid>
         </Grid>
 
         <Grid container spacing={2} className={styles.question_container}>
-          <Grid item xs={8}>
+          <Grid item xs={12} sm={6} md={8}>
             <Typography>{QUESTIONS.GIVE_Q2}</Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12} sm={6} md={4}>
             <TextField
-            className={styles.select}
-            id="question-two"
-            select
-            defaultValue=""
-            label="Seleccionar una opción"
-            {...register("answerTwo")}
-            helperText={QUESTIONS.GIVE_Q2}
+              className={styles.select}
+              id="question-two"
+              select
+              defaultValue=""
+              label="Seleccionar una opción"
+              {...register("answerTwo")}
+              helperText={QUESTIONS.GIVE_Q2}
             >
-              <MenuItem value="" disabled><em>Seleccione</em></MenuItem>
+              <MenuItem value="" disabled>
+                <em>Seleccione</em>
+              </MenuItem>
               <MenuItem value="Agresivo">Agresivo</MenuItem>
               <MenuItem value="Tranquilo">Tranquilo</MenuItem>
             </TextField>
@@ -172,20 +227,22 @@ function Giveadoption() {
         </Grid>
 
         <Grid container spacing={2} className={styles.question_container}>
-          <Grid item xs={8}>
+          <Grid item xs={12} sm={6} md={8}>
             <Typography>{QUESTIONS.GIVE_Q3}</Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12} sm={6} md={4}>
             <TextField
-            className={styles.select}
-            id="question-three"
-            select
-            defaultValue=""
-            label="Seleccionar una opción"
-            {...register("answerThree")}
-            helperText={QUESTIONS.GIVE_Q3}
+              className={styles.select}
+              id="question-three"
+              select
+              defaultValue=""
+              label="Seleccionar una opción"
+              {...register("answerThree")}
+              helperText={QUESTIONS.GIVE_Q3}
             >
-              <MenuItem value="" disabled><em>Seleccione</em></MenuItem>
+              <MenuItem value="" disabled>
+                <em>Seleccione</em>
+              </MenuItem>
               <MenuItem value="Sí">Sí</MenuItem>
               <MenuItem value="No">No</MenuItem>
               <MenuItem value="No lo sé">No lo sé</MenuItem>
@@ -193,41 +250,49 @@ function Giveadoption() {
           </Grid>
         </Grid>
         <Grid container spacing={2} className={styles.question_container}>
-          <Grid item xs={8}>
+          <Grid item xs={12} sm={6} md={8}>
             <Typography>{QUESTIONS.GIVE_Q4}</Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12} sm={6} md={4}>
             <TextField
-            className={styles.select}
-            id="question-four"
-            select
-            defaultValue=""
-            label="Seleccionar una opción"
-            {...register("answerFour")}
-            helperText={QUESTIONS.GIVE_Q4}
+              className={styles.select}
+              id="question-four"
+              select
+              defaultValue=""
+              label="Seleccionar una opción"
+              {...register("answerFour")}
+              helperText={QUESTIONS.GIVE_Q4}
             >
-              <MenuItem value="" disabled><em>Seleccione</em></MenuItem>
-              <MenuItem value="No, la encontré en la calle">No, la encontré en la calle</MenuItem>
+              <MenuItem value="" disabled>
+                <em>Seleccione</em>
+              </MenuItem>
+              <MenuItem value="No, la encontré en la calle">
+                No, la encontré en la calle
+              </MenuItem>
               <MenuItem value="Sí, es mía">Sí, es mía</MenuItem>
-              <MenuItem value="Es de un amigo o familiar">Es de un amigo o familiar</MenuItem>
+              <MenuItem value="Es de un amigo o familiar">
+                Es de un amigo o familiar
+              </MenuItem>
             </TextField>
           </Grid>
         </Grid>
         <Grid container spacing={2} className={styles.question_container}>
-          <Grid item xs={8}>
-          <Typography>Tipo de mascota</Typography>
+          <Grid item xs={12} sm={6} md={8}>
+            <Typography>Tipo de mascota</Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12} sm={6} md={4}>
             <TextField
-            className={styles.select}
-            id="petType"
-            select
-            defaultValue=""
-            label="Seleccionar una opción"
-            {...register("petType")}
+              className={styles.select}
+              id="petType"
+              select
+              defaultValue=""
+              label="Seleccionar una opción"
+              {...register("petType")}
               helperText="Seleccione el tipo de mascota"
             >
-              <MenuItem value="" disabled><em>Seleccione</em></MenuItem>
+              <MenuItem value="" disabled>
+                <em>Seleccione</em>
+              </MenuItem>
               <MenuItem value={PETTYPE.GATO}>{PETTYPE.GATO}</MenuItem>
               <MenuItem value={PETTYPE.PERRO}>{PETTYPE.PERRO}</MenuItem>
               <MenuItem value={PETTYPE.OTROS}>{PETTYPE.OTROS}</MenuItem>
@@ -235,10 +300,10 @@ function Giveadoption() {
           </Grid>
         </Grid>
         <Grid container spacing={2} className={styles.question_container}>
-          <Grid item xs={8}>
+          <Grid item xs={12} sm={6} md={8}>
             <Typography>Nombre de la mascota</Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12} sm={6} md={4}>
             <TextField
               className={styles.select}
               id="petAge"
@@ -249,20 +314,22 @@ function Giveadoption() {
           </Grid>
         </Grid>
         <Grid container spacing={2} className={styles.question_container}>
-          <Grid item xs={8}>
+          <Grid item xs={12} sm={6} md={8}>
             <Typography>Tamaño de la mascota</Typography>
           </Grid>
-          <Grid item xs={4}>
-          <TextField
-            className={styles.select}
-            id="petSize"
-            select
-            defaultValue=""
-            label="Seleccione el tamaño de la mascota"
-            {...register("petSize")}
-            helperText="Tamaño de la mascota"
+          <Grid item xs={12} sm={6} md={4}>
+            <TextField
+              className={styles.select}
+              id="petSize"
+              select
+              defaultValue=""
+              label="Seleccione el tamaño de la mascota"
+              {...register("petSize")}
+              helperText="Tamaño de la mascota"
             >
-              <MenuItem value="" disabled><em>Seleccione</em></MenuItem>
+              <MenuItem value="" disabled>
+                <em>Seleccione</em>
+              </MenuItem>
               <MenuItem value="Grande">Grande</MenuItem>
               <MenuItem value="Mediano">Mediano</MenuItem>
               <MenuItem value="Pequeño">Pequeño</MenuItem>
@@ -270,10 +337,10 @@ function Giveadoption() {
           </Grid>
         </Grid>
         <Grid container spacing={2} className={styles.question_container}>
-          <Grid item xs={8}>
+          <Grid item xs={12} sm={6} md={8}>
             <Typography>Edad de la mascota</Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12} sm={6} md={4}>
             <TextField
               className={styles.select}
               id="petAge"
@@ -284,10 +351,10 @@ function Giveadoption() {
           </Grid>
         </Grid>
         <Grid container spacing={2} className={styles.question_container}>
-          <Grid item xs={8}>
+          <Grid item xs={12} sm={6} md={8}>
             <Typography>Sexo de la mascota</Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12} sm={6} md={4}>
             <TextField
               className={styles.select}
               id="petSex"
@@ -297,20 +364,24 @@ function Giveadoption() {
               {...register("petSex")}
               helperText="Sexo de la mascota"
             >
-              <MenuItem value="" disabled><em>Seleccione</em></MenuItem>
+              <MenuItem value="" disabled>
+                <em>Seleccione</em>
+              </MenuItem>
               <MenuItem value="Hembra">Hembra</MenuItem>
               <MenuItem value="Macho">Macho</MenuItem>
             </TextField>
           </Grid>
         </Grid>
         <Grid container spacing={2} className={styles.question_container}>
-          <Grid item xs={8}>
+          <Grid item xs={12} sm={6} md={8}>
             <Typography>Imagen de la mascota</Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12} sm={6} md={4}>
             <Button
               variant="outlined"
               component="label"
+              className={styles.upload_image_button}
+              endIcon={<UploadIcon />}
             >
               Seleccionar Imagen
               <input
@@ -320,17 +391,13 @@ function Giveadoption() {
                 onChange={handleImage}
               />
             </Button>
-            {
-              imageName && (
-                <Typography>{imageName}</Typography>
-              )
-            }
+            {imageName && <Typography>{imageName}</Typography>}
           </Grid>
         </Grid>
         <Grid container spacing={2} className={styles.question_container}>
           <Grid item xs={12} className={styles.container}>
             <TextField
-              className={styles.select}
+              className={styles.description_text}
               id="extraDescription"
               label="Agregar una descripción"
               {...register("extraDescription")}
@@ -347,36 +414,44 @@ function Giveadoption() {
           </Grid>
         </Grid>
         <Dialog
-            open={open}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
+          open={open}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
         >
-            <DialogTitle id="alert-dialog-title">
-            {"Poner en adopción una mascota"}
-            </DialogTitle>
-            <DialogContent className={styles.dialog_container}>
+          <DialogTitle id="alert-dialog-title">
+            {"Publicar una mascota en adopción"}
+          </DialogTitle>
+          <DialogContent className={styles.dialog_container}>
             <Image
               src="/images/huella.png"
               alt="fingerprint"
               width="154.24px"
               height="60px"
-              background = "#B224EF"
+              background="#B224EF"
               transform="rotate(-34.58deg)"
             />
-            <DialogContentText id="alert-dialog-description" className={styles.dialog_text}>
-                Se ha enviado tu socilitud para publicar una mascota,
-                la aprobación se te informará en tu bandeja de notificaciones.
+            <DialogContentText
+              id="alert-dialog-description"
+              className={styles.dialog_text}
+            >
+              Se ha enviado tu socilitud para publicar una mascota, la
+              aprobación se te informará en tu bandeja de notificaciones.
             </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-            <Button className={styles.submit_button} autoFocus href={Routes.USERPROFILE} onClick={handleClose}>
-                OK!
+          </DialogContent>
+          <DialogActions>
+            <Button
+              className={styles.submit_button}
+              autoFocus
+              href={Routes.USERPROFILE}
+              onClick={handleClose}
+            >
+              OK!
             </Button>
-            </DialogActions>
+          </DialogActions>
         </Dialog>
-    </Box>
+      </Box>
     </>
   );
 }
 
-export default withAuth(Giveadoption)
+export default withAuth(Giveadoption);
