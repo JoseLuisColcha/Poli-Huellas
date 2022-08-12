@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Modal, Typography } from '@mui/material'
+import { Box, Button, Grid, Modal, Typography, Divider } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -12,9 +12,14 @@ const style = {
   paddingX: "2rem",
   paddingY: "1rem",
 };
-
-export const PostInfoFormModal = ({ open, handleClose, formInfo, handleAction, postStatus }) => {
-
+import styles from "../../styles/postInfoFormModal.module.css";
+export const PostInfoFormModal = ({
+  open,
+  handleClose,
+  formInfo,
+  handleAction,
+  postStatus,
+}) => {
   return (
     <Modal
       open={open}
@@ -22,20 +27,24 @@ export const PostInfoFormModal = ({ open, handleClose, formInfo, handleAction, p
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box component='form' sx={style}>
-        {
-          formInfo.map(({ question, answer }) => {
-            return (
-              <Grid
-                container
-                sx={{ paddingY: "1rem" }}
-                key={question}
-              >
+      <Box component="form" sx={style}>
+        <Typography id="modal-modal-title" className={styles.text_title_modal}>
+          Formulario de publicación
+        </Typography>
+        {formInfo.map(({ question, answer }) => {
+          return (
+            <>
+              <Divider />
+
+              <Grid container sx={{ paddingY: "1rem" }} key={question}>
                 <Grid
                   item
                   xs={12}
                   md={8}
-                  sx={{ display: "flex", textAlign: { xs: 'center', md: 'left' } }}
+                  sx={{
+                    display: "flex",
+                    textAlign: { xs: "center", md: "left" },
+                  }}
                 >
                   <Typography>{question}</Typography>
                 </Grid>
@@ -43,61 +52,53 @@ export const PostInfoFormModal = ({ open, handleClose, formInfo, handleAction, p
                   item
                   xs={12}
                   md={4}
-                  sx={{ display: "flex", justifyContent: "center", textAlign: "center" }}
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    textAlign: "center",
+                  }}
                 >
                   <Typography>{answer}</Typography>
                 </Grid>
               </Grid>
-            )
-          })
-        }
+            </>
+          );
+        })}
         <Grid
           container
           sx={{ justifyContent: { xs: "center", md: "flex-end" }, gap: "1rem" }}
         >
-          {
-            postStatus === "created" && (
-              <>
-                <Button
-                  variant="contained"
-                  id='ACCEPTED'
-                  onClick={() => handleAction('ACCEPTED')}
-                >
-                  Aceptar
-                </Button>
-                <Button
-                  variant="contained"
-                  color='error'
-                  id='REJECTED'
-                  onClick={() => handleAction('REJECTED')}
-                >
-                  Denegar
-                </Button>
-              </>
-            )
-          }
-          {
-            postStatus === "ACCEPTED" && (
+          {postStatus === "created" && (
+            <>
               <Button
                 variant="contained"
-                disabled={true}
+                id="ACCEPTED"
+                onClick={() => handleAction("ACCEPTED")}
               >
-                Publicación aceptada
+                Aceptar
               </Button>
-            )
-          }
-          {
-            postStatus === "REJECTED" && (
               <Button
                 variant="contained"
-                disabled={true}
+                color="error"
+                id="REJECTED"
+                onClick={() => handleAction("REJECTED")}
               >
-                Publicación rechazada
+                Denegar
               </Button>
-            )
-          }
+            </>
+          )}
+          {postStatus === "ACCEPTED" && (
+            <Button variant="contained" disabled={true}>
+              Publicación aceptada
+            </Button>
+          )}
+          {postStatus === "REJECTED" && (
+            <Button variant="contained" disabled={true}>
+              Publicación rechazada
+            </Button>
+          )}
         </Grid>
       </Box>
     </Modal>
-  )
-}
+  );
+};

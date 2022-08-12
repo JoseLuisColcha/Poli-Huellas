@@ -7,7 +7,7 @@ import "swiper/css/navigation";
 import { getPosts } from "@/lib/posts";
 import Link from "next/link";
 import CarruselPetCard from "./CarruselPetCard";
-import styles from "../styles/Adoptions.module.css";
+import styles from "../styles/adoptions.module.css";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useAuth } from "@/lib/auth";
 
@@ -65,12 +65,14 @@ export default function PostCarrusel(props) {
             ))}
       </Swiper>
       {typePet ? (
-        <Box className={styles.button_carrusel}>
+        <Box className={styles.button_container}>
           <Link href={path} passHref>
             <Button
               size="large"
               variant="contained"
+              
               endIcon={<ArrowForwardIcon />}
+              className={styles.button_view_more}
             >
               Ver más
             </Button>

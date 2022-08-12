@@ -1,7 +1,7 @@
 import { Avatar, Grid, Typography } from '@mui/material';
 import React, {useEffect, useState} from 'react';
 import { useAuth } from "@/lib/auth";
-import styles from '../../styles/Comments.module.css';
+import styles from '../../styles/comments.module.css';
 
 function Comment({userId, comment, createdAt}) {
   const { listenUser } = useAuth();

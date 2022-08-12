@@ -19,9 +19,14 @@ import { getMyPosts } from "@/lib/posts";
 import { MyPostCard } from "@/components/MyPostCard";
 import { useRouter } from "next/router";
 import { useUserProfileInformation } from "@/hooks/useUserProfileInformation";
+import styles from "../../styles/userProfile.module.css"
+import EditIcon from "@mui/icons-material/Edit";
+import UploadIcon from "@mui/icons-material/Upload";
 
 function Profile() {
-  const { query: { id: userId } } = useRouter()
+  const {
+    query: { id: userId },
+  } = useRouter();
   const { updateUser, session } = useAuth();
   const [open, setOpen] = useState(false);
   const [myPosts, setMyPosts] = useState([]);
@@ -39,7 +44,7 @@ function Profile() {
     const getPosts = async () => {
       const posts = await getMyPosts(userId);
       setMyPosts(posts);
-    }
+    };
     getPosts();
   }, [userId]);
 
@@ -64,18 +69,39 @@ function Profile() {
   };
 
   return (
-    <Grid container margin={0} spacing={2}>
-      <Grid xs={12} sm={2}>
-        <Grid marginY={4} container direction="column" alignItems="center">
+    <Grid container margin={0} spacing={2} marginTop={4}>
+      <Grid xs={12} sm={3} justifyContent={"center"}>
+        <Grid
+          marginY={4}
+          container
+          direction="column"
+          alignItems="center"
+          marginLeft={3}
+        >
           <Avatar
             alt="username"
-            sx={{ width: 100, height: 100 }}
+            sx={{ width: 150, height: 150 }}
             src={userDataProfile?.photoURL}
           >
             {userDataProfile?.displayName?.charAt(0)}
           </Avatar>
         </Grid>
-        <Grid container>
+        <Grid container marginLeft={4}>
+          <Grid container marginBottom={2} justifyContent={"center"}>
+            {userId === session?.uid ? (
+              <Button
+                variant="outlined"
+                component="label"
+                className={styles.button_upload}
+                endIcon={<UploadIcon />}
+              >
+                Seleccionar Imagen
+                <input type="file" accept=".png,.jpg,.jpeg" hidden />
+              </Button>
+            ) : (
+              ""
+            )}
+          </Grid>
           <Typography variant="h6" noWrap>
             Contacto
           </Typography>
@@ -98,19 +124,38 @@ function Profile() {
             <ListItemText primary={userDataProfile?.location} />
           </ListItem>
         </Grid>
-        <Grid container direction="row" justifyContent={"center"} margin={2}>
-          <Button variant="contained" onClick={handleOpenModal}>
-            Editar información
-          </Button>
+        <Grid container direction="row" justifyContent={"center"} margin={3}>
+          {userId === session?.uid ? (
+            <Button
+              variant="contained"
+              className={styles.button_update_information}
+              onClick={handleOpenModal}
+              endIcon={<EditIcon />}
+            >
+              Editar información
+            </Button>
+          ) : (
+            ""
+          )}
         </Grid>
       </Grid>
 
-      <Grid xs={12} sm={10} container direction="column" alignItems="center">
-        <Typography style={{'fontSize':'32px', 'fontWeight':700}}>{userId === session?.uid ? 'Tus Publicaciones' : 'Publicaciones'}</Typography>
-        <Divider variant="inset" style={{'border':'1px solid #C2C6CC', 'width':'90%'}} />
-          {myPosts?.map((post, index) => (
-            <MyPostCard key={index} post={post} />
-          ))}
+      <Grid xs={12} sm={9} container direction="column" alignItems="center">
+        <Typography style={{ fontSize: "32px", fontWeight: 700 }}>
+          {userId === session?.uid ? "Tus Publicaciones" : "Publicaciones"}
+        </Typography>
+        <Divider
+          variant="inset"
+          style={{ border: "1px solid #C2C6CC", width: "90%" }}
+        />
+        {myPosts?.map((post, index) => (
+          <MyPostCard
+            key={index}
+            post={post}
+            userId={userId}
+            session={session}
+          />
+        ))}
       </Grid>
 
       <EditUserInfoModal

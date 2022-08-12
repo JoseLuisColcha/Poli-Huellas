@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import { getPost, updatePost } from "@/lib/posts";
-import { Grid } from "@mui/material";
+import { Grid, Stack } from "@mui/material";
 import PostCover from "@/components/PostDetails/PostCover";
 import PostInformation from "@/components/PostDetails/PostInformation";
 import Comments from "@/components/PostDetails/Comments";
@@ -10,7 +10,7 @@ import { useAlert } from "@/lib/alert";
 
 function Post() {
   const router = useRouter();
-  const {addAlert} = useAlert();
+  const { addAlert } = useAlert();
   const {
     query: { id },
   } = router;
@@ -26,23 +26,23 @@ function Post() {
   }, [id]);
 
   const handleAction = async (action) => {
-    try{
-       await updatePost({ data: { status: action }, id});
-       addAlert({
+    try {
+      await updatePost({ data: { status: action }, id });
+      addAlert({
         text: "Publicación actualizada",
         severity: "success",
         duration: 6000,
       });
-      handleClosePostFormModal()
-    } catch(e){
-      console.log({e})
+      handleClosePostFormModal();
+    } catch (e) {
+      console.log({ e });
       addAlert({
         text: "Error al actualizar la publicación",
         severity: "error",
         duration: 6000,
       });
     }
-  }
+  };
 
   const handleClosePostFormModal = () => setOpenPostForm(false);
 
@@ -50,17 +50,8 @@ function Post() {
     <>
       {postData && (
         <>
-          <Grid container>
-            <Grid
-              item
-              xs={12}
-              sm={4}
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
+          <Grid container marginTop={3}>
+            <Grid item xs={12} sm={12} md={4}>
               <PostCover
                 petImage={postData.image}
                 petName={postData.petName}
@@ -70,7 +61,8 @@ function Post() {
             <Grid
               item
               xs={12}
-              sm={8}
+              sm={12}
+              md={8}
               sx={{ justifyContent: "center", alignItems: "center" }}
             >
               <PostInformation
@@ -86,7 +78,10 @@ function Post() {
               />
             </Grid>
           </Grid>
-          <Comments postId={id} />
+          <Stack marginTop={5}>
+            <Comments postId={id} />
+          </Stack>
+
           <PostInfoFormModal
             open={openPostForm}
             handleClose={handleClosePostFormModal}

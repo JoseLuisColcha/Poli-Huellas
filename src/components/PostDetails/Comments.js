@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { listtenComments } from "@/lib/comments";
 import { Typography, Grid} from '@mui/material';
-import styles from '../../styles/Comments.module.css';
+import styles from '../../styles/comments.module.css';
 import Comment from './Comment';
 import SendComment from './SendComment';
 
