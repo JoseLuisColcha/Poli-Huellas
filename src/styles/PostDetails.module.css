@@ -1,6 +1,6 @@
 .pet_image{
-    width: 245px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
     border-radius:150px;
 }
 .container{
@@ -8,12 +8,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
 .title{
     color: #B224EF;
-    font-size: 24px;
-    font-weight: 700;
+    font-size: 22px;
+    font-weight: 500;
 }
 .cover{
     background: rgba(178, 36, 239, 0.1);
@@ -23,19 +22,23 @@
     color: #B224EF;
 }
 .text{
-    font-size: 22px;
-    font-weight: 500;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 3px;
+    margin-left: 25px;
 }
 .textHead{
-    font-size: 48px;
-    font-weight: 700;
+    font-size: 35px;
+    font-weight: 400;
+    margin-left: 25px;
 }
 .button{
     background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%);
     border-radius: 28px;
-    width: 151px;
+    width: 190px;
     height: 56px;
     color: #FFFFFF;
+    margin-right: 15px;
 }
 
 .reject_button {

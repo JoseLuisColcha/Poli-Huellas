@@ -1,7 +1,7 @@
 import PostCarrusel from "@/components/PostCarrusel";
 import { Container } from "@mui/material";
 import Routes from "src/constants/routes";
-import styles from "../styles/Adoptions.module.css";
+import styles from "../styles/adoptions.module.css";
 import Image from "next/image";
 
 export default function Adoptions() {
@@ -28,14 +28,14 @@ export default function Adoptions() {
 
   return (
     <Container>
-      <Container className={styles.container}>
+      <Container className={styles.image_container}>
         <Image
           src="/images/banner-adoptions.jpg"
           alt="cover"
-          width="1000x"
-          height="409px"
+          width="14880x"
+          height="4804px"
         />
-      </Container >
+      </Container>
       {carruselCategories.map((categorie, index) =>
         categorie.typePet ? (
           <PostCarrusel

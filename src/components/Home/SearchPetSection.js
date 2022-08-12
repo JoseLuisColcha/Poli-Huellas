@@ -3,7 +3,7 @@ import Huella from "../../../public/images/huella.png";
 import Image from "next/image";
 import Link from "next/link";
 import Routes from "src/constants/routes";
-import styles from "../../styles/TextGlobal.module.css";
+import styles from "../../styles/homePage.module.css";
 
 export default function SearchPetSection() {
   return (
@@ -17,18 +17,17 @@ export default function SearchPetSection() {
           p: 6,
         }}
       >
-        <Grid item xs={12} sm={6} order={{ xs: 2, sm: 1 }} sx={{ marginY: 8 }}>
-          <Typography variant="h4" sx={{ marginLeft: 5 }}>
-            Encuentra un <span className={styles.txtcolor}>amigo</span> de
+        <Grid item xs={12} sm={6} order={{ xs: 2, sm: 1 }} >
+          <Typography className={styles.text_title_search}>
+            Encuentra un <span className={styles.text_title_span}>amigo</span> de
             Verdad!
           </Typography>
-          <Typography variant="h6" color="inherit" sx={{ marginLeft: 5 }}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
-            facilis magnam ratione, voluptas excepturi quos quo consequatur
-            iusto dignissimos
+          <Typography className={styles.text_content_search}>
+            Está comprobado que tener una mascota en tu hogar mejora tu salud y
+            humor.
           </Typography>
           <Link href={Routes.ADOPTIONS} passHref>
-            <Button size="large" variant="contained" sx={{ margin: 4 }}>
+            <Button className={styles.button_search}>
               Buscar mascotas
             </Button>
           </Link>

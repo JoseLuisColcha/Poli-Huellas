@@ -4,7 +4,7 @@ import {
 } from "@/lib/adoption-requests";
 import { useAlert } from "@/lib/alert";
 import { useAuth } from "@/lib/auth";
-import { getPost} from "@/lib/posts";
+import { getPost } from "@/lib/posts";
 import {
   Box,
   Button,
@@ -24,10 +24,11 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Routes from "src/constants/routes";
 import { useAdoptionRequest } from "@/hooks/useAdoptionRequest";
-import styles from "../../../styles/AdoptionRequest.module.css";
+import styles from "../../../styles/adoptionRequest.module.css";
 import { UserInformation } from "@/components/UserInformation";
 import NOTIFICATIONS from "src/constants/notifications";
 import { createNotification } from "@/lib/notifications";
+import PetsIcon from "@mui/icons-material/Pets";
 
 const ADOPTION_REQUEST_QUESTIONS = [
   {
@@ -147,10 +148,10 @@ const ADOPTION_REQUEST_QUESTIONS = [
 ];
 
 const PET_IMAGES_SRC = {
-  Gato: '/images/adoption-request-cat.jpg',
-  Perro: '/images/adoption-request-dog.jpg',
-  Otro: '/images/adoption-request-other.jpg',
-}
+  Gato: "/images/adoption-request-cat.jpg",
+  Perro: "/images/adoption-request-dog.jpg",
+  Otro: "/images/adoption-request-other.jpg",
+};
 
 function AdoptionRequest() {
   const [questions, setQuestions] = useState(ADOPTION_REQUEST_QUESTIONS);
@@ -213,30 +214,33 @@ function AdoptionRequest() {
     const newQuestions = questions.map(({ answer, ...rest }) =>
       !answer
         ? {
-          ...rest,
-          answer,
-          error: { message: "Este campo es obligatorio", exists: true },
-        }
+            ...rest,
+            answer,
+            error: { message: "Este campo es obligatorio", exists: true },
+          }
         : {
-          ...rest,
-          answer,
-        }
+            ...rest,
+            answer,
+          }
     );
     setQuestions(newQuestions);
     return newQuestions.some(({ error: { exists } }) => exists);
   };
 
   const handleCloseDialog = async () => {
-    try{
-      await createNotification(postData?.userId, `${currentUser?.displayName} ${NOTIFICATIONS.ADOPTION}`);
-    }catch(e){
+    try {
+      await createNotification(
+        postData?.userId,
+        `${currentUser?.displayName} ${NOTIFICATIONS.ADOPTION}`
+      );
+    } catch (e) {
       console.log(e);
     }
     setOpenDialog(false);
     push(Routes.USERPROFILE(session.uid));
   };
 
-  console.log(currentUser.displayName)
+  // console.log(currentUser.displayName);
   const updateAdoptionReqStatus = async (status) => {
     try {
       await updateAdoptionRequestStatus({
@@ -248,7 +252,7 @@ function AdoptionRequest() {
         severity: "success",
         duration: 6000,
       });
-      push(`/post/${query.id}`)
+      push(`/post/${query.id}`);
     } catch (e) {
       console.error(e);
     }
@@ -256,36 +260,45 @@ function AdoptionRequest() {
 
   return (
     <>
-      <Container>
-        <Image
-          src={PET_IMAGES_SRC[query?.petType] || '/images/adoption-request-dog.jpg'}
-          alt="cover"
-          width="1080px"
-          height="450px"
-        />
-      </Container>
-      {
-        query?.userId ? (
+      {query?.userId ? (
+        <>
           <UserInformation userId={query?.userId} />
-        ) : (
-          <Container
-            sx={{ padding: "1rem", display: "flex", justifyContent: "center" }}
+          <Stack direction="row">
+            <PetsIcon className={styles.icon_form_completed} />
+            <Typography className={styles.text_remark}>
+              Recuerda, revisa las preguntas y respuestas antes de aceptar o
+              denegar al adoptante.
+            </Typography>
+          </Stack>
+        </>
+      ) : (
+        <Container>
+          <Stack direction="row">
+            <Image
+              src={
+                PET_IMAGES_SRC[query?.petType] ||
+                "/images/adoption-request-dog.jpg"
+              }
+              alt="cover"
+              width="3840px"
+              height="1240px"
+            />
+          </Stack>
+
+          <Stack
+            direction="row"
+            spacing={1}
+            paddingTop={4}
+            justifyContent={"center"}
           >
-            <Stack direction="row" spacing={1}>
-              <Image
-                src="/images/huella.png"
-                alt="fingerprint"
-                width="60px"
-                height="24px"
-              />
-              <Typography>
-                Por favor, complete el presente formulario si esta de acuerdo en
-                adoptar y cuidar una mascota.
-              </Typography>
-            </Stack>
-          </Container>
-        )
-      }
+            <PetsIcon className={styles.icon_pet} />
+            <Typography>
+              Por favor, complete el presente formulario si esta de acuerdo en
+              adoptar y cuidar una mascota.
+            </Typography>
+          </Stack>
+        </Container>
+      )}
       <Box
         className={styles.form_container}
         component="form"
@@ -300,21 +313,23 @@ function AdoptionRequest() {
             <Grid
               item
               xs={12}
-              md={8}
+              md={12}
               sx={{ display: "flex", alignItems: "center" }}
             >
-              <Typography>{questionGroup.question}</Typography>
+              <Typography className={styles.text_question}>
+                {questionGroup.question}
+              </Typography>
             </Grid>
             <Grid
               item
               xs={12}
-              md={4}
+              md={12}
               sx={{ display: "flex", justifyContent: "center" }}
             >
               <TextField
                 className={styles.select}
                 id={`question_${index}`}
-                label="Escribe aquí tu respuesta"
+                label={query?.userId ? "" : "Escribe tu respuesta aquí"}
                 value={questionGroup.answer}
                 helperText={
                   questionGroup?.error?.exists && questionGroup?.error?.message
@@ -330,7 +345,7 @@ function AdoptionRequest() {
           container
           sx={{ justifyContent: { xs: "center", md: "flex-end" }, gap: "1rem" }}
         >
-          {query?.userId ?
+          {query?.userId ? (
             userAdoptionRequestByPostId?.status === "ACCEPTED" ? (
               <Button
                 className={styles.submit_button}
@@ -349,39 +364,39 @@ function AdoptionRequest() {
               >
                 Solicitud denegada
               </Button>
-            ) :
-              (
-                <>
-                  <Button
-                    className={styles.submit_button}
-                    type="button"
-                    id="ACCEPTED"
-                    onClick={({ target }) => updateAdoptionReqStatus(target.id)}
-                    disabled={
-                      userAdoptionRequestByPostId?.status === "ACCEPTED" ||
-                      userAdoptionRequestByPostId?.status === "REJECTED"
-                    }
-                  >
-                    Aceptar
-                  </Button>
-                  <Button
-                    className={styles.reject_button}
-                    type="button"
-                    id="REJECTED"
-                    onClick={({ target }) => updateAdoptionReqStatus(target.id)}
-                    disabled={
-                      userAdoptionRequestByPostId?.status === "ACCEPTED" ||
-                      userAdoptionRequestByPostId?.status === "REJECTED"
-                    }
-                  >
-                    Denegar
-                  </Button>
-                </>
-              ) : (
-              <Button className={styles.submit_button} type="submit">
-                Enviar
-              </Button>
-            )}
+            ) : (
+              <>
+                <Button
+                  className={styles.submit_button}
+                  type="button"
+                  id="ACCEPTED"
+                  onClick={({ target }) => updateAdoptionReqStatus(target.id)}
+                  disabled={
+                    userAdoptionRequestByPostId?.status === "ACCEPTED" ||
+                    userAdoptionRequestByPostId?.status === "REJECTED"
+                  }
+                >
+                  Aceptar
+                </Button>
+                <Button
+                  className={styles.reject_button}
+                  type="button"
+                  id="REJECTED"
+                  onClick={({ target }) => updateAdoptionReqStatus(target.id)}
+                  disabled={
+                    userAdoptionRequestByPostId?.status === "ACCEPTED" ||
+                    userAdoptionRequestByPostId?.status === "REJECTED"
+                  }
+                >
+                  Denegar
+                </Button>
+              </>
+            )
+          ) : (
+            <Button className={styles.submit_button} type="submit">
+              Enviar
+            </Button>
+          )}
         </Grid>
       </Box>
       <Dialog open={openDialog}>

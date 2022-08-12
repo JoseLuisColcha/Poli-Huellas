@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import Routes from "../../constants/routes";
-import styles from "../../styles/TextGlobal.module.css";
+import styles from "../../styles/homePage.module.css";
 
 export default function PetsSection() {
   const pets = [
@@ -38,9 +38,9 @@ export default function PetsSection() {
         justify="center"
         sx={{ p: 8 }}
       >
-        <Typography variant="h3" mt={6} mb={6}>
-          ¿Quieres <span className={styles.txtcolor}>adoptar</span> una mascota
-          ?
+        <Typography className={styles.text_title_pets}>
+          ¿Quieres <span className={styles.text_title_span}>adoptar</span> una
+          mascota ?
         </Typography>
       </Grid>
       <Stack
@@ -48,21 +48,21 @@ export default function PetsSection() {
         justifyContent="space-evenly"
         sx={{ flexWrap: "wrap" }}
       >
-        {pets.map((item) => {
+        {pets.map((pet) => {
           return (
-            <CardActionArea sx={{ maxWidth: "300px", my: 5 }} key={item.type}>
-              <Link href={item.to}>
+            <CardActionArea sx={{ maxWidth: "300px", mb: 3 }} key={pet.type}>
+              <Link href={pet.to}>
                 <Card variant="inlined">
                   <CardMedia
                     component="img"
                     height="300"
-                    image={item.image}
+                    image={pet.image}
                     alt="pet"
                     sx={{ borderRadius: 50 }}
                   />
                   <CardContent>
                     <Typography variant="h5" align="center">
-                      {item.type}
+                      {pet.type}
                     </Typography>
                   </CardContent>
                 </Card>

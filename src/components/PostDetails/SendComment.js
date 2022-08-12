@@ -1,7 +1,7 @@
 import { useAuth } from "@/lib/auth";
 import React, { useEffect } from "react";
 import { Box, FormControl, OutlinedInput, Button } from "@mui/material";
-import styles from "../../styles/Comments.module.css";
+import styles from "../../styles/comments.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
@@ -32,7 +32,7 @@ function SendComment(props) {
 
   const onSubmit = async (data) => {
     const { comment } = data;
-    if(!currentUser) return router.push(Routes.LOGIN);
+    if (!currentUser) return router.push(Routes.LOGIN);
     try {
       await addComment(comment, currentUser.uid, postId);
       reset({ comment: "" });

@@ -6,7 +6,7 @@ const {
   DialogContentText,
   DialogActions,
 } = require("@mui/material");
-import styles from "../../styles/ForgotPasswModal.module.css";
+import styles from "../../styles/forgotPasswModal.module.css";
 import Routes from "src/constants/routes";
 import Image from "next/image";
 import Link from "next/link";

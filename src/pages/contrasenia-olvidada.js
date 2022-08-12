@@ -12,7 +12,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import withoutAuth from "@/hocs/withoutAuth";
 import Image from "next/image";
-import styles from "../styles/ForgotPassword.module.css";
+import styles from "../styles/forgotPassword.module.css";
 import Routes from "src/constants/routes";
 import NextLink from "next/link";
 import ForgotPasswInfoModal from "@/components/Modals/ForgotPasswInfoModal";
@@ -45,7 +45,7 @@ const ResetPassword = () => {
   };
 
   return (
-    <Grid container direction="row" alignItems="center" spacing={8}>
+    <Grid container direction="row" alignItems="center" spacing={8} marginTop={1}>
       <Grid item xs={12} sm={12} md={6}>
         <Grid item xs={12} className={styles.item_container}>
           <Typography variant="h4" align="center">
