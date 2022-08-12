@@ -6,6 +6,7 @@ import {
 import {
   Avatar,
   Card,
+  Container,
   CardContent,
   CardHeader,
   IconButton,
@@ -13,11 +14,11 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import React from "react";
-import styles from "../styles/MyPosts.module.css";
+import styles from "../styles/myPosts.module.css";
 
 export const MyPostCard = (props) => {
-  const { post } = props;
-  const router = useRouter()
+  const { post, session, userId } = props;
+  const router = useRouter();
 
   const convertDate = (date) => {
     let convertDate = date?.toDate();
@@ -44,15 +45,25 @@ export const MyPostCard = (props) => {
             subheader={`Publicado el ${convertDate(post.createdAt)}`}
             action={
               <>
-                <IconButton aria-label="Ver" className={styles.icons} onClick={() => router.push(`/post/${post.id}`)}>
-                  <VisibilityOutlined />
-                </IconButton>
-                <IconButton aria-label="Editar" className={styles.icons}>
-                  <ModeEditOutlined />
-                </IconButton>
-                <IconButton aria-label="Eliminar" className={styles.icons}>
-                  <DeleteOutlined />
-                </IconButton>
+                {userId === session?.uid ? (
+                  <Container>
+                    <IconButton
+                      aria-label="Ver"
+                      className={styles.icons}
+                      onClick={() => router.push(`/post/${post.id}`)}
+                    >
+                      <VisibilityOutlined />
+                    </IconButton>
+                    <IconButton aria-label="Editar" className={styles.icons}>
+                      <ModeEditOutlined />
+                    </IconButton>
+                    <IconButton aria-label="Eliminar" className={styles.icons}>
+                      <DeleteOutlined />
+                    </IconButton>
+                  </Container>
+                ) : (
+                  ""
+                )}
               </>
             }
           />

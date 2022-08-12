@@ -19,13 +19,13 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import Routes from "../constants/routes";
 import { SESSION_STATE, useAuth } from "@/lib/auth";
-import Link from "next/link";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 
 const menuItems = [
   {
-    title: "Pubicaciones",
+    title: "Publicaciones",
     to: "#",
     subItems: [
       {
@@ -44,7 +44,7 @@ const menuItems = [
   },
   {
     title: "Usuarios",
-    to: "/admin/usuarios",
+    to: Routes.ADMIN_USERS,
   },
 ];
 
@@ -104,7 +104,7 @@ export function AdminNav() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Link href={Routes.HOME} passHref>
+          <NextLink href={Routes.ADMIN_USERS} passHref>
             <Typography
               variant="h6"
               noWrap
@@ -121,7 +121,7 @@ export function AdminNav() {
             >
               POLI HUELLAS
             </Typography>
-          </Link>
+          </NextLink>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -170,7 +170,7 @@ export function AdminNav() {
                     </MenuItem>
                     <Collapse in={collapse.open} timeout="auto" unmountOnExit>
                       {collapse.items.map((item) => (
-                        <Link href={item.to} key={item.title}>
+                        <NextLink href={item.to} key={item.title}>
                           <MenuItem
                             key={item.title}
                             sx={{ pl: 4 }}
@@ -180,39 +180,40 @@ export function AdminNav() {
                               {item.title}
                             </Typography>
                           </MenuItem>
-                        </Link>
+                        </NextLink>
                       ))}
                     </Collapse>
                   </>
                 ) : (
-                  <Link href={item.to} key={item.title}>
+                  <NextLink href={item.to} key={item.title}>
                     <MenuItem key={item.title} onClick={handleCloseNavMenu}>
                       <Typography textAlign="center">{item.title}</Typography>
                     </MenuItem>
-                  </Link>
+                  </NextLink>
                 )
               )}
             </Menu>
           </Box>
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".2rem",
-              color: "inherit",
-              textDecoration: "none",
-              fontSize: { xs: "1rem", md: "2rem" },
-            }}
-          >
-            POLI HUELLAS
-          </Typography>
+          <NextLink href={Routes.ADMIN_USERS} passHref>
+            <Typography
+              variant="h5"
+              noWrap
+              component="a"
+              sx={{
+                mr: 2,
+                display: { xs: "flex", md: "none" },
+                flexGrow: 1,
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".2rem",
+                color: "inherit",
+                textDecoration: "none",
+                fontSize: { xs: "1rem", md: "2rem" },
+              }}
+            >
+              POLI HUELLAS
+            </Typography>
+          </NextLink>
           <Box
             sx={{
               flexGrow: 1,
@@ -247,11 +248,11 @@ export function AdminNav() {
               autoFocus
             >
               {tabMenuState?.item?.subItems?.map((subItem) => (
-                <Link href={subItem.to} key={subItem.title}>
+                <NextLink href={subItem.to} key={subItem.title}>
                   <MenuItem key={subItem.title} onClick={handleCloseTabMenu}>
                     {subItem.title}
                   </MenuItem>
-                </Link>
+                </NextLink>
               ))}
             </Menu>
           </Box>
@@ -263,11 +264,11 @@ export function AdminNav() {
                   <Avatar alt="avatar-user" src={`${currentUser?.photoURL}`} />
                 </IconButton>
               ) : session === SESSION_STATE.NO_LOGGED ? (
-                <Link href={Routes.LOGIN}>
+                <NextLink href={Routes.LOGIN}>
                   <Button variant="contained" sx={{ m: "0.3rem" }}>
                     Iniciar sesión
                   </Button>
-                </Link>
+                </NextLink>
               ) : (
                 <Skeleton variant="circular" width={40} height={40} />
               )}

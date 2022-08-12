@@ -25,3 +25,7 @@
     font-size: 20px;
     font-weight: 500;
 }
+.label_status{
+    color: red;
+    font-weight: 700;
+}

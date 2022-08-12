@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Link from "next/link";
-import styles from "../styles/textglobal.module.css";
+import styles from "../styles/registerPage.module.css";
 import Routes from "src/constants/routes";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -156,17 +156,14 @@ const Register = () => {
             </Grid>
             <Button
               type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              color="primary"
+              className={styles.button_register}
             >
               Registrar
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href={Routes.LOGIN}>
-                  <a className={styles.tx}>Ya tienenes cuenta? Inicia sesión</a>
+                  <a className={styles.text_link}>Ya tienenes cuenta? Inicia sesión</a>
                 </Link>
               </Grid>
             </Grid>

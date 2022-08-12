@@ -12,7 +12,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import NextLink from "next/link";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import styles from "../styles/textglobal.module.css";
+import styles from "../styles/loginPage.module.css";
 import { useForm } from "react-hook-form";
 import Routes from "src/constants/routes";
 import withoutAuth from "@/hocs/withoutAuth";
@@ -111,24 +111,24 @@ const Login = () => {
             />
             <Button
               type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              color="primary"
+              className={styles.button_start}
             >
               Iniciar
             </Button>
             <Grid container>
               <Grid item xs>
                 <NextLink href={Routes.FORGOT_PASSWORD}>
-                  <a a className={styles.tx}>
+                  <a a className={styles.text_link}>
                     Olvidaste tu contraseña?
                   </a>
                 </NextLink>
               </Grid>
               <Grid item>
                 <NextLink href={Routes.REGISTER}>
-                  <a className={styles.tx}>No tienes cuenta? Crea una</a>
+                  <a>
+                    No tienes cuenta?{" "}
+                    <span className={styles.text_link}>Crea una</span>
+                  </a>
                 </NextLink>
               </Grid>
             </Grid>

@@ -1,5 +1,5 @@
 import { Grid, Typography, Stack } from "@mui/material";
-import styles from "../styles/TextGlobal.module.css";
+import styles from "../styles/instructionsPage.module.css";
 import INSTRUCTIONS from "src/constants/instructions";
 
 const items = [
@@ -18,7 +18,7 @@ export default function Instructions() {
       <Grid>
         <Grid item xs={12} sm={8}>
           <Typography variant="h4" align="center" sx={{ p: 4 }}>
-            ¿Cómo <span className={styles.txtcolor}>adoptar</span> una mascota?
+            ¿Cómo <span className={styles.text_title_span}>adoptar</span> una mascota?
           </Typography>
         </Grid>
         <Grid
