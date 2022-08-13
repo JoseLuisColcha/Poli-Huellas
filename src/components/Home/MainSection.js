@@ -35,7 +35,7 @@ export default function MainSection() {
         )}
       </Grid>
       <Grid
-        container
+        item
         xs={12}
         sm={6}
         order={{ xs: 2, sm: 2 }}
