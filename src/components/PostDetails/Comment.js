@@ -26,7 +26,7 @@ function Comment({userId, comment, createdAt}) {
           userOwnerProfile ?
             <Grid container className={styles.comment_container}>
             <Grid item xs={1} sm={1} className={styles.container}>
-              <Avatar alt={comment} src="/images/pet19.jpg"/>
+              <Avatar alt={comment} src={userOwnerProfile.photoURL}/>
             </Grid>
             <Grid item xs={12} sm={11}>
               <Typography className={styles.commenter_name}>{userOwnerProfile.name}</Typography>
