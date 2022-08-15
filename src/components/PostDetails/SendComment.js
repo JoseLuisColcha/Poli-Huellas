@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form";
 import { addComment } from "@/lib/comments";
 import Routes from '../../constants/routes';
 import { useRouter } from "next/router";
+import { createNotification } from "@/lib/notifications";
+import NOTIFICATIONS from "src/constants/notifications";
  
 const schema = yup.object({
   comment: yup
@@ -16,7 +18,7 @@ const schema = yup.object({
 });
 
 function SendComment(props) {
-  const { postId } = props;
+  const { postId, ownerId } = props;
   const { currentUser } = useAuth();
   const {
     register,
@@ -35,6 +37,9 @@ function SendComment(props) {
     if (!currentUser) return router.push(Routes.LOGIN);
     try {
       await addComment(comment, currentUser.uid, postId);
+      if(currentUser.uid !== ownerId) {
+        await createNotification(ownerId, `${currentUser?.displayName} ${NOTIFICATIONS.COMMENTED}`)
+      }
       reset({ comment: "" });
     } catch (error) {
       if (error.response) {
