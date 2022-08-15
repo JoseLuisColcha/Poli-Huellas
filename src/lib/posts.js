@@ -8,6 +8,8 @@ import {
   doc,
   orderBy,
   updateDoc,
+  deleteDoc,
+  onSnapshot
 } from "firebase/firestore";
 
 export const getPosts = async (petType, status) => {
@@ -30,18 +32,10 @@ export const getPosts = async (petType, status) => {
   }
 };
 
-export const getMyPosts = async (userId) => {
-  try {
-    const q = query(collection(db, "posts"), where("userId", "==", userId));
-    const querySnapshot = await getDocs(q);
-    const data = querySnapshot.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
-    }));
-    return data;
-  } catch (e) {
-    console.log(e);
-  }
+export const getMyPosts = ({userId, callback}) => {
+  const q = query(collection(db, "posts"), where("userId", "==", userId), orderBy("createdAt", "desc"));
+  const unsubscribe = onSnapshot(q, callback);
+  return unsubscribe;
 };
 
 export const getPost = async (postId) => {
@@ -58,3 +52,8 @@ export const updatePost = async ({ data, id }) => {
   const docRef = doc(db, "posts", id);
   await updateDoc(docRef, data);
 };
+
+export const deletePost = async (id) => {
+  const docRef = doc(db, "posts", id);
+  await deleteDoc(docRef);
+}

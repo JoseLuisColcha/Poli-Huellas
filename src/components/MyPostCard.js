@@ -13,12 +13,14 @@ import {
   Typography,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import React from "react";
+import React, {useState} from "react";
 import styles from "../styles/myPosts.module.css";
+import DeletePostModal from "./Modals/DeletePostModal";
 
 export const MyPostCard = (props) => {
   const { post, session, userId } = props;
   const router = useRouter();
+  const [open, setOpen] = useState(false);
 
   const convertDate = (date) => {
     let convertDate = date?.toDate();
@@ -26,6 +28,10 @@ export const MyPostCard = (props) => {
       convertDate?.getUTCMonth() + 1
     } / ${convertDate?.getUTCFullYear()}`;
     return newDate;
+  };
+
+  const handleOpenModal = () => {
+    setOpen(true);
   };
   return (
     <div className={styles.container}>
@@ -57,7 +63,7 @@ export const MyPostCard = (props) => {
                     <IconButton aria-label="Editar" className={styles.icons}>
                       <ModeEditOutlined />
                     </IconButton>
-                    <IconButton aria-label="Eliminar" className={styles.icons}>
+                    <IconButton aria-label="Eliminar" className={styles.icons} onClick={handleOpenModal}>
                       <DeleteOutlined />
                     </IconButton>
                   </Container>
@@ -68,6 +74,7 @@ export const MyPostCard = (props) => {
             }
           />
         </CardContent>
+        <DeletePostModal open={open} handleClose={() => setOpen(false)} postId={post.id}/>
       </Card>
     </div>
   );

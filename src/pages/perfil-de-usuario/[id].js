@@ -22,6 +22,8 @@ import { useUserProfileInformation } from "@/hooks/useUserProfileInformation";
 import styles from "../../styles/userProfile.module.css"
 import EditIcon from "@mui/icons-material/Edit";
 import UploadIcon from "@mui/icons-material/Upload";
+import { updateUserImageURL, uploadUserImage } from "@/lib/shared";
+import { getDownloadURL } from "firebase/storage";
 
 function Profile() {
   const {
@@ -30,6 +32,50 @@ function Profile() {
   const { updateUser, session } = useAuth();
   const [open, setOpen] = useState(false);
   const [myPosts, setMyPosts] = useState([]);
+  const [task, setTask] = useState();
+  const [imgURL, setImgURL] = useState("");
+  const [file, setFile] = useState(null);
+  const [imageName, setImageName] = useState("");
+
+  useEffect(() => {
+    if (task) {
+      task?.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              break;
+            case "running":
+              console.log("Upload is running");
+              break;
+          }
+        },
+        (error) => {
+          // Handle unsuccessful uploads
+        },
+        () => {
+          console.log("Upload completed");
+          getDownloadURL(task.snapshot.ref).then((url) => {
+            updateUserImageURL(userId, url);
+          });
+        }
+      );
+    }
+  }, [task]);
+
+  const handleImage = (e) => {
+    const file = e.target.files[0];
+    if (file !== undefined) {
+      setFile(file);
+      const task = uploadUserImage(file, userId);
+      setTask(task);
+      setImageName(file.name);
+    }
+  };
 
   const { userDataProfile } = useUserProfileInformation({ userId });
 
@@ -41,11 +87,12 @@ function Profile() {
   } = useForm();
 
   useEffect(() => {
-    const getPosts = async () => {
-      const posts = await getMyPosts(userId);
-      setMyPosts(posts);
-    };
-    getPosts();
+    const cb = (snapshot) => {
+      const posts = snapshot.docs
+      setMyPosts(posts.map(doc => ({ ...doc.data(), id: doc.id })))
+    }
+    const unsub = getMyPosts({ userId, callback: cb });
+    return () => unsub();
   }, [userId]);
 
   const onSubmit = async (data) => {
@@ -94,6 +141,7 @@ function Profile() {
                 component="label"
                 className={styles.button_upload}
                 endIcon={<UploadIcon />}
+                onChange={handleImage}
               >
                 Seleccionar Imagen
                 <input type="file" accept=".png,.jpg,.jpeg" hidden />
