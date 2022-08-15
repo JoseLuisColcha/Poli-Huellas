@@ -79,7 +79,7 @@ function Post() {
             </Grid>
           </Grid>
           <Stack marginTop={5}>
-            <Comments postId={id} />
+            <Comments postId={id} ownerId={postData.userId}/>
           </Stack>
 
           <PostInfoFormModal

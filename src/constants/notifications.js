@@ -4,6 +4,7 @@ const NOTIFICATIONS = {
     ADOPTED: "Tu mascota fue adoptada con éxito.",
     REQUEST_ADOPTION: "Felicidades!! La mascota que quiere adoptar es tuya.",
     BAD_REQUEST_ADOPTION: "La mascota que deseabas adoptar ya fue adoptada, pero puedes seguir buscando otra mascota.",
+    COMMENTED: "comento tu publicación."
 }
 
 export default NOTIFICATIONS;

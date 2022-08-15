@@ -5,7 +5,7 @@ import styles from '../../styles/comments.module.css';
 import Comment from './Comment';
 import SendComment from './SendComment';
 
-function Comments({ postId }) {
+function Comments({ postId, ownerId }) {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ function Comments({ postId }) {
           :
           <Typography className={styles.message_alert}>{comments.length} comentarios</Typography>
       }
-      <SendComment postId={postId} />
+      <SendComment postId={postId} ownerId={ownerId}/>
       <Grid className={styles.messages_container}>
         {comments?.map(comment => (
           <Comment key={comment.id} comment={comment.comment} userId={comment.userId} createdAt={comment.createdAt} />
