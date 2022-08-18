@@ -57,3 +57,13 @@ export const deletePost = async (id) => {
   const docRef = doc(db, "posts", id);
   await deleteDoc(docRef);
 }
+
+export const updatePostInformation = async (id, petName, petSex, petSize, petAge, description) => {
+  const docRef = doc(db, "posts", id);
+  await updateDoc(docRef, { petName, petSex, petSize, petAge, description });
+}
+
+export const updatePostImage = async (id, image) => {
+  const docRef = doc(db, "posts", id);
+  await updateDoc(docRef, { image });
+}
