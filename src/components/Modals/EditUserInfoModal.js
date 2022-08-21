@@ -1,3 +1,5 @@
+import styles from "@/styles/editUserInfoModal.module.css";
+
 const {
   Modal,
   Box,
@@ -25,7 +27,7 @@ const EditUserInfoModal = ({
   handleClose,
   register = () => "",
   errors,
-  onSubmit
+  onSubmit,
 }) => {
   return (
     <Modal
@@ -34,7 +36,7 @@ const EditUserInfoModal = ({
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box component='form' sx={style} onSubmit={onSubmit}>
+      <Box component="form" sx={style} onSubmit={onSubmit}>
         <Typography variant="h6" paddingBottom={1}>
           Editar información
         </Typography>
@@ -87,21 +89,13 @@ const EditUserInfoModal = ({
         </Grid>
         <Grid container justifyContent="space-around">
           <Button
-            fullWidth
             variant="outlined"
-            sx={{ width: "45%", mt: "1rem" }}
-            color="primary"
             onClick={handleClose}
+            className={styles.button_exit}
           >
             Cerrar
           </Button>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ width: "45%", mt: "1rem" }}
-            color="primary"
-          >
+          <Button type="submit" className={styles.button_save}>
             Guardar
           </Button>
         </Grid>

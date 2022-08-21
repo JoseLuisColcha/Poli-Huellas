@@ -6,7 +6,6 @@ import {
   ListItemText,
   ListItemIcon,
   Button,
-  Stack,
   Divider,
 } from "@mui/material";
 import { Person, Phone, LocationOn } from "@mui/icons-material";

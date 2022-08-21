@@ -36,6 +36,7 @@ const schema = yup.object({
 });
 
 const Register = () => {
+  
   const { singup } = useAuth();
   const {
     register,
