@@ -98,7 +98,7 @@ const EditPostModal = ({openEdition, handleCloseEdition, postPhoto, postId, regi
           </Button>
           {imageName && <Typography>{imageName}</Typography>}
           <Grid container spacing={2}>
-            <Grid item xs={12}>
+            <Grid item xs={6}>
             <TextField
             className={styles.field}
               id="petName"
@@ -106,7 +106,7 @@ const EditPostModal = ({openEdition, handleCloseEdition, postPhoto, postId, regi
               {...register("petName")}
             />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={6}>
             <TextField
             className={styles.field}
               id="petAge"

@@ -7,6 +7,8 @@ import PostInformation from "@/components/PostDetails/PostInformation";
 import Comments from "@/components/PostDetails/Comments";
 import { PostInfoFormModal } from "@/components/Modals/PostInfoFormModal";
 import { useAlert } from "@/lib/alert";
+import NOTIFICATIONS from "src/constants/notifications";
+import { createNotification } from "@/lib/notifications";
 
 function Post() {
   const router = useRouter();
@@ -33,7 +35,6 @@ function Post() {
         severity: "success",
         duration: 6000,
       });
-      handleClosePostFormModal();
     } catch (e) {
       console.log({ e });
       addAlert({
@@ -41,6 +42,17 @@ function Post() {
         severity: "error",
         duration: 6000,
       });
+    }
+    try {
+      await createNotification(
+        postData?.userId,
+        action === "ACCEPTED"
+          ? NOTIFICATIONS.ACCEPTED_POST
+          : NOTIFICATIONS.REJECTED_POST
+      );
+      handleClosePostFormModal();
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -79,7 +91,7 @@ function Post() {
             </Grid>
           </Grid>
           <Stack marginTop={5}>
-            <Comments postId={id} ownerId={postData.userId}/>
+            <Comments postId={id} ownerId={postData.userId} />
           </Stack>
 
           <PostInfoFormModal

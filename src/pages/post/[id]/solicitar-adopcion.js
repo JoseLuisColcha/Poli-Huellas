@@ -240,7 +240,6 @@ function AdoptionRequest() {
     push(Routes.USERPROFILE(session.uid));
   };
 
-  // console.log(currentUser.displayName);
   const updateAdoptionReqStatus = async (status) => {
     try {
       await updateAdoptionRequestStatus({
@@ -255,6 +254,16 @@ function AdoptionRequest() {
       push(`/post/${query.id}`);
     } catch (e) {
       console.error(e);
+    }
+    try {
+      await createNotification(
+        query?.userId,
+        status === "ACCEPTED"
+          ? NOTIFICATIONS.REQUEST_ADOPTION
+          : NOTIFICATIONS.BAD_REQUEST_ADOPTION
+      );
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -401,23 +410,25 @@ function AdoptionRequest() {
       </Box>
       <Dialog open={openDialog}>
         <DialogTitle id="alert-dialog-title">
-          {"Poner en adopción una mascota"}
+          {"Solicitar adopción"}
         </DialogTitle>
         <DialogContent className={styles.dialog_container}>
-          <Image
-            src="/images/huella.png"
-            alt="fingerprint"
-            width="154.24px"
-            height="60px"
-            background="#B224EF"
-            transform="rotate(-34.58deg)"
-          />
+          <Stack alignItems={"center"}>
+            <Image
+              src="/images/huella.png"
+              alt="fingerprint"
+              width="154.24px"
+              height="60px"
+              background="#B224EF"
+              transform="rotate(-34.58deg)"
+            />
+          </Stack>
           <DialogContentText
             id="alert-dialog-description"
             className={styles.dialog_text}
           >
-            Se ha enviado tu socilitud para publicar una mascota, la aprobación
-            se te informará en tu bandeja de notificaciones.
+            Se ha enviado tu solicitud de adopción, la aprobación te lo haremos
+            saber en tu bandeja de notificaciones.
           </DialogContentText>
         </DialogContent>
         <DialogActions>

@@ -9,16 +9,17 @@ import {
   orderBy,
   updateDoc,
   deleteDoc,
-  onSnapshot
+  onSnapshot,
 } from "firebase/firestore";
 
-export const getPosts = async (petType, status) => {
+export const getPosts = async (petType, status, petSex, petSize) => {
   const constraints = [
     petType && where("petType", "==", petType),
     status && where("status", "==", status),
+    petSex && where("petSex", "==", petSex),
+    petSize && where("petSize", "==", petSize),
     orderBy("createdAt", "desc"),
   ].filter((c) => c);
-
   try {
     const q = query(collection(db, "posts"), ...constraints);
     const querySnapshot = await getDocs(q);
@@ -32,8 +33,12 @@ export const getPosts = async (petType, status) => {
   }
 };
 
-export const getMyPosts = ({userId, callback}) => {
-  const q = query(collection(db, "posts"), where("userId", "==", userId), orderBy("createdAt", "desc"));
+export const getMyPosts = ({ userId, callback }) => {
+  const q = query(
+    collection(db, "posts"),
+    where("userId", "==", userId),
+    orderBy("createdAt", "desc")
+  );
   const unsubscribe = onSnapshot(q, callback);
   return unsubscribe;
 };
@@ -56,14 +61,25 @@ export const updatePost = async ({ data, id }) => {
 export const deletePost = async (id) => {
   const docRef = doc(db, "posts", id);
   await deleteDoc(docRef);
-}
+};
 
-export const updatePostInformation = async (id, petName, petSex, petSize, petAge, description) => {
+export const updatePostInformation = async (
+  id,
+  petName,
+  petSex,
+  petSize,
+  petAge,
+  description
+) => {
   const docRef = doc(db, "posts", id);
   await updateDoc(docRef, { petName, petSex, petSize, petAge, description });
-}
+};
 
 export const updatePostImage = async (id, image) => {
   const docRef = doc(db, "posts", id);
   await updateDoc(docRef, { image });
-}
+};
+export const deleteComment = async (id) => {
+  const docRef = doc(db, "comments", id);
+  await deleteDoc(docRef);
+};

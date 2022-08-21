@@ -13,14 +13,14 @@ import {
   Typography,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styles from "../styles/myPosts.module.css";
 import DeletePostModal from "./Modals/DeletePostModal";
 import EditPostModal from "./Modals/EditPostModal";
 import { useForm } from "react-hook-form";
 import { updatePostInformation } from "@/lib/posts";
 import { useAlert } from "../../src/lib/alert";
-
+import { convertDate } from "@/lib/dates";
 
 export const MyPostCard = (props) => {
   const { post, session, userId } = props;
@@ -35,14 +35,6 @@ export const MyPostCard = (props) => {
     handleSubmit,
     reset,
   } = useForm();
-
-  const convertDate = (date) => {
-    let convertDate = date?.toDate();
-    let newDate = `${convertDate?.getDate()} / ${
-      convertDate?.getUTCMonth() + 1
-    } / ${convertDate?.getUTCFullYear()}`;
-    return newDate;
-  };
 
   const handleOpenModal = () => {
     setOpen(true);
@@ -62,22 +54,28 @@ export const MyPostCard = (props) => {
   const onSubmit = async (data) => {
     const { petName, petSize, petAge, petSex, description } = data;
     console.log(data);
-    try{
-      await updatePostInformation(post.id, petName, petSex, petSize, petAge, description);
+    try {
+      await updatePostInformation(
+        post.id,
+        petName,
+        petSex,
+        petSize,
+        petAge,
+        description
+      );
       addAlert({
         text: "Publicación actualizada exitosamente",
         severity: "success",
         duration: 3000,
       });
       setOpenEdition(false);
-    }catch(error){
+    } catch (error) {
       addAlert({
         text: "Error al actualizar la publicación",
         severity: "error",
         duration: 3000,
       });
     }
-    
   };
   return (
     <div className={styles.container}>
@@ -104,13 +102,21 @@ export const MyPostCard = (props) => {
                       className={styles.icons}
                       onClick={() => router.push(`/post/${post.id}`)}
                     >
-                      <VisibilityOutlined />
+                      <VisibilityOutlined titleAccess="Ver otro" />
                     </IconButton>
-                    <IconButton aria-label="Editar" className={styles.icons} onClick={handleOpenEditModal}>
-                      <ModeEditOutlined />
+                    <IconButton
+                      aria-label="Editar"
+                      className={styles.icons}
+                      onClick={handleOpenEditModal}
+                    >
+                      <ModeEditOutlined titleAccess="Editar" />
                     </IconButton>
-                    <IconButton aria-label="Eliminar" className={styles.icons} onClick={handleOpenModal}>
-                      <DeleteOutlined />
+                    <IconButton
+                      aria-label="Eliminar"
+                      className={styles.icons}
+                      onClick={handleOpenModal}
+                    >
+                      <DeleteOutlined titleAccess="Eliminar" />
                     </IconButton>
                   </Container>
                 ) : (
@@ -120,8 +126,20 @@ export const MyPostCard = (props) => {
             }
           />
         </CardContent>
-        <EditPostModal openEdition={openEdition} handleCloseEdition={() => setOpenEdition(false)} postPhoto={post.image} postId={post.id} register={register} errors={errors} onSubmit={handleSubmit(onSubmit)}/>
-        <DeletePostModal open={open} handleClose={() => setOpen(false)} postId={post.id}/>
+        <EditPostModal
+          openEdition={openEdition}
+          handleCloseEdition={() => setOpenEdition(false)}
+          postPhoto={post.image}
+          postId={post.id}
+          register={register}
+          errors={errors}
+          onSubmit={handleSubmit(onSubmit)}
+        />
+        <DeletePostModal
+          open={open}
+          handleClose={() => setOpen(false)}
+          postId={post.id}
+        />
       </Card>
     </div>
   );

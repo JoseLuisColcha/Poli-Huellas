@@ -6,11 +6,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { addComment } from "@/lib/comments";
-import Routes from '../../constants/routes';
+import Routes from "../../constants/routes";
 import { useRouter } from "next/router";
 import { createNotification } from "@/lib/notifications";
 import NOTIFICATIONS from "src/constants/notifications";
- 
 const schema = yup.object({
   comment: yup
     .string("El campo debe ser alfanumérico")
@@ -37,8 +36,11 @@ function SendComment(props) {
     if (!currentUser) return router.push(Routes.LOGIN);
     try {
       await addComment(comment, currentUser.uid, postId);
-      if(currentUser.uid !== ownerId) {
-        await createNotification(ownerId, `${currentUser?.displayName} ${NOTIFICATIONS.COMMENTED}`)
+      if (currentUser.uid !== ownerId) {
+        await createNotification(
+          ownerId,
+          `${currentUser?.displayName} ${NOTIFICATIONS.COMMENTED}`
+        );
       }
       reset({ comment: "" });
     } catch (error) {

@@ -26,17 +26,22 @@ import Routes from "src/constants/routes";
 import QUESTIONS from "src/constants/questions";
 import PETTYPE from "src/constants/petType";
 import withAuth from "@/hocs/withAuth";
-import { createNotification } from "@/lib/notifications";
-import NOTIFICATIONS from "src/constants/notifications";
 import PetsIcon from "@mui/icons-material/Pets";
 import UploadIcon from "@mui/icons-material/Upload";
+import { useRouter } from "next/router";
 
 const schema = yup.object({
   petAge: yup
     .string("El campo debe ser alfanumérico")
     .required("Este campo es requerido"),
   petSize: yup.string().required("Este campo es requerido"),
+  petSex: yup.string().required("Este campo es requerido"),
   petType: yup.string().required("Este campo es requerido"),
+  petName: yup.string().required("Este campo es requerido"),
+  answerOne: yup.string().required("Este campo es requerido"),
+  answerTwo: yup.string().required("Este campo es requerido"),
+  answerThree: yup.string().required("Este campo es requerido"),
+  answerFour: yup.string().required("Este campo es requerido"),
 });
 
 function Giveadoption() {
@@ -47,12 +52,13 @@ function Giveadoption() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const { currentUser } = useAuth();
+  const { currentUser, session } = useAuth();
   const [task, setTask] = useState();
   const [imgURL, setImgURL] = useState("");
   const [file, setFile] = useState(null);
   const [imageName, setImageName] = useState("");
   const [open, setOpen] = useState(false);
+  const { push } = useRouter();
 
   useEffect(() => {
     if (task) {
@@ -93,12 +99,8 @@ function Giveadoption() {
   };
 
   const handleClose = async () => {
-    try {
-      await createNotification(currentUser.uid, NOTIFICATIONS.NEW_POST);
-    } catch (e) {
-      console.log(e);
-    }
     setOpen(false);
+    push(Routes.USERPROFILE(session.uid));
   };
 
   const onSubmit = async (data) => {
@@ -184,7 +186,12 @@ function Giveadoption() {
               defaultValue=""
               label="Seleccionar una opción"
               {...register("answerOne")}
-              helperText={QUESTIONS.GIVE_Q1}
+              error={!!errors.answerOne}
+              helperText={
+                errors?.answerOne?.message
+                  ? errors?.answerOne?.message
+                  : QUESTIONS.GIVE_Q1
+              }
             >
               <MenuItem value="" disabled>
                 <em>Seleccione</em>
@@ -215,7 +222,12 @@ function Giveadoption() {
               defaultValue=""
               label="Seleccionar una opción"
               {...register("answerTwo")}
-              helperText={QUESTIONS.GIVE_Q2}
+              error={!!errors.answerTwo}
+              helperText={
+                errors?.answerTwo?.message
+                  ? errors?.answerTwo?.message
+                  : QUESTIONS.GIVE_Q2
+              }
             >
               <MenuItem value="" disabled>
                 <em>Seleccione</em>
@@ -238,7 +250,12 @@ function Giveadoption() {
               defaultValue=""
               label="Seleccionar una opción"
               {...register("answerThree")}
-              helperText={QUESTIONS.GIVE_Q3}
+              error={!!errors.answerThree}
+              helperText={
+                errors?.answerThree?.message
+                  ? errors?.answerThree?.message
+                  : QUESTIONS.GIVE_Q3
+              }
             >
               <MenuItem value="" disabled>
                 <em>Seleccione</em>
@@ -261,7 +278,12 @@ function Giveadoption() {
               defaultValue=""
               label="Seleccionar una opción"
               {...register("answerFour")}
-              helperText={QUESTIONS.GIVE_Q4}
+              error={!!errors.answerFour}
+              helperText={
+                errors?.answerFour?.message
+                  ? errors?.answerFour?.message
+                  : QUESTIONS.GIVE_Q4
+              }
             >
               <MenuItem value="" disabled>
                 <em>Seleccione</em>
@@ -288,7 +310,12 @@ function Giveadoption() {
               defaultValue=""
               label="Seleccionar una opción"
               {...register("petType")}
-              helperText="Seleccione el tipo de mascota"
+              error={!!errors.petType}
+              helperText={
+                errors?.petType?.message
+                  ? errors?.petType?.message
+                  : "Seleccione el tipo de mascota"
+              }
             >
               <MenuItem value="" disabled>
                 <em>Seleccione</em>
@@ -309,7 +336,12 @@ function Giveadoption() {
               id="petAge"
               label="Ingrese el nombre de la mascota"
               {...register("petName")}
-              helperText="Ingrese el nombre que tiene o como quisieras llamarlo"
+              error={!!errors.petName}
+              helperText={
+                errors?.petName?.message
+                  ? errors?.petName?.message
+                  : "Ingrese el nombre que tiene o como quisieras llamarlo"
+              }
             />
           </Grid>
         </Grid>
@@ -325,7 +357,12 @@ function Giveadoption() {
               defaultValue=""
               label="Seleccione el tamaño de la mascota"
               {...register("petSize")}
-              helperText="Tamaño de la mascota"
+              error={!!errors.petSize}
+              helperText={
+                errors?.petSize?.message
+                  ? errors?.petSize?.message
+                  : "Tamaño de la mascota"
+              }
             >
               <MenuItem value="" disabled>
                 <em>Seleccione</em>
@@ -346,7 +383,12 @@ function Giveadoption() {
               id="petAge"
               label="Ingrese la edad de la mascota"
               {...register("petAge")}
-              helperText="En años y meses. (Ej. 1 año y 2 meses)"
+              error={!!errors.petAge}
+              helperText={
+                errors?.petAge?.message
+                  ? errors?.petAge?.message
+                  : "En años y meses. (Ej. 1 año y 2 meses)"
+              }
             />
           </Grid>
         </Grid>
@@ -362,7 +404,12 @@ function Giveadoption() {
               defaultValue=""
               label="Seleccionar una opción"
               {...register("petSex")}
-              helperText="Sexo de la mascota"
+              error={!!errors.petSex}
+              helperText={
+                errors?.petSex?.message
+                  ? errors?.petSex?.message
+                  : "Sexo de la mascota"
+              }
             >
               <MenuItem value="" disabled>
                 <em>Seleccione</em>
@@ -442,7 +489,6 @@ function Giveadoption() {
             <Button
               className={styles.submit_button}
               autoFocus
-              href={Routes.USERPROFILE}
               onClick={handleClose}
             >
               OK!

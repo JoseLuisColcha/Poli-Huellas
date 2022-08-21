@@ -25,26 +25,26 @@ import { ExpandLess, ExpandMore } from "@mui/icons-material";
 
 const menuItems = [
   {
+    title: "Usuarios",
+    to: Routes.ADMIN_USERS,
+  },
+  {
     title: "Publicaciones",
     to: "#",
     subItems: [
       {
         title: "Gatos",
-        to: Routes.CATS,
+        to: Routes.ADMIN_CATS,
       },
       {
         title: "Perros",
-        to: Routes.DOGS,
+        to: Routes.ADMIN_DOGS,
       },
       {
         title: "Otros",
-        to: Routes.OTHER,
+        to: Routes.ADMIN_OTHER,
       },
     ],
-  },
-  {
-    title: "Usuarios",
-    to: Routes.ADMIN_USERS,
   },
 ];
 

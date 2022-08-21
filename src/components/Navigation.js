@@ -14,6 +14,7 @@ import {
   Skeleton,
   Tabs,
   Tab,
+  Badge,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -23,7 +24,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { listtenNotifications } from "@/lib/notifications";
 import Notification from "./Notification";
-import styles from "../styles/navigation.module.css"
+import styles from "../styles/navigation.module.css";
 
 const menuItems = [
   {
@@ -230,7 +231,9 @@ export default function ResponsiveAppBar(props) {
                     color: "#FFFFFF",
                   }}
                 >
-                  <NotificationsIcon />
+                  {/* <Badge badgeContent={numberNotifications.length} color="secondary"> */}
+                    <NotificationsIcon />
+                  {/* </Badge> */}
                 </IconButton>
               ) : session === SESSION_STATE.NO_LOGGED ? (
                 <p />
@@ -266,7 +269,7 @@ export default function ResponsiveAppBar(props) {
                 </IconButton>
               ) : session === SESSION_STATE.NO_LOGGED ? (
                 <Link href={Routes.LOGIN}>
-                  <Button variant="contained" className={styles.button_login}  >
+                  <Button variant="contained" className={styles.button_login}>
                     Iniciar sesión
                   </Button>
                 </Link>
