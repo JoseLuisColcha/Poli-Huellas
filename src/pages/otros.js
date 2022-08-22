@@ -30,13 +30,13 @@ export default function Otros() {
       let petSizeName = petSize?.at(0).toUpperCase() + petSize?.substring(1);
       petSizeName = petSizeName === "Todos" ? null : petSizeName;
 
-      const posts = await getPosts(
-        PETTYPE.OTROS,
-        status,
-        petSexName,
-        petSizeName
-      );
-      setOtherPosts(posts);
+      const cb = (snapshot) => {
+        const others = snapshot.docs;
+        setOtherPosts(others.map((doc) => ({ ...doc.data(), id: doc.id })));
+      };
+      
+      const unsub = getPosts({petType:PETTYPE.OTROS, status:status, petSex: petSexName, petSize:petSizeName, callback: cb});
+      return () => unsub();
     };
     getOtherPosts();
   }, [session, petSex, petSize]);
