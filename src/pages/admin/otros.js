@@ -10,11 +10,13 @@ function Otros() {
   const [otherPosts, setOtherPosts] = useState();
 
   useEffect(() => {
-    const getOtherPosts = async () => {
-      const posts = await getPosts(PETTYPE.OTROS);
-      setOtherPosts(posts);
+    const cb = (snapshot) => {
+      const others = snapshot.docs;
+      setOtherPosts(others.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
-    getOtherPosts();
+    
+    const unsub = getPosts({petType: PETTYPE.OTROS, callback: cb});
+    return () => unsub();
   }, []);
   return (
     <>
