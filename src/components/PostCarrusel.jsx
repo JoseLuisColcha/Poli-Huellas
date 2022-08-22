@@ -20,8 +20,13 @@ export default function PostCarrusel(props) {
   useEffect(() => {
     const getPostsPets = async () => {
       const status = session ? session?.role === "user" ? "ACCEPTED" : undefined : 'ACCEPTED';
-      const posts = await getPosts(typePet, status);
-      setPostsPets(posts);
+      const cb = (snapshot) => {
+        const posts = snapshot.docs;
+        setPostsPets(posts.map((doc) => ({ ...doc.data(), id: doc.id })));
+      };
+      
+      const unsub = getPosts({petType: typePet,status: status, callback: cb});
+      return () => unsub();
     };
     getPostsPets();
   }, [session]);
