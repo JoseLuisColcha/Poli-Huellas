@@ -29,13 +29,13 @@ export default function Gatos() {
       let petSizeName = petSize?.at(0).toUpperCase() + petSize?.substring(1);
       petSizeName = petSizeName === "Todos" ? null : petSizeName;
 
-      const posts = await getPosts(
-        PETTYPE.PERRO,
-        status,
-        petSexName,
-        petSizeName
-      );
-      setDogPosts(posts);
+      const cb = (snapshot) => {
+        const dogs = snapshot.docs;
+        setDogPosts(dogs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      };
+      
+      const unsub = getPosts({petType:PETTYPE.PERRO, status:status, petSex: petSexName, petSize:petSizeName, callback: cb});
+      return () => unsub();
     };
     getDogPosts();
   }, [session, petSex, petSize]);
