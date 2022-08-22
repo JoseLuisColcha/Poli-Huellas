@@ -10,11 +10,13 @@ function Gatos() {
   const [catPosts, setCatPosts] = useState();
 
   useEffect(() => {
-    const getCatPosts = async () => {
-      const posts = await getPosts(PETTYPE.GATO);
-      setCatPosts(posts);
+    const cb = (snapshot) => {
+      const cats = snapshot.docs;
+      setCatPosts(cats.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
-    getCatPosts();
+    
+    const unsub = getPosts({petType: PETTYPE.GATO, callback: cb});
+    return () => unsub();
   }, []);
   return (
     <>

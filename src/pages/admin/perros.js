@@ -10,11 +10,13 @@ function Perros() {
   const [dogPosts, setDogPosts] = useState();
 
   useEffect(() => {
-    const getDogPosts = async () => {
-      const posts = await getPosts(PETTYPE.PERRO);
-      setDogPosts(posts);
+    const cb = (snapshot) => {
+      const dogs = snapshot.docs;
+      setDogPosts(dogs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
-    getDogPosts();
+    
+    const unsub = getPosts({petType: PETTYPE.PERRO, callback: cb});
+    return () => unsub();
   }, []);
 
   return (
@@ -22,7 +24,7 @@ function Perros() {
       <Typography className={styles.title_text}>
         Lista de <span className={styles.span_text}>perros</span>
       </Typography>
-      <PostsTable posts={dogPosts} />;
+      <PostsTable posts={dogPosts} />
     </>
   );
 }
