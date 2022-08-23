@@ -7,6 +7,7 @@ import {
   ListItemIcon,
   Button,
   Divider,
+  Box
 } from "@mui/material";
 import { Person, Phone, LocationOn } from "@mui/icons-material";
 import { useAuth } from "@/lib/auth";
@@ -18,11 +19,13 @@ import { getMyPosts } from "@/lib/posts";
 import { MyPostCard } from "@/components/MyPostCard";
 import { useRouter } from "next/router";
 import { useUserProfileInformation } from "@/hooks/useUserProfileInformation";
-import styles from "../../styles/userProfile.module.css"
+import styles from "../../styles/userProfile.module.css";
 import EditIcon from "@mui/icons-material/Edit";
 import UploadIcon from "@mui/icons-material/Upload";
 import { updateUserImageURL, uploadUserImage } from "@/lib/shared";
 import { getDownloadURL } from "firebase/storage";
+import Pet from "../../../public/images/logo-post.png";
+import Image from "next/image";
 
 function Profile() {
   const {
@@ -86,11 +89,17 @@ function Profile() {
   } = useForm();
 
   useEffect(() => {
+    const status = session
+      ? session?.role === "user"
+        ? "ACCEPTED"
+        : undefined
+      : "ACCEPTED";
+
     const cb = (snapshot) => {
-      const posts = snapshot.docs
-      setMyPosts(posts.map(doc => ({ ...doc.data(), id: doc.id })))
-    }
-    const unsub = getMyPosts({ userId, callback: cb });
+      const posts = snapshot.docs;
+      setMyPosts(posts.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+    const unsub = getMyPosts({ userId, status: status, callback: cb });
     return () => unsub();
   }, [userId]);
 
@@ -195,14 +204,20 @@ function Profile() {
           variant="inset"
           style={{ border: "1px solid #C2C6CC", width: "90%" }}
         />
-        {myPosts?.map((post, index) => (
-          <MyPostCard
-            key={index}
-            post={post}
-            userId={userId}
-            session={session}
-          />
-        ))}
+        {myPosts?.length > 0 ? (
+          myPosts?.map((post, index) => (
+            <MyPostCard
+              key={index}
+              post={post}
+              userId={userId}
+              session={session}
+            />
+          ))
+        ) : (
+          <Box>
+            <Image alt="mascota" src={Pet} width={550} height={450} />
+          </Box>
+        )}
       </Grid>
 
       <EditUserInfoModal

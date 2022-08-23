@@ -16,26 +16,12 @@ export const PetCard = (props) => {
                 alt={petName}
                 src={petImage}
               ></Avatar>
-              <Typography className={styles.title}>{petName}</Typography>
-              {session?.role !== "admin" ? (
-                <>
-                  <Typography className={styles.text} marginBottom={2}>
-                    <span className={styles.label}>Edad: </span> {petAge}
-                  </Typography>
-                  <Typography className={styles.text}>
-                    <span className={styles.label}>Sexo: </span> {petSex}
-                  </Typography>{" "}
-                </>
-              ) : (
-                ""
-              )}
-              {session?.role === "admin" ? (
-                <Typography className={styles.text}>
-                  <span className={styles.label_status}>Estado: </span> {status}
-                </Typography>
-              ) : (
-                ""
-              )}
+              <Typography className={styles.text} marginBottom={2}>
+                <span className={styles.label}>Edad: </span> {petAge}
+              </Typography>
+              <Typography className={styles.text}>
+                <span className={styles.label}>Sexo: </span> {petSex}
+              </Typography>
             </CardContent>
           </Card>
         </NextLink>
