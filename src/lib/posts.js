@@ -12,7 +12,7 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 
-export const getPosts = ({petType, status, petSex, petSize, callback}) => {
+export const getPosts = ({ petType, status, petSex, petSize, callback }) => {
   const constraints = [
     petType && where("petType", "==", petType),
     status && where("status", "==", status),
@@ -21,14 +21,15 @@ export const getPosts = ({petType, status, petSex, petSize, callback}) => {
     orderBy("createdAt", "desc"),
   ].filter((c) => c);
   const q = query(collection(db, "posts"), ...constraints);
-  const unsubscribe = onSnapshot(q,callback);
+  const unsubscribe = onSnapshot(q, callback);
   return unsubscribe;
 };
 
-export const getMyPosts = ({ userId, callback }) => {
+export const getMyPosts = ({ userId, status, callback }) => {
   const q = query(
     collection(db, "posts"),
     where("userId", "==", userId),
+    where("status", "==", status),
     orderBy("createdAt", "desc")
   );
   const unsubscribe = onSnapshot(q, callback);
