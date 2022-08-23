@@ -20,7 +20,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Routes from "../constants/routes";
 import { SESSION_STATE, useAuth } from "@/lib/auth";
-import Link from "next/link";
+import  NextLink from "next/link";
 import { useRouter } from "next/router";
 import { listtenNotifications } from "@/lib/notifications";
 import Notification from "./Notification";
@@ -114,7 +114,7 @@ export default function ResponsiveAppBar(props) {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Link href={Routes.HOME} passHref>
+          <NextLink href={Routes.HOME} passHref>
             <Typography
               variant="h6"
               noWrap
@@ -131,7 +131,7 @@ export default function ResponsiveAppBar(props) {
             >
               POLI HUELLAS
             </Typography>
-          </Link>
+          </NextLink>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -164,15 +164,15 @@ export default function ResponsiveAppBar(props) {
               autoFocus
             >
               {menuItems.map((item) => (
-                <Link href={item.to} key={item.title}>
+                <NextLink href={item.to} key={item.title}>
                   <MenuItem key={item.title} onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">{item.title}</Typography>
                   </MenuItem>
-                </Link>
+                </NextLink>
               ))}
             </Menu>
           </Box>
-          <Link href={Routes.HOME} passHref>
+          <NextLink href={Routes.HOME} passHref>
             <Typography
               variant="h5"
               noWrap
@@ -191,7 +191,7 @@ export default function ResponsiveAppBar(props) {
             >
               POLI HUELLAS
             </Typography>
-          </Link>
+          </NextLink>
           <Box
             sx={{
               flexGrow: 1,
@@ -268,11 +268,11 @@ export default function ResponsiveAppBar(props) {
                   <Avatar alt="avatar-user" src={`${currentUser?.photoURL}`} />
                 </IconButton>
               ) : session === SESSION_STATE.NO_LOGGED ? (
-                <Link href={Routes.LOGIN}>
+                <NextLink href={Routes.LOGIN}>
                   <Button variant="contained" className={styles.button_login}>
                     Iniciar sesión
                   </Button>
-                </Link>
+                </NextLink>
               ) : (
                 <Skeleton variant="circular" width={40} height={40} />
               )}
@@ -293,9 +293,9 @@ export default function ResponsiveAppBar(props) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <Link href={`/perfil-de-usuario/${session?.uid}`}>
+              <NextLink href={`/perfil-de-usuario/${session?.uid}`}>
                 <MenuItem onClick={handleCloseUserMenu}>Perfil</MenuItem>
-              </Link>
+              </NextLink>
               <MenuItem onClick={handleLogout}>Cerrar sesión</MenuItem>
             </Menu>
           </Box>
@@ -304,3 +304,4 @@ export default function ResponsiveAppBar(props) {
     </AppBar>
   );
 }
+
