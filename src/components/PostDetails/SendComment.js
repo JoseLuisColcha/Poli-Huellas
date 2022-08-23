@@ -81,14 +81,7 @@ function SendComment(props) {
             placeholder="Escribe aquí tu comentario"
           />
         </FormControl>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "right",
-            justifyContent: "right",
-            paddingTop: "10px",
-          }}
-        >
+        <Box className={styles.button_container}>
           <Button className={styles.submit_button} type="submit">
             Enviar
           </Button>

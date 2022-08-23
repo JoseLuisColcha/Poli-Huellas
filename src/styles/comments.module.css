@@ -17,6 +17,14 @@
     padding: 10px !important;
 }
 
+.button_container {
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: flex-end !important;
+    padding-top: 10px !important;
+
+}
+
 .messages_container {
     border: 1px solid #9A9A9A !important;
     margin-right: 20px !important;
@@ -47,7 +55,7 @@
 
 .comment_date {
     font-size: 12px !important;
-    font-weight: 400!important;
+    font-weight: 400 !important;
     color: #9A9A9A !important;
 }
 
