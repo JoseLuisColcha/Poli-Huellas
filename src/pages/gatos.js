@@ -36,7 +36,13 @@ export default function Gatos() {
         setCatPosts(cats.map((doc) => ({ ...doc.data(), id: doc.id })));
       };
 
-      const unsub = getPosts({petType:PETTYPE.GATO, status:status, petSex: petSexName, petSize:petSizeName, callback: cb});
+      const unsub = getPosts({
+        petType: PETTYPE.GATO,
+        status: status,
+        petSex: petSexName,
+        petSize: petSizeName,
+        callback: cb,
+      });
       return () => unsub();
     };
     getCatPosts();

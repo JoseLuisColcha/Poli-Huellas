@@ -9,6 +9,8 @@ import { PostInfoFormModal } from "@/components/Modals/PostInfoFormModal";
 import { useAlert } from "@/lib/alert";
 import NOTIFICATIONS from "src/constants/notifications";
 import { createNotification } from "@/lib/notifications";
+import Routes from "src/constants/routes";
+import PETTYPE from "src/constants/petType";
 
 function Post() {
   const router = useRouter();
@@ -18,6 +20,7 @@ function Post() {
   } = router;
   const [postData, setPostData] = useState(null);
   const [openPostForm, setOpenPostForm] = useState(false);
+  const { push } = useRouter();
 
   useEffect(() => {
     const getPostData = async () => {
@@ -35,6 +38,11 @@ function Post() {
         severity: "success",
         duration: 6000,
       });
+      postData?.petType === PETTYPE.GATO
+        ? push(Routes.ADMIN_CATS)
+        : postData?.petType === PETTYPE.DOG
+        ? push(Routes.ADMIN_DOGS)
+        : push(Routes.ADMIN_OTHER);
     } catch (e) {
       console.log({ e });
       addAlert({

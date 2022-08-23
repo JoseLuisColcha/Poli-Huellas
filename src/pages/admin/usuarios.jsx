@@ -62,11 +62,6 @@ function Users() {
                         router.push(`/perfil-de-usuario/${user.uid}`)
                       }
                     />
-                    <Delete
-                      sx={{ cursor: "pointer" }}
-                      color="error"
-                      titleAccess="Eliminar"
-                    />
                   </TableCell>
                 </TableRow>
               ))}
