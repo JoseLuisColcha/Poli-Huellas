@@ -10,7 +10,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { Visibility, Delete } from "@mui/icons-material";
+import { Visibility} from "@mui/icons-material";
 import { useRouter } from "next/router";
 import styles from "@/styles/usersTable.module.css";
 import { convertDate } from "@/lib/dates";
