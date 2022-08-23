@@ -1,31 +1,31 @@
 .pet_image{
-    width: 245px;
-    height: 250px;
-    border-radius:150px;
+    width: 245px !important;
+    height: 250px !important;
+    border-radius:150px !important;
 }
 .card_container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-    margin-left: 10px;
-    margin-right: 10px;
-    cursor: pointer;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-bottom: 20px !important;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+    cursor: pointer !important;
 }
 .title{
-    color: #B224EF;
-    font-size: 26px;
-    font-weight: 700;
+    color: #B224EF !important;
+    font-size: 26px !important;
+    font-weight: 700 !important;
 }
 .label{
-    color: #B224EF;
+    color: #B224EF !important;
 }
 .text{
-    font-size: 20px;
-    font-weight: 500;
+    font-size: 20px !important;
+    font-weight: 500 !important;
 }
 .label_status{
-    color: red;
-    font-weight: 700;
+    color: red !important;
+    font-weight: 700 !important;
 }
