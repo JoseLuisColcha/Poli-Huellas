@@ -26,12 +26,14 @@ export const getPosts = ({ petType, status, petSex, petSize, callback }) => {
 };
 
 export const getMyPosts = ({ userId, status, callback }) => {
-  const q = query(
-    collection(db, "posts"),
-    where("userId", "==", userId),
-    where("status", "==", status),
-    orderBy("createdAt", "desc")
-  );
+  const constraints = [
+    userId && where("userId", "==", userId),
+    status && where("status", "==", status),
+    orderBy("createdAt", "desc"),
+  ].filter((c) => c);
+
+  const q = query(collection(db, "posts"), ...constraints);
+
   const unsubscribe = onSnapshot(q, callback);
   return unsubscribe;
 };
