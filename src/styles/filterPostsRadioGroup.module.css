@@ -1,6 +1,6 @@
 .title_text {
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 48px;
-    color: #B224EF;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    line-height: 48px !important;
+    color: #B224EF !important;
 }

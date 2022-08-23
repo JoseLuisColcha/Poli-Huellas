@@ -1,14 +1,14 @@
 .head_table {
-    background: rgba(178, 36, 239, 0.1);
+    background: rgba(178, 36, 239, 0.1) !important;
 }
 
 .title_text {
-    font-size: 27px;
-    font-weight: 400;
-    text-align: center;
-    margin-top: 30px;
+    font-size: 27px !important;
+    font-weight: 400 !important;
+    text-align: center !important;
+    margin-top: 30px !important;
 }
 
 .span_text {
-    color: #B224EF;
+    color: #B224EF !important;
 }

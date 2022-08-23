@@ -1,24 +1,24 @@
 .footer_container {
-    margin-top: 70px;
-    padding: 2.5rem;
-    background-color: #7E41A1;
-    display: flex;
-    flex-direction: column;
-    flex: 0 0 auto;
+    margin-top: 70px !important;
+    padding: 2.5rem !important;
+    background-color: #7E41A1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 0 0 auto !important;
 
 }
 
 .text_content {
-    text-align: center;
-    color: aliceblue;
+    text-align: center !important;
+    color: aliceblue !important;
 }
 
 .text_title {
-    text-align: center;
-    font-weight: bold;
-    font-size: 25px;
-    color: #101011;
+    text-align: center !important;
+    font-weight: bold !important;
+    font-size: 25px !important;
+    color: #101011 !important;
 }
 .text_span {
-    color: #BD95D5;
+    color: #BD95D5 !important;
 }

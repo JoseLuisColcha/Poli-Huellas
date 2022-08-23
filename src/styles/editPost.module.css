@@ -1,42 +1,42 @@
 .text{
-    font-size: 28px;
-    font-weight: 700;
-    line-height: 34px;
-    color: #B224EF;
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    line-height: 34px !important;
+    color: #B224EF !important;
 }
 .label{
-    color: #000000;
+    color: #000000 !important;
 }
 .petImage{
-    width: 149px;
-    height: 146px;
-    margin: 10px;
+    width: 149px !important;
+    height: 146px !important;
+    margin: 10px !important;
 }
 .button_upload {
-    border-radius: 28px;
-    text-transform: none;
-    margin: 20px;
+    border-radius: 28px !important;
+    text-transform: none !important;
+    margin: 20px !important;
 }
 .field{
-    width: 100%;
+    width: 100% !important;
 }
 .submit_button {
-    background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%);
-    border-radius: 30px;
-    width: 100px;
-    height: 30px;
-    color: #FFFFFF;
-    padding: 10px;
-    margin-top: 10px;
+    background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%) !important;
+    border-radius: 30px !important;
+    width: 100px !important;
+    height: 30px !important;
+    color: #FFFFFF !important;
+    padding: 10px !important;
+    margin-top: 10px !important;
 }
 
 .cancel_button {
-    border: 1px solid #B224EF;
-    border-radius: 30px;
-    padding: 10px;
-    width: 100px;
-    height: 30px;
-    padding: 10px;
-    margin-right: 60px;
-    margin-top: 10px;
+    border: 1px solid #B224EF !important;
+    border-radius: 30px !important;
+    padding: 10px !important;
+    width: 100px !important;
+    height: 30px !important;
+    padding: 10px !important;
+    margin-right: 60px !important;
+    margin-top: 10px !important;
 }
