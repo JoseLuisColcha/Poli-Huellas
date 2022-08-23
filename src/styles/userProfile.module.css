@@ -1,12 +1,12 @@
 .button_update_information {
-    background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%);
-    border-radius: 28px;
-    color: #FFFFFF;
-    text-transform: none;
+    background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%) !important;
+    border-radius: 28px !important;
+    color: #FFFFFF !important;
+    text-transform: none !important;
 
 }
 
 .button_upload {
-    border-radius: 28px;
-    text-transform: none;
+    border-radius: 28px !important;
+    text-transform: none !important;
 }

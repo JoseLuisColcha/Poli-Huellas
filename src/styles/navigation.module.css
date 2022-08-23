@@ -1,8 +1,8 @@
 .button_login {
-    background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%);
-    border-radius: 28px;
-    width: 151px;
-    height: 35px;
-    color: #FFFFFF;
-    margin-bottom: 15px;
+    background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%) !important;
+    border-radius: 28px !important;
+    width: 151px !important;
+    height: 35px !important;
+    color: #FFFFFF !important;
+    margin-bottom: 15px !important;
 }

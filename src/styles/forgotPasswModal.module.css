@@ -1,21 +1,21 @@
 .dialog_container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
 .dialog_text {
-    font-size: 32px;
-    font-weight: 700;
-    color: #666666;
-    padding-top: 20px;
+    font-size: 32px !important;
+    font-weight: 700 !important;
+    color: #666666 !important;
+    padding-top: 20px !important;
 }
 
 .submit_button {
-    background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%);
-    border-radius: 28px;
-    width: 151px;
-    height: 56px;
-    color: #FFFFFF;
+    background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%) !important;
+    border-radius: 28px !important;
+    width: 151px !important;
+    height: 56px !important;
+    color: #FFFFFF !important;
 }
