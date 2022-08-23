@@ -1,35 +1,35 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
 }
 
 .title {
-    color: #B224EF;
-    font-size: 26px;
-    font-weight: 700;
-    padding: 0px 0px 20px;
+    color: #B224EF !important;
+    font-size: 26px !important;
+    font-weight: 700 !important;
+    padding: 0px 0px 20px !important;
 }
 
 .container_carrusel {
-    justify-content: center;
-    align-items: center;
-    padding: 50px 40px 0px;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 50px 40px 0px !important;
 }
 
 .button_container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 50px 0px 0px;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 50px 0px 0px !important;
 
 }
 
 .button_view_more {
-    background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%);
-    border-radius: 28px;
-    width: 160px;
-    height: 40px;
-    color: #FFFFFF;
+    background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%) !important;
+    border-radius: 28px !important;
+    width: 160px !important;
+    height: 40px !important;
+    color: #FFFFFF !important;
 }

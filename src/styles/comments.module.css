@@ -1,65 +1,64 @@
 .submit_button {
-    background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%);
-    border-radius: 30px;
-    width: 100px;
-    height: 30px;
-    color: #FFFFFF;
-    padding: 10px;
-    margin-right: 10px;
+    background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%) !important;
+    border-radius: 30px !important;
+    width: 100px !important;
+    height: 30px !important;
+    color: #FFFFFF !important;
+    padding: 10px !important;
+    margin-right: 10px !important;
 }
 
 .cancel_button {
-    border: 1px solid #B224EF;
-    border-radius: 30px;
-    padding: 10px;
-    width: 100px;
-    height: 30px;
-    padding: 10px;
+    border: 1px solid #B224EF !important;
+    border-radius: 30px !important;
+    padding: 10px !important;
+    width: 100px !important;
+    height: 30px !important;
+    padding: 10px !important;
 }
 
 .messages_container {
-    border: 1px solid #9A9A9A;
-    margin-right: 20px;
-    margin-top: 20px;
-    padding: 20px;
+    border: 1px solid #9A9A9A !important;
+    margin-right: 20px !important;
+    margin-top: 20px !important;
+    padding: 20px !important;
 }
 
 .commenter_name {
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 18px !important;
+    font-weight: 600 !important;
 }
 
 .message {
-    font-size: 16px;
-    font-weight: 400;
+    font-size: 16px !important;
+    font-weight: 400 !important;
 }
 
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
 }
 
 .comment_container {
-    padding: 10px;
-    margin: 10px;
+    padding: 10px !important;
+    margin: 10px !important;
 }
 
 .comment_date {
-    font-size: 12px;
-    font-weight: 400;
-    color: #9A9A9A;
+    font-size: 12px !important;
+    font-weight: 400!important;
+    color: #9A9A9A !important;
 }
 
 .message_input {
-    margin-right: 20px;
+    margin-right: 20px !important;
 }
 
 .message_alert {
-    margin: 10px;
+    margin: 10px !important;
 }
 
 .delete_icon {
-
-    color: #B224EF;
+    color: #B224EF !important;
 }

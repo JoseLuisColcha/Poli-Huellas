@@ -1,81 +1,81 @@
 .button_register {
-    background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%);
-    border-radius: 28px;
-    width: 151px;
-    height: 40px;
-    color: #FFFFFF;
-    margin-bottom: 40px;
-    margin-left: 40px;
+    background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%) !important;
+    border-radius: 28px !important;
+    width: 151px !important;
+    height: 40px !important;
+    color: #FFFFFF !important;
+    margin-bottom: 40px !important;
+    margin-left: 40px !important;
 }
 
 .text_content {
-    margin-left: 40px;
-    margin-bottom: 20px;
-    font-size: 20px;
-    font-weight: 400;
-    margin-right: 20px;
+    margin-left: 40px !important;
+    margin-bottom: 20px !important;
+    font-size: 20px !important;
+    font-weight: 400 !important;
+    margin-right: 20px !important;
 }
 
 .text_title_span {
-    color: #7E41A1;
+    color: #7E41A1 !important;
 }
 
 .button_search {
-    background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%);
-    border-radius: 28px;
-    width: 180px;
-    height: 45px;
-    color: #FFFFFF;
-    margin-top: 20px;
-    margin-bottom: 40px;
-    margin-left: 40px;
+    background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%) !important;
+    border-radius: 28px !important;
+    width: 180px !important;
+    height: 45px !important;
+    color: #FFFFFF !important;
+    margin-top: 20px !important;
+    margin-bottom: 40px !important;
+    margin-left: 40px !important;
 }
 
 .text_content_search {
-    font-size: 19px;
-    font-weight: 400;
-    margin-left: 40px;
+    font-size: 19px !important;
+    font-weight: 400 !important;
+    margin-left: 40px !important;
 
 }
 
 .text_title_search {
-    font-size: 30px;
-    font-weight: 400;
-    margin-left: 40px;
-    margin-top: 20px;
-    margin-bottom: 10px;
+    font-size: 30px !important;
+    font-weight: 400 !important;
+    margin-left: 40px !important;
+    margin-top: 20px !important;
+    margin-bottom: 10px !important;
 }
 
 .text_title_information {
-    font-size: 36px;
-    font-weight: 400;
-    text-align: center;
-    margin-top: 40px;
-    margin-bottom: 20px;
+    font-size: 36px !important;
+    font-weight: 400 !important;
+    text-align: center !important;
+    margin-top: 40px !important;
+    margin-bottom: 20px !important;
 }
 .text_information {
-    font-size: 19px;
-    font-weight: 400;
-    margin-left: 40px;
-    margin-bottom: 40px;
+    font-size: 19px !important;
+    font-weight: 400 !important;
+    margin-left: 40px !important;
+    margin-bottom: 40px !important;
 
 }
 .text_title_pets {
-    font-size: 36px;
-    font-weight: 400;
-    text-align: center;
+    font-size: 36px !important;
+    font-weight: 400 !important;
+    text-align: center !important;
 }
 .image_logo_container{
-    margin-top: 6px;
-    padding-left: 40px;
-    padding-right:6px;
+    margin-top: 6px !important;
+    padding-left: 40px !important;
+    padding-right:6px !important;
 }
 
 .image_pet_main_container{
-    justify-content: center;
-    padding-top: 30px;
-    padding-right: 50px;
-    padding-bottom: 30px;
+    justify-content: center !important;
+    padding-top: 30px !important;
+    padding-right: 50px !important;
+    padding-bottom: 30px !important;
 
 
 }

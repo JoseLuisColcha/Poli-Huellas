@@ -1,55 +1,53 @@
 .form_container {
-  padding: 20px 70px 20px 70px;
-  margin: 30px 20px 30px 20px;
-  border: 1px solid #C2C6CC;
-  border-radius: 8px;
+  padding: 20px 70px 20px 70px !important;
+  margin: 30px 20px 30px 20px !important;
+  border: 1px solid #C2C6CC !important;
+  border-radius: 8px !important;
 }
 
 .select {
-  border-radius: 8px;
-  width: 100%
+  border-radius: 8px !important;
+  width: 100% !important;
 }
 
 .question_container {
-  padding-bottom: 20px;
+  padding-bottom: 20px !important;
 }
 
 .submit_button {
-  background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%);
-  border-radius: 28px;
-  width: 151px;
-  height: 56px;
-  color: #FFFFFF;
+  background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%) !important;
+  border-radius: 28px !important;
+  width: 151px !important;
+  height: 56px !important;
+  color: #FFFFFF !important;
 }
 
 .reject_button {
-  background: linear-gradient(90deg, #ef2457 0%, #e7b529 100%);
-  border-radius: 28px;
-  width: 151px;
-  height: 56px;
-  color: #FFFFFF;
+  background: linear-gradient(90deg, #ef2457 0%, #e7b529 100%) !important;
+  border-radius: 28px !important;
+  width: 151px !important;
+  height: 56px !important;
+  color: #FFFFFF !important;
 }
 
 .text_question {
-  margin-top: 10px;
-  margin-bottom: 20px;
+  margin-top: 10px !important;
+  margin-bottom: 20px !important;
 }
 
 .text_remark {
-  font-size: 20px;
-  margin-left: 20px;
-  margin-top: 30px;
+  font-size: 20px !important;
+  margin-left: 20px!important;
+  margin-top: 30px!important;
 }
 .icon_pet{
-  color: #B224EF;
+  color: #B224EF !important;
 }
 
 .icon_form_completed {
-  color: #B224EF;
-  margin-top: 30px;
-  height: 30px;
-  width: 30px;
-  margin-left: 30px;
-
-
+  color: #B224EF !important;
+  margin-top: 30px !important;
+  height: 30px !important;
+  width: 30px !important;
+  margin-left: 30px !important;
 }

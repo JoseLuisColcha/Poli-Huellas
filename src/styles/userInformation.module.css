@@ -1,20 +1,20 @@
 .text_title {
-    text-align: center;
-    margin-bottom: 4px;
-    margin-top: 60px;
-    font-size: 30px;
-    font-weight: 400;
+    text-align: center !important;
+    margin-bottom: 4px !important;
+    margin-top: 60px !important;
+    font-size: 30px !important;
+    font-weight: 400 !important;
 }
 
 .text_title_span {
-    color: #B224EF;
+    color: #B224EF !important;
 }
 
 .button_view_profile {
-    background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%);
-    border-radius: 28px;
-    width: 151px;
-    height: 35px;
-    color: #FFFFFF;
-    margin-top: 10px;
+    background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%) !important;
+    border-radius: 28px !important;
+    width: 151px !important;
+    height: 35px !important;
+    color: #FFFFFF !important;
+    margin-top: 10px !important;
 }

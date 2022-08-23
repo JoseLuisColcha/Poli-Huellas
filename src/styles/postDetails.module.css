@@ -1,50 +1,50 @@
 .pet_image{
-    width: 200px;
-    height: 200px;
-    border-radius:150px;
+    width: 200px !important;
+    height: 200px !important;
+    border-radius:150px !important;
 }
 .container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
 }
 .title{
-    color: #B224EF;
-    font-size: 22px;
-    font-weight: 500;
+    color: #B224EF !important;
+    font-size: 22px !important;
+    font-weight: 500 !important;
 }
 .cover{
-    background: rgba(178, 36, 239, 0.1);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background: rgba(178, 36, 239, 0.1) !important;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) !important;
 }
 .label{
-    color: #B224EF;
+    color: #B224EF !important;
 }
 .text{
-    font-size: 20px;
-    font-weight: 400;
-    margin: 3px;
-    margin-left: 25px;
+    font-size: 20px !important;
+    font-weight: 400 !important;
+    margin: 3px !important;
+    margin-left: 25px !important;
 }
 .textHead{
-    font-size: 35px;
-    font-weight: 400;
-    margin-left: 25px;
+    font-size: 35px !important;
+    font-weight: 400 !important;
+    margin-left: 25px !important;
 }
 .button{
-    background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%);
-    border-radius: 28px;
-    width: 190px;
-    height: 56px;
-    color: #FFFFFF;
-    margin-right: 15px;
+    background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%) !important;
+    border-radius: 28px !important;
+    width: 190px !important;
+    height: 56px !important;
+    color: #FFFFFF !important;
+    margin-right: 15px !important;
 }
 
 .reject_button {
-    background: linear-gradient(90deg, #ef2457 0%, #e7b529 100%);
-    border-radius: 28px;
-    width: 151px;
-    height: 56px;
-    color: #FFFFFF;
+    background: linear-gradient(90deg, #ef2457 0%, #e7b529 100%) !important;
+    border-radius: 28px !important;
+    width: 151px !important;
+    height: 56px !important;
+    color: #FFFFFF !important;
   }
