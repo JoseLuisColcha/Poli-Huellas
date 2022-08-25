@@ -231,7 +231,9 @@ function AdoptionRequest() {
     try {
       await createNotification(
         postData?.userId,
-        `${currentUser?.displayName} ${NOTIFICATIONS.ADOPTION}`
+        `${currentUser?.displayName} ${NOTIFICATIONS.ADOPTION}`,
+        postData.id,
+        session.uid
       );
     } catch (e) {
       console.log(e);
@@ -260,7 +262,8 @@ function AdoptionRequest() {
         query?.userId,
         status === "ACCEPTED"
           ? NOTIFICATIONS.REQUEST_ADOPTION
-          : NOTIFICATIONS.BAD_REQUEST_ADOPTION
+          : NOTIFICATIONS.BAD_REQUEST_ADOPTION,
+        postData.id
       );
     } catch (e) {
       console.log(e);

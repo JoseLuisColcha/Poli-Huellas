@@ -56,7 +56,8 @@ function Post() {
         postData?.userId,
         action === "ACCEPTED"
           ? NOTIFICATIONS.ACCEPTED_POST
-          : NOTIFICATIONS.REJECTED_POST
+          : NOTIFICATIONS.REJECTED_POST,
+        postData?.id
       );
       handleClosePostFormModal();
     } catch (e) {

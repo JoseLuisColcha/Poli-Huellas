@@ -14,13 +14,14 @@ import {
   Skeleton,
   Tabs,
   Tab,
-  Badge,
+  Grid,
+  ListItem,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Routes from "../constants/routes";
 import { SESSION_STATE, useAuth } from "@/lib/auth";
-import  NextLink from "next/link";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { listtenNotifications } from "@/lib/notifications";
 import Notification from "./Notification";
@@ -87,6 +88,7 @@ export default function ResponsiveAppBar(props) {
   };
   const handleOpenNotificationsMenu = (event) => {
     setAnchorElNotifications(event.currentTarget);
+    console.log("notifi", notifications);
   };
 
   const handleCloseNavMenu = () => {
@@ -218,7 +220,7 @@ export default function ResponsiveAppBar(props) {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Notifications">
+            <Tooltip title="Notificaciones">
               {session ? (
                 <IconButton
                   onClick={handleOpenNotificationsMenu}
@@ -231,9 +233,7 @@ export default function ResponsiveAppBar(props) {
                     color: "#FFFFFF",
                   }}
                 >
-                  {/* <Badge badgeContent={numberNotifications.length} color="secondary"> */}
-                    <NotificationsIcon />
-                  {/* </Badge> */}
+                  <NotificationsIcon />
                 </IconButton>
               ) : session === SESSION_STATE.NO_LOGGED ? (
                 <p />
@@ -257,12 +257,24 @@ export default function ResponsiveAppBar(props) {
               open={Boolean(anchorElNotifications)}
               onClose={handleCloseNotificationsMenu}
             >
-              {notifications.map((noti) => (
-                <Notification key={noti.id} notification={noti} />
-              ))}
+              {notifications === [] || notifications === undefined ? (
+                <MenuItem>
+                  <ListItem>
+                    <Typography>No hay notificaciones</Typography>
+                  </ListItem>
+                </MenuItem>
+              ) : (
+                notifications.map((noti) => (
+                  <Notification
+                    key={noti.id}
+                    notification={noti}
+                    handleCloseNotificationsMenu={handleCloseNotificationsMenu}
+                  />
+                ))
+              )}
             </Menu>
 
-            <Tooltip title="Open settings">
+            <Tooltip title="Abrir menú">
               {session ? (
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt="avatar-user" src={`${currentUser?.photoURL}`} />
@@ -304,4 +316,3 @@ export default function ResponsiveAppBar(props) {
     </AppBar>
   );
 }
-

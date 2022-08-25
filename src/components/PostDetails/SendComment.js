@@ -39,7 +39,8 @@ function SendComment(props) {
       if (currentUser.uid !== ownerId) {
         await createNotification(
           ownerId,
-          `${currentUser?.displayName} ${NOTIFICATIONS.COMMENTED}`
+          `${currentUser?.displayName} ${NOTIFICATIONS.COMMENTED}`,
+          postId
         );
       }
       reset({ comment: "" });

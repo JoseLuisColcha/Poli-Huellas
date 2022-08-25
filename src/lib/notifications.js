@@ -19,12 +19,13 @@ export const listtenNotifications = ({ receiverId, callback }) => {
   return unsubscribe;
 };
 
-export const createNotification = async (receiverId, message) => {
+export const createNotification = async (receiverId, message, postId) => {
   try {
     await addDoc(collection(db, "notifications"), {
       receiverId: receiverId,
       message: message,
       isSeen: false,
+      postId: postId,
       createdAt: Timestamp.fromDate(new Date()),
     });
   } catch (e) {
