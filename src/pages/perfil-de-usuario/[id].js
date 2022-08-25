@@ -24,7 +24,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import UploadIcon from "@mui/icons-material/Upload";
 import { updateUserImageURL, uploadUserImage } from "@/lib/shared";
 import { getDownloadURL } from "firebase/storage";
-import Pet from "../../../public/images/logo-post.png";
+import DoNotHavePost from "../../../public/images/logo-post.png";
 import Image from "next/image";
 
 function Profile() {
@@ -215,7 +215,7 @@ function Profile() {
           ))
         ) : (
           <Box>
-            <Image alt="mascota" src={Pet} width={550} height={450} />
+            <Image alt="mascota" src={DoNotHavePost} width={550} height={450} />
           </Box>
         )}
       </Grid>
