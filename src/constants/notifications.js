@@ -1,14 +1,13 @@
 const NOTIFICATIONS = {
-  NEW_POST:
-    "Tu nueva publicación fue creada con éxito, nuestro administrador la revisará para publicarla.",
-  ADOPTION: "quiere adoptar la mascota que publicaste.",
-  ADOPTED: "Tu mascota fue adoptada con éxito.",
-  REQUEST_ADOPTION: "Felicidades!! La mascota que quiere adoptar es tuya.",
+  ADOPTION: "quiere adoptar la mascota que publicaste. Revisa tus solicitudes de adopción",
+  REQUEST_ADOPTION:
+    "Felicidades!! La mascota que solicitaste adoptar es tuya, el propietario se contactará contigo",
   BAD_REQUEST_ADOPTION:
-    "La mascota que deseabas adoptar ya fue adoptada, pero puedes seguir buscando otra mascota.",
+    "Tu solicitud de adopción fue denegada, pero puedes seguir buscando otra mascota.",
   COMMENTED: "comento tu publicación.",
-  ACCEPTED_POST: "Tu publicación ha sido aceptada!",
-  REJECTED_POST: "Lo sentimos tu publicación ha sido rechazada",
+  ACCEPTED_POST: "Tu publicación ha sido aceptada, puedes mirarla en tu perfil.",
+  REJECTED_POST:
+    "Lo sentimos tu publicación ha sido rechazada, en unas horas será eliminada de tu perfil.",
 };
 
 export default NOTIFICATIONS;
