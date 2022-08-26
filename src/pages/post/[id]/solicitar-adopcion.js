@@ -292,8 +292,8 @@ function AdoptionRequest() {
                 "/images/adoption-request-dog.webp"
               }
               alt="cover"
-              width="3840px"
-              height="1240px"
+              width="1800px"
+              height="580px"
             />
           </Stack>
 

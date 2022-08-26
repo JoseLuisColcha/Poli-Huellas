@@ -272,7 +272,9 @@ export default function ResponsiveAppBar(props) {
             <Tooltip title="Abrir menú">
               {session ? (
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="avatar-user" src={`${currentUser?.photoURL}`} />
+                  <Avatar alt="avatar-user" src={`${currentUser?.photoURL}`}>
+                    {currentUser?.displayName?.charAt(0)}
+                  </Avatar>
                 </IconButton>
               ) : session === SESSION_STATE.NO_LOGGED ? (
                 <NextLink href={Routes.LOGIN}>

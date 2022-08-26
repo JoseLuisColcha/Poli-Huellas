@@ -62,8 +62,8 @@ export default function Gatos() {
         <Image
           src="/images/gato-banner.webp"
           alt="cover"
-          width="3840px"
-          height="1240px"
+          width="1800px"
+          height="580px"
         />
         <Typography className={styles.title}>Sabías que?</Typography>
         <Stack direction="row">

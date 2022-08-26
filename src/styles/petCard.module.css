@@ -1,9 +1,10 @@
-.pet_image{
+.pet_image {
     width: 245px !important;
     height: 250px !important;
-    border-radius:150px !important;
+    border-radius: 150px !important;
 }
-.card_container{
+
+.card_container {
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
@@ -11,21 +12,26 @@
     margin-bottom: 20px !important;
     margin-left: 10px !important;
     margin-right: 10px !important;
-    cursor: pointer !important;
+    width: auto !important;
+    color: #8813ba !important;
 }
-.title{
+
+.title {
     color: #B224EF !important;
     font-size: 26px !important;
     font-weight: 700 !important;
 }
-.label{
+
+.label {
     color: #B224EF !important;
 }
-.text{
+
+.text {
     font-size: 20px !important;
     font-weight: 500 !important;
 }
-.label_status{
+
+.label_status {
     color: red !important;
     font-weight: 700 !important;
 }
