@@ -15,17 +15,17 @@ export default function PetsSection() {
   const pets = [
     {
       type: "Perros",
-      image: "/images/dog.jpg",
+      image: "/images/dog.webp",
       to: Routes.DOGS,
     },
     {
       type: "Gatos",
-      image: "/images/cat.png",
+      image: "/images/cat.webp",
       to: Routes.CATS,
     },
     {
       type: "Otros",
-      image: "/images/ham.jpg",
+      image: "/images/ham.webp",
       to: Routes.OTHER,
     },
   ];

@@ -7,7 +7,7 @@ import {
   ListItemIcon,
   Button,
   Divider,
-  Box
+  Box,
 } from "@mui/material";
 import { Person, Phone, LocationOn } from "@mui/icons-material";
 import { useAuth } from "@/lib/auth";
@@ -24,7 +24,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import UploadIcon from "@mui/icons-material/Upload";
 import { updateUserImageURL, uploadUserImage } from "@/lib/shared";
 import { getDownloadURL } from "firebase/storage";
-import DoNotHavePost from "../../../public/images/logo-post.png";
+import DoNotHavePostImage from "../../../public/images/dont-post-dog.webp";
 import Image from "next/image";
 
 function Profile() {
@@ -125,7 +125,7 @@ function Profile() {
 
   return (
     <Grid container margin={0} spacing={2} marginTop={4}>
-      <Grid xs={12} sm={3} justifyContent={"center"}>
+      <Grid item xs={12} sm={3} justifyContent={"center"}>
         <Grid
           marginY={4}
           container
@@ -196,7 +196,14 @@ function Profile() {
         </Grid>
       </Grid>
 
-      <Grid xs={12} sm={9} container direction="column" alignItems="center">
+      <Grid
+        item
+        xs={12}
+        sm={9}
+        container
+        direction="column"
+        alignItems="center"
+      >
         <Typography style={{ fontSize: "32px", fontWeight: 700 }}>
           {userId === session?.uid ? "Tus Publicaciones" : "Publicaciones"}
         </Typography>
@@ -215,7 +222,12 @@ function Profile() {
           ))
         ) : (
           <Box>
-            <Image alt="mascota" src={DoNotHavePost} width={550} height={450} />
+            <Image
+              alt="mascota"
+              src={DoNotHavePostImage}
+              width={420}
+              height={400}
+            />
           </Box>
         )}
       </Grid>

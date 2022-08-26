@@ -20,6 +20,7 @@ export default function FilterPostsRadioGroup(props) {
           name="position"
           defaultValue="todos"
           onChange={(e) => setPetSex(e.target.value)}
+          
         >
           <FormControlLabel value="todos" control={<Radio />} label="Todos" />
           <FormControlLabel value="hembra" control={<Radio />} label="Hembra" />

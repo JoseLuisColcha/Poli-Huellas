@@ -14,8 +14,6 @@ import {
   Skeleton,
   Tabs,
   Tab,
-  Grid,
-  ListItem,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -88,7 +86,6 @@ export default function ResponsiveAppBar(props) {
   };
   const handleOpenNotificationsMenu = (event) => {
     setAnchorElNotifications(event.currentTarget);
-    console.log("notifi", notifications);
   };
 
   const handleCloseNavMenu = () => {
@@ -257,13 +254,7 @@ export default function ResponsiveAppBar(props) {
               open={Boolean(anchorElNotifications)}
               onClose={handleCloseNotificationsMenu}
             >
-              {notifications === [] || notifications === undefined ? (
-                <MenuItem>
-                  <ListItem>
-                    <Typography>No hay notificaciones</Typography>
-                  </ListItem>
-                </MenuItem>
-              ) : (
+              {notifications?.length > 0 ? (
                 notifications.map((noti) => (
                   <Notification
                     key={noti.id}
@@ -271,6 +262,10 @@ export default function ResponsiveAppBar(props) {
                     handleCloseNotificationsMenu={handleCloseNotificationsMenu}
                   />
                 ))
+              ) : (
+                <MenuItem>
+                  <Typography>No hay notificaciones</Typography>
+                </MenuItem>
               )}
             </Menu>
 

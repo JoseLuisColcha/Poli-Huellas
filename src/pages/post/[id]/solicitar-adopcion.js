@@ -148,9 +148,9 @@ const ADOPTION_REQUEST_QUESTIONS = [
 ];
 
 const PET_IMAGES_SRC = {
-  Gato: "/images/adoption-request-cat.jpg",
-  Perro: "/images/adoption-request-dog.jpg",
-  Otro: "/images/adoption-request-other.jpg",
+  Gato: "/images/adoption-request-cat.webp",
+  Perro: "/images/adoption-request-dog.webp",
+  Otro: "/images/adoption-request-other.webp",
 };
 
 function AdoptionRequest() {
@@ -289,7 +289,7 @@ function AdoptionRequest() {
             <Image
               src={
                 PET_IMAGES_SRC[query?.petType] ||
-                "/images/adoption-request-dog.jpg"
+                "/images/adoption-request-dog.webp"
               }
               alt="cover"
               width="3840px"

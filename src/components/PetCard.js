@@ -4,7 +4,7 @@ import styles from "../styles/petCard.module.css";
 import NextLink from "next/link";
 
 export const PetCard = (props) => {
-  const { postId, petName, petAge, petSex, petImage, status, session } = props;
+  const { postId, petName, petAge, petSex, petImage } = props;
   return (
     <>
       {postId && petAge && petSex && petImage ? (

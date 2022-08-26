@@ -8,6 +8,7 @@ import PETTYPE from "src/constants/petType";
 import { useAuth } from "@/lib/auth";
 import PetsIcon from "@mui/icons-material/Pets";
 import FilterPostsRadioGroup from "@/components/FilterPostsRadioGroup";
+import DontResultImage from "../../public/images/dontresult-other.webp";
 
 export default function Otros() {
   const [otherPosts, setOtherPosts] = useState();
@@ -34,8 +35,14 @@ export default function Otros() {
         const others = snapshot.docs;
         setOtherPosts(others.map((doc) => ({ ...doc.data(), id: doc.id })));
       };
-      
-      const unsub = getPosts({petType:PETTYPE.OTROS, status:status, petSex: petSexName, petSize:petSizeName, callback: cb});
+
+      const unsub = getPosts({
+        petType: PETTYPE.OTROS,
+        status: status,
+        petSex: petSexName,
+        petSize: petSizeName,
+        callback: cb,
+      });
       return () => unsub();
     };
     getOtherPosts();
@@ -45,7 +52,7 @@ export default function Otros() {
     <>
       <Box container className={styles.container}>
         <Image
-          src="/images/banner-other.jpg"
+          src="/images/banner-other.webp"
           alt="cover"
           width="3840px"
           height="1240px"
@@ -74,16 +81,33 @@ export default function Otros() {
             spacing={{ xs: 1, sm: 2, md: 4 }}
           >
             {otherPosts ? (
-              otherPosts?.map((post, index) => (
-                <PetCard
-                  key={index}
-                  postId={post.id}
-                  petName={post.petName}
-                  petAge={post.petAge}
-                  petSex={post.petSex}
-                  petImage={post.image}
-                />
-              ))
+              otherPosts?.length > 0 ? (
+                otherPosts?.map((post, index) => (
+                  <PetCard
+                    key={index}
+                    postId={post.id}
+                    petName={post.petName}
+                    petAge={post.petAge}
+                    petSex={post.petSex}
+                    petImage={post.image}
+                  />
+                ))
+              ) : (
+                <Grid
+                  container
+                  item
+                  xs={12}
+                  sm={12}
+                  className={styles.image_container}
+                >
+                  <Image
+                    alt="logo-mascota"
+                    src={DontResultImage}
+                    width={420}
+                    height={400}
+                  />
+                </Grid>
+              )
             ) : (
               <CircularProgress />
             )}
