@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Box, Button, Typography } from "@mui/material";
-import Pet from "../../../public/images/pets2.png";
-import Logo from "../../../public/images/logo-polihuella.png";
+import Pet from "../../../public/images/pets2.webp";
+import Logo from "../../../public/images/logo-polihuella.webp";
 import Image from "next/image";
 import Link from "next/link";
 import Routes from "src/constants/routes";

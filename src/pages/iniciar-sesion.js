@@ -51,7 +51,7 @@ const Login = () => {
         sm={4}
         md={7}
         sx={{
-          backgroundImage: "url(http://localhost:3000/images/pet7.jpg)",
+          backgroundImage: "url(http://localhost:3000/images/pet7.webp)",
           backgroundRepeat: "no-repeat",
           backgroundColor: (t) =>
             t.palette.mode === "light"

@@ -1,5 +1,5 @@
 import { Grid, Box, Button, Typography } from "@mui/material";
-import Huella from "../../../public/images/huella.png";
+import Huella from "../../../public/images/huella.webp";
 import Image from "next/image";
 import Link from "next/link";
 import Routes from "src/constants/routes";

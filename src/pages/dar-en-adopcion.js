@@ -149,7 +149,7 @@ function Giveadoption() {
     <>
       <Container className={styles.banner_container}>
         <Image
-          src="/images/banner-form-post.jpg"
+          src="/images/banner-form-post.webp"
           alt="cover"
           width="3840px"
           height="1240px"
