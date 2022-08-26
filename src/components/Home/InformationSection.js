@@ -1,5 +1,5 @@
 import { Grid, Box, Typography } from "@mui/material";
-import Pets from "../../../public/images/pets.png";
+import Pets from "../../../public/images/pets.webp";
 import Image from "next/image";
 import styles from "../../styles/homePage.module.css";
 

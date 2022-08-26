@@ -18,7 +18,7 @@
     font-weight: 400 !important;
     margin-bottom: 40px !important;
     margin-top: 20px !important;
-    
+
 }
 
 .text_title_main {
@@ -27,8 +27,15 @@
     margin-bottom: 20px !important;
     margin-top: 30px !important;
 }
-.icon_pet{
+
+.icon_pet {
     color: #B224EF !important;
-    margin-right:10px !important;
+    margin-right: 10px !important;
     margin-top: 22px !important;
+}
+
+.image_container {
+    justify-content: center !important;
+    margin-right: 130px;
+    
 }
