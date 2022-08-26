@@ -32,8 +32,8 @@ export default function Adoptions() {
         <Image
           src="/images/banner-adoptions.webp"
           alt="cover"
-          width="14880x"
-          height="4804px"
+          width="1600px"
+          height="515px"
         />
       </Container>
       {carruselCategories.map((categorie, index) =>
