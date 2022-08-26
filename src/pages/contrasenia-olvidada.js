@@ -114,7 +114,7 @@ const ResetPassword = () => {
         justifyContent="center"
       >
         <Image
-          src="/images/pet8.jpg"
+          src="/images/pet8.webp"
           alt="cover"
           width="1024px"
           height="768px"

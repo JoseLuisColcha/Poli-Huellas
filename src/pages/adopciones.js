@@ -30,7 +30,7 @@ export default function Adoptions() {
     <Container>
       <Container className={styles.image_container}>
         <Image
-          src="/images/banner-adoptions.jpg"
+          src="/images/banner-adoptions.webp"
           alt="cover"
           width="14880x"
           height="4804px"

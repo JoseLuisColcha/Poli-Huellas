@@ -58,7 +58,7 @@ const Register = () => {
         sm={4}
         md={7}
         sx={{
-          backgroundImage: "url(http://localhost:3000/images/pet14.jpg)",
+          backgroundImage: "url(http://localhost:3000/images/pet14.webp)",
           backgroundRepeat: "no-repeat",
           backgroundColor: (t) =>
             t.palette.mode === "light"
