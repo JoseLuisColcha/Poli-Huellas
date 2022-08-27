@@ -17,6 +17,8 @@ import { useForm } from "react-hook-form";
 import Routes from "src/constants/routes";
 import withoutAuth from "@/hocs/withoutAuth";
 import { useAuth } from "@/lib/auth";
+import RegisterImage from "../../public/images/login-image.webp";
+import Image from "next/image";
 
 const schema = yup.object({
   email: yup
@@ -45,22 +47,9 @@ const Login = () => {
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
-      <Grid
-        item
-        xs={false}
-        sm={4}
-        md={7}
-        sx={{
-          backgroundImage: "url(http://localhost:3000/images/pet7.webp)",
-          backgroundRepeat: "no-repeat",
-          backgroundColor: (t) =>
-            t.palette.mode === "light"
-              ? t.palette.grey[50]
-              : t.palette.grey[900],
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
+      <Grid item xs={false} sm={4} md={7}>
+        <Image alt="mascota" src={RegisterImage} width={1500} height={1400} />
+      </Grid>
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <Box
           sx={{
@@ -109,10 +98,7 @@ const Login = () => {
               error={!!errors.password}
               helperText={errors?.password?.message}
             />
-            <Button
-              type="submit"
-              className={styles.button_start}
-            >
+            <Button type="submit" className={styles.button_start}>
               Iniciar
             </Button>
             <Grid container>
