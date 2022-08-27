@@ -1,4 +1,3 @@
-
 import { Box, Modal, Typography, Button } from "@mui/material";
 import React from "react";
 import styles from "../../styles/deletePost.module.css";
@@ -30,10 +29,17 @@ const DeleteModal = ({ open, handleClose, handleDelete }) => {
           {`eliminar ?`}
         </Typography>
         <Box>
-          <Button className={styles.cancel_button} onClick={handleClose}>
+          <Button
+            className={styles.cancel_button}
+            onClick={handleClose}
+          >
             Cancelar
           </Button>
-          <Button className={styles.submit_button} onClick={handleDelete}>
+          <Button
+            variant="contained"
+            className={styles.submit_button}
+            onClick={handleDelete}
+          >
             Aceptar
           </Button>
         </Box>

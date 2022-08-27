@@ -67,6 +67,7 @@ function PostInformation({
             {!isUserPostOwner && session?.role !== "admin" && (
               <p align="right">
                 <Button
+                  variant="contained"
                   className={styles.button}
                   onClick={
                     session === SESSION_STATE.NO_LOGGED
@@ -93,6 +94,7 @@ function PostInformation({
                 }}
               >
                 <Button
+                  variant="contained"
                   className={styles.button}
                   onClick={() => setOpenPostForm(true)}
                 >

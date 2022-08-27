@@ -360,6 +360,7 @@ function AdoptionRequest() {
           {query?.userId ? (
             userAdoptionRequestByPostId?.status === "ACCEPTED" ? (
               <Button
+                variant="contained"
                 className={styles.submit_button}
                 type="button"
                 id="ACCEPTED"
@@ -369,6 +370,7 @@ function AdoptionRequest() {
               </Button>
             ) : userAdoptionRequestByPostId?.status === "REJECTED" ? (
               <Button
+                variant="contained"
                 className={styles.reject_button}
                 type="button"
                 id="REJECTED"
@@ -405,7 +407,11 @@ function AdoptionRequest() {
               </>
             )
           ) : (
-            <Button className={styles.submit_button} type="submit">
+            <Button
+              variant="contained"
+              className={styles.submit_button}
+              type="submit"
+            >
               Enviar
             </Button>
           )}
@@ -436,6 +442,7 @@ function AdoptionRequest() {
         </DialogContent>
         <DialogActions>
           <Button
+            variant="contained"
             className={styles.submit_button}
             autoFocus
             onClick={handleCloseDialog}

@@ -45,24 +45,30 @@ const DeletePostModal = ({open, handleClose, postId}) => {
   }
 
   return (
-    <Modal
-    open={open}
-    onClose={handleClose}>
-        <Box sx={style}>
-          <Typography className={styles.text}>
-            <span className={styles.label}>¿Está seguro que desea</span> {`eliminar ?`}
-          </Typography>
-          <Box>
-            <Button className={styles.cancel_button} onClick={handleClose}>
-              Cancelar
-            </Button>
-            <Button className={styles.submit_button} onClick={handleDeletePost}>
-              Aceptar
-            </Button>
-          </Box>
+    <Modal open={open} onClose={handleClose}>
+      <Box sx={style}>
+        <Typography className={styles.text}>
+          <span className={styles.label}>¿Está seguro que desea</span>{" "}
+          {`eliminar ?`}
+        </Typography>
+        <Box>
+          <Button
+            className={styles.cancel_button}
+            onClick={handleClose}
+          >
+            Cancelar
+          </Button>
+          <Button
+            variant="contained"
+            className={styles.submit_button}
+            onClick={handleDeletePost}
+          >
+            Aceptar
+          </Button>
         </Box>
+      </Box>
     </Modal>
-  )
+  );
 }
 
 export default DeletePostModal

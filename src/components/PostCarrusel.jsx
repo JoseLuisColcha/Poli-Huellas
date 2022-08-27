@@ -75,7 +75,6 @@ export default function PostCarrusel(props) {
             <Button
               size="large"
               variant="contained"
-              
               endIcon={<ArrowForwardIcon />}
               className={styles.button_view_more}
             >

@@ -455,7 +455,11 @@ function Giveadoption() {
         </Grid>
         <Grid container spacing={2} className={styles.question_container}>
           <Grid item xs={10} className={styles.button_container}>
-            <Button className={styles.submit_button} type="submit">
+            <Button
+              variant="contained"
+              className={styles.submit_button}
+              type="submit"
+            >
               Enviar
             </Button>
           </Grid>
@@ -487,6 +491,7 @@ function Giveadoption() {
           </DialogContent>
           <DialogActions>
             <Button
+              variant="contained"
               className={styles.submit_button}
               autoFocus
               onClick={handleClose}
