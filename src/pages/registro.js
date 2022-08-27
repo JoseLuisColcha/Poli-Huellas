@@ -17,6 +17,8 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import withoutAuth from "@/hocs/withoutAuth";
 import { useAuth } from "@/lib/auth";
+import RegisterImage from "../../public/images/register-image.webp";
+import Image from "next/image";
 
 const schema = yup.object({
   email: yup
@@ -36,7 +38,6 @@ const schema = yup.object({
 });
 
 const Register = () => {
-  
   const { singup } = useAuth();
   const {
     register,
@@ -49,30 +50,17 @@ const Register = () => {
   const onSubmit = async (data) => {
     await singup(data);
   };
-  
+
   return (
-    <Grid container component="main" sx={{ height: "100vh" }}>
-      <Grid
-        item
-        xs={false}
-        sm={4}
-        md={7}
-        sx={{
-          backgroundImage: "url(http://localhost:3000/images/pet14.webp)",
-          backgroundRepeat: "no-repeat",
-          backgroundColor: (t) =>
-            t.palette.mode === "light"
-              ? t.palette.grey[50]
-              : t.palette.grey[900],
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
+    <Grid container component="main" sx={{ height: "80vh" }}>
+      <Grid item xs={false} sm={4} md={7}>
+        <Image alt="mascota" src={RegisterImage} width={1900} height={1600} />
+      </Grid>
 
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 2,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -155,16 +143,15 @@ const Register = () => {
                 />
               </Grid>
             </Grid>
-            <Button
-              type="submit"
-              className={styles.button_register}
-            >
+            <Button type="submit" className={styles.button_register}>
               Registrar
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href={Routes.LOGIN}>
-                  <a className={styles.text_link}>Ya tienenes cuenta? Inicia sesión</a>
+                  <a className={styles.text_link}>
+                    Ya tienenes cuenta? Inicia sesión
+                  </a>
                 </Link>
               </Grid>
             </Grid>
