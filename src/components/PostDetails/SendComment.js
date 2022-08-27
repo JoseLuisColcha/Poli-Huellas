@@ -82,8 +82,12 @@ function SendComment(props) {
             placeholder="Escribe aquí tu comentario"
           />
         </FormControl>
-        <Box className={styles.button_container}>
-          <Button className={styles.submit_button} type="submit">
+        <Box variant="contained" className={styles.button_container}>
+          <Button
+            variant="contained"
+            className={styles.submit_button}
+            type="submit"
+          >
             Enviar
           </Button>
           <Button className={styles.cancel_button} onClick={cancel}>

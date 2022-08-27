@@ -17,17 +17,17 @@ export default function SearchPetSection() {
           p: 6,
         }}
       >
-        <Grid item xs={12} sm={6} order={{ xs: 2, sm: 1 }} >
+        <Grid item xs={12} sm={6} order={{ xs: 2, sm: 1 }}>
           <Typography className={styles.text_title_search}>
-            Encuentra un <span className={styles.text_title_span}>amigo</span> de
-            Verdad!
+            Encuentra un <span className={styles.text_title_span}>amigo</span>{" "}
+            de Verdad!
           </Typography>
           <Typography className={styles.text_content_search}>
             Está comprobado que tener una mascota en tu hogar mejora tu salud y
             humor.
           </Typography>
           <Link href={Routes.ADOPTIONS} passHref>
-            <Button className={styles.button_search}>
+            <Button variant="contained" className={styles.button_search}>
               Buscar mascotas
             </Button>
           </Link>

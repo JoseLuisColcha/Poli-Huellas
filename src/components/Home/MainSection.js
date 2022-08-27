@@ -30,7 +30,9 @@ export default function MainSection() {
         </Typography>
         {!session && (
           <Link href={Routes.REGISTER} passHref>
-            <Button className={styles.button_register}>Registrate</Button>
+            <Button variant="contained" className={styles.button_register}>
+              Registrate
+            </Button>
           </Link>
         )}
       </Grid>

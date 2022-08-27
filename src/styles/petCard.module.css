@@ -35,3 +35,9 @@
     color: red !important;
     font-weight: 700 !important;
 }
+
+.text_content {
+    font-size: 20px !important;
+    font-weight: 500 !important;
+    color: #110915 !important;
+}

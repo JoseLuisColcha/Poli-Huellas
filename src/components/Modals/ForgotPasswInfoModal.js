@@ -41,6 +41,7 @@ export default function ForgotPasswInfoModal({ open, handleClose }) {
       <DialogActions>
         <Link href={Routes.LOGIN} passHref>
           <Button
+            variant="contained"
             className={styles.submit_button}
             autoFocusonClick={handleClose}
           >

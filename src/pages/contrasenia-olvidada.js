@@ -85,7 +85,6 @@ const ResetPassword = () => {
               <Button
                 type="submit"
                 variant="contained"
-                color="primary"
                 size="large"
                 className={styles.button_container}
               >

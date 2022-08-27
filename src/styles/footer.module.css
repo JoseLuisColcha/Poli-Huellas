@@ -5,7 +5,9 @@
     display: flex !important;
     flex-direction: column !important;
     flex: 0 0 auto !important;
-
+    position: absolute !important;
+    clear: both !important;
+    width: 100% !important;
 }
 
 .text_content {
@@ -19,6 +21,7 @@
     font-size: 25px !important;
     color: #101011 !important;
 }
+
 .text_span {
     color: #BD95D5 !important;
 }

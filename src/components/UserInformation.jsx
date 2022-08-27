@@ -59,6 +59,7 @@ export const UserInformation = ({ userId }) => {
       </Grid>
       <Grid container justifyContent="center">
         <Button
+          variant="contained"
           className={styles.button_view_profile}
           onClick={() =>
             router.push(`/perfil-de-usuario/${userDataProfile.uid}`)

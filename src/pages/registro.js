@@ -52,12 +52,12 @@ const Register = () => {
   };
 
   return (
-    <Grid container component="main" sx={{ height: "80vh" }}>
+    <Grid container component="main">
       <Grid item xs={false} sm={4} md={7}>
-        <Image alt="mascota" src={RegisterImage} width={1900} height={1600} />
+        <Image alt="mascota" src={RegisterImage} width={1900} height={1700} />
       </Grid>
 
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid item xs={12} sm={8} md={5} component={Paper}>
         <Box
           sx={{
             marginTop: 2,
@@ -143,7 +143,11 @@ const Register = () => {
                 />
               </Grid>
             </Grid>
-            <Button type="submit" className={styles.button_register}>
+            <Button
+              type="submit"
+              variant="contained"
+              className={styles.button_register}
+            >
               Registrar
             </Button>
             <Grid container justifyContent="flex-end">

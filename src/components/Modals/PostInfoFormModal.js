@@ -1,5 +1,5 @@
 import { Box, Button, Grid, Modal, Typography, Divider } from "@mui/material";
-
+import styles from "../../styles/postInfoFormModal.module.css";
 const style = {
   position: "absolute",
   top: "50%",
@@ -7,12 +7,17 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: "auto",
   bgcolor: "background.paper",
-  border: "1px solid #000056",
+  border: "2px solid #7E41A1",
+  borderRadius: "20px",
   boxShadow: 24,
   paddingX: "2rem",
   paddingY: "1rem",
+  justifyContent: "center",
+  alignItems: "center",
+  flexDirection: "column",
+  backgroundColor: "#FFFFFF",
 };
-import styles from "../../styles/postInfoFormModal.module.css";
+
 export const PostInfoFormModal = ({
   open,
   handleClose,
@@ -29,7 +34,7 @@ export const PostInfoFormModal = ({
     >
       <Box component="form" sx={style}>
         <Typography id="modal-modal-title" className={styles.text_title_modal}>
-          Formulario de publicación
+          Solicitud de publicación
         </Typography>
         {formInfo.map(({ question, answer }) => {
           return (

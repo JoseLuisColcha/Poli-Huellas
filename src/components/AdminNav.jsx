@@ -22,6 +22,7 @@ import { SESSION_STATE, useAuth } from "@/lib/auth";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import styles from "../styles/navigation.module.css";
 
 const menuItems = [
   {
@@ -101,7 +102,7 @@ export function AdminNav() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="fixed" className={styles.navbar}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <NextLink href={Routes.ADMIN_USERS} passHref>
@@ -115,11 +116,10 @@ export function AdminNav() {
                 fontFamily: "monospace",
                 fontWeight: 700,
                 letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
+                color: "#101011",
               }}
             >
-              POLI HUELLAS
+              POLI <span className={styles.text_span}> HUELLAS</span>
             </Typography>
           </NextLink>
 

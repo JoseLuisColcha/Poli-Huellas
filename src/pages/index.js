@@ -6,7 +6,6 @@ import SearchPetSection from "@/components/Home/SearchPetSection";
 import Head from "next/head";
 
 export default function Home() {
-  
   return (
     <div>
       <Head>

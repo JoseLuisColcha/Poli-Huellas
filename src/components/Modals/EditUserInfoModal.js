@@ -16,10 +16,16 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: "auto",
   bgcolor: "background.paper",
-  border: "1px solid #000056",
+  border: "2px solid #7E41A1",
   boxShadow: 24,
   paddingX: "2rem",
   paddingY: "1rem",
+  borderRadius: "20px",
+  backgroundColor: "#FFFFFF",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  flexDirection: "column",
 };
 
 const EditUserInfoModal = ({

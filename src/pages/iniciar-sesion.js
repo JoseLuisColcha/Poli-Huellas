@@ -46,11 +46,11 @@ const Login = () => {
   };
 
   return (
-    <Grid container component="main" sx={{ height: "100vh" }}>
+    <Grid container component="main">
       <Grid item xs={false} sm={4} md={7}>
         <Image alt="mascota" src={RegisterImage} width={1500} height={1400} />
       </Grid>
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid item xs={12} sm={8} md={5} component={Paper}>
         <Box
           sx={{
             my: 8,
@@ -98,7 +98,11 @@ const Login = () => {
               error={!!errors.password}
               helperText={errors?.password?.message}
             />
-            <Button type="submit" className={styles.button_start}>
+            <Button
+              type="submit"
+              variant="contained"
+              className={styles.button_start}
+            >
               Iniciar
             </Button>
             <Grid container>

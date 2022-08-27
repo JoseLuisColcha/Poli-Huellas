@@ -33,11 +33,13 @@
 }
 
 .commenter_name {
+    margin-left: 5px !important;
     font-size: 18px !important;
     font-weight: 600 !important;
 }
 
 .message {
+    margin-left: 5px !important;
     font-size: 16px !important;
     font-weight: 400 !important;
 }
@@ -54,6 +56,7 @@
 }
 
 .comment_date {
+    margin-left: 5px !important;
     font-size: 12px !important;
     font-weight: 400 !important;
     color: #9A9A9A !important;
@@ -69,4 +72,8 @@
 
 .delete_icon {
     color: #B224EF !important;
+}
+.avatar_user{
+    height: 50px;
+    width: 50px;
 }
