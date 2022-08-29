@@ -5,3 +5,18 @@
     margin-top: 10px !important;
     text-align: center !important;
 }
+.accepted_button {
+    background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%) !important;
+    border-radius: 28px !important;
+    width: 120px !important;
+    height: 40px !important;
+    color: #FFFFFF !important;
+}
+
+.reject_button {
+    background: linear-gradient(90deg, #ef2457 0%, #e7b529 100%) !important;
+    border-radius: 28px !important;
+    width: 120px !important;
+    height: 40px !important;
+    color: #FFFFFF !important;
+}
