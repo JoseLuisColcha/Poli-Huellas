@@ -47,10 +47,10 @@ const Login = () => {
 
   return (
     <Grid container component="main">
-      <Grid item xs={false} sm={4} md={7}>
+      <Grid item xs={12} sm={12} md={7}>
         <Image alt="mascota" src={RegisterImage} width={1500} height={1400} />
       </Grid>
-      <Grid item xs={12} sm={8} md={5} component={Paper}>
+      <Grid item xs={12} sm={12} md={5} component={Paper}>
         <Box
           sx={{
             my: 8,
@@ -116,7 +116,7 @@ const Login = () => {
               <Grid item>
                 <NextLink href={Routes.REGISTER}>
                   <a>
-                    No tienes cuenta?{" "}
+                    No tienes cuenta?
                     <span className={styles.text_link}>Crea una</span>
                   </a>
                 </NextLink>

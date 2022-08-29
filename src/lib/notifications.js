@@ -7,6 +7,8 @@ import {
   Timestamp,
   onSnapshot,
   orderBy,
+  doc,
+  deleteDoc,
 } from "firebase/firestore";
 
 export const listtenNotifications = ({ receiverId, callback }) => {
@@ -31,4 +33,9 @@ export const createNotification = async (receiverId, message, postId) => {
   } catch (e) {
     console.log(e);
   }
+};
+
+export const deleteNotification = async (id) => {
+  const docRef = doc(db, "notifications", id);
+  await deleteDoc(docRef);
 };

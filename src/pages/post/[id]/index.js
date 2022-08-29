@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import { getPost, updatePost } from "@/lib/posts";
-import { Grid, Stack } from "@mui/material";
+import { Grid, Stack, Box } from "@mui/material";
 import PostCover from "@/components/PostDetails/PostCover";
 import PostInformation from "@/components/PostDetails/PostInformation";
 import Comments from "@/components/PostDetails/Comments";
@@ -11,6 +11,9 @@ import NOTIFICATIONS from "src/constants/notifications";
 import { createNotification } from "@/lib/notifications";
 import Routes from "src/constants/routes";
 import PETTYPE from "src/constants/petType";
+import DeletePostImage from "../../../../public/images/delete-post.webp";
+import Image from "next/image";
+import styles from "@/styles/postDeleted.module.css";
 
 function Post() {
   const router = useRouter();
@@ -40,7 +43,7 @@ function Post() {
       });
       postData?.petType === PETTYPE.GATO
         ? push(Routes.ADMIN_CATS)
-        : postData?.petType === PETTYPE.DOG
+        : postData?.petType === PETTYPE.PERRO
         ? push(Routes.ADMIN_DOGS)
         : push(Routes.ADMIN_OTHER);
     } catch (e) {
@@ -69,48 +72,67 @@ function Post() {
 
   return (
     <>
-      {postData && (
-        <>
-          <Grid container marginTop={3}>
-            <Grid item xs={12} sm={12} md={4}>
-              <PostCover
-                petImage={postData.image}
-                petName={postData.petName}
-                userId={postData.userId}
-              />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              sm={12}
-              md={8}
-              sx={{ justifyContent: "center", alignItems: "center" }}
-            >
-              <PostInformation
-                id={id}
-                petName={postData.petName}
-                petSex={postData.petSex}
-                petAge={postData.petAge}
-                petSize={postData.petSize}
-                description={postData.description}
-                postUserId={postData.userId}
-                petType={postData.petType}
-                setOpenPostForm={setOpenPostForm}
-              />
-            </Grid>
+      {postData === undefined ? (
+        <Box className={styles.image_container}>
+          <Grid
+            container
+            item
+            xs={12}
+            sm={12}
+            className={styles.image_container}
+          >
+            <Image
+              alt="logo-mascota"
+              src={DeletePostImage}
+              width={490}
+              height={530}
+            />
           </Grid>
-          <Stack marginTop={5}>
-            <Comments postId={id} ownerId={postData.userId} />
-          </Stack>
+        </Box>
+      ) : (
+        postData && (
+          <>
+            <Grid container marginTop={3}>
+              <Grid item xs={12} sm={12} md={4}>
+                <PostCover
+                  petImage={postData.image}
+                  petName={postData.petName}
+                  userId={postData.userId}
+                />
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={8}
+                sx={{ justifyContent: "center", alignItems: "center" }}
+              >
+                <PostInformation
+                  id={id}
+                  petName={postData.petName}
+                  petSex={postData.petSex}
+                  petAge={postData.petAge}
+                  petSize={postData.petSize}
+                  description={postData.description}
+                  postUserId={postData.userId}
+                  petType={postData.petType}
+                  setOpenPostForm={setOpenPostForm}
+                />
+              </Grid>
+            </Grid>
+            <Stack marginTop={5}>
+              <Comments postId={id} ownerId={postData.userId} />
+            </Stack>
 
-          <PostInfoFormModal
-            open={openPostForm}
-            handleClose={handleClosePostFormModal}
-            formInfo={postData.form}
-            handleAction={handleAction}
-            postStatus={postData.status}
-          />
-        </>
+            <PostInfoFormModal
+              open={openPostForm}
+              handleClose={handleClosePostFormModal}
+              formInfo={postData.form}
+              handleAction={handleAction}
+              postStatus={postData.status}
+            />
+          </>
+        )
       )}
     </>
   );

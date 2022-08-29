@@ -474,7 +474,7 @@ function Giveadoption() {
           </DialogTitle>
           <DialogContent className={styles.dialog_container}>
             <Image
-              src="/images/huella.png"
+              src="/images/huella.webp"
               alt="fingerprint"
               width="154.24px"
               height="60px"
