@@ -289,7 +289,9 @@ export function AdminNav() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem onClick={handleLogout}>Cerrar sesión</MenuItem>
+              <NextLink href={Routes.HOME}>
+                <MenuItem onClick={handleLogout}>Cerrar sesión</MenuItem>
+              </NextLink>
             </Menu>
           </Box>
         </Toolbar>

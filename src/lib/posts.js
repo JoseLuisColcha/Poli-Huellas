@@ -44,6 +44,7 @@ export const getPost = async (postId) => {
   if (docSnap.exists()) {
     return { ...docSnap.data(), id: docSnap.id };
   } else {
+    console.log(docSnap.data());
     console.log("No such document!");
   }
 };

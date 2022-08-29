@@ -36,6 +36,6 @@
 
 .image_container {
     justify-content: center !important;
-    margin-right: 130px;
-    
+    margin-right: 130px !important;
+
 }

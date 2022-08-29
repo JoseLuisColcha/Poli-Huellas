@@ -5,7 +5,6 @@ import DeleteModal from "./DeleteModal";
 
 const DeleteCommentModal = ({ open, handleClose, commentId }) => {
   const { addAlert } = useAlert();
-  console.log("Id de comentario modal", commentId);
 
   const handleDeleteComment = () => {
     try {

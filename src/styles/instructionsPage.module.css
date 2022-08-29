@@ -1,3 +1,22 @@
 .text_title_span {
-    color: #7E41A1 !important;
+    color: #B224EF !important;
+    font-weight: 700 !important;
+}
+
+.text_title {
+    font-weight: 900 !important;
+}
+
+.text_title_container {
+    background-color: #F7E9FD !important;
+
+}
+.text_content_rigth {
+    font-weight: 500 !important;
+    margin-bottom: 40px !important;
+}
+
+.text_content_left {
+    font-weight: 500 !important;
+    margin-bottom: 20px !important;
 }
