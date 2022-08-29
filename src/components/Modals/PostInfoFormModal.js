@@ -76,6 +76,7 @@ export const PostInfoFormModal = ({
           {postStatus === "created" && (
             <>
               <Button
+                className={styles.accepted_button}
                 variant="contained"
                 id="ACCEPTED"
                 onClick={() => handleAction("ACCEPTED")}
@@ -84,7 +85,7 @@ export const PostInfoFormModal = ({
               </Button>
               <Button
                 variant="contained"
-                color="error"
+                className={styles.reject_button}
                 id="REJECTED"
                 onClick={() => handleAction("REJECTED")}
               >
