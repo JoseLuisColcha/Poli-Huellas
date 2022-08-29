@@ -3,11 +3,12 @@
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
+    text-align: center !important;
 }
 
 .dialog_text {
-    font-size: 32px !important;
-    font-weight: 700 !important;
+    font-size: 20px !important;
+    font-weight: 500 !important;
     color: #666666 !important;
     padding-top: 20px !important;
 }
@@ -15,7 +16,7 @@
 .submit_button {
     background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%) !important;
     border-radius: 28px !important;
-    width: 151px !important;
-    height: 56px !important;
+    width: 120px !important;
+    height: 50px !important;
     color: #FFFFFF !important;
 }

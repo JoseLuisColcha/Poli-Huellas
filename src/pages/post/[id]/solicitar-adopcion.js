@@ -163,6 +163,7 @@ function AdoptionRequest() {
   });
   const { addAlert } = useAlert();
   const [openDialog, setOpenDialog] = useState(false);
+  const [open, setOpen] = useState(false);
   const [postData, setPostData] = useState();
 
   useEffect(() => {
@@ -201,10 +202,13 @@ function AdoptionRequest() {
       console.error(e);
     }
   };
-
+  const handleClose = async () => {
+    setOpen(false);
+    push(`/post/${query.id}`);
+  };
   const handleOnChange = (e, index) => {
     const { value } = e.target;
-    const newQuestions = [...questions]; // check this out bacause I am mutating the state since I am not doing a deep copy
+    const newQuestions = [...questions];
     newQuestions[index].answer = value;
     newQuestions[index].error.exists = false;
     setQuestions(newQuestions);
@@ -248,12 +252,7 @@ function AdoptionRequest() {
         status,
         id: userAdoptionRequestByPostId?.id,
       });
-      addAlert({
-        text: "Solicitud de adopción actualizada",
-        severity: "success",
-        duration: 6000,
-      });
-      push(`/post/${query.id}`);
+      setOpen(true);
     } catch (e) {
       console.error(e);
     }
@@ -404,6 +403,35 @@ function AdoptionRequest() {
                 >
                   Denegar
                 </Button>
+                <Dialog open={open}>
+                  <DialogContent className={styles.dialog_container}>
+                    <Image
+                      src="/images/huella.webp"
+                      alt="fingerprint"
+                      width="154.24px"
+                      height="60px"
+                      background="#B224EF"
+                      transform="rotate(-34.58deg)"
+                    />
+                    <DialogContentText
+                      id="alert-dialog-description"
+                      className={styles.dialog_text}
+                    >
+                      Recuerda, al aceptar o denegar la solicitud se lo
+                      notificaremos al solicitante.
+                    </DialogContentText>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button
+                      variant="contained"
+                      className={styles.submit_button}
+                      autoFocus
+                      onClick={handleClose}
+                    >
+                      OK!
+                    </Button>
+                  </DialogActions>
+                </Dialog>
               </>
             )
           ) : (
@@ -424,7 +452,7 @@ function AdoptionRequest() {
         <DialogContent className={styles.dialog_container}>
           <Stack alignItems={"center"}>
             <Image
-              src="/images/huella.png"
+              src="/images/huella.webp"
               alt="fingerprint"
               width="154.24px"
               height="60px"

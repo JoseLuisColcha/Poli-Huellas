@@ -20,7 +20,7 @@ export const UserInformation = ({ userId }) => {
   return (
     <Grid xs={12} sm={2}>
       <Typography className={styles.text_title}>
-        Información y formulario completado del{" "}
+        Información y formulario completado del
         <span className={styles.text_title_span}>adoptante</span>
       </Typography>
       <Grid marginY={2} container direction="column" alignItems="center">
@@ -34,7 +34,7 @@ export const UserInformation = ({ userId }) => {
       </Grid>
       <Grid container direction="column" alignItems="center">
         <Typography variant="h6" noWrap>
-          Adoptante
+          Solicitante
         </Typography>
         <List>
           <ListItem disablePadding>

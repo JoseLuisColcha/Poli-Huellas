@@ -17,16 +17,16 @@
 .submit_button {
   background: linear-gradient(90deg, #B224EF 0%, #7579FF 100%) !important;
   border-radius: 28px !important;
-  width: 151px !important;
-  height: 56px !important;
+  width: 120px !important;
+  height: 50px !important;
   color: #FFFFFF !important;
 }
 
 .reject_button {
   background: linear-gradient(90deg, #ef2457 0%, #e7b529 100%) !important;
   border-radius: 28px !important;
-  width: 151px !important;
-  height: 56px !important;
+  width: 120px !important;
+  height: 50px !important;
   color: #FFFFFF !important;
 }
 
@@ -37,10 +37,11 @@
 
 .text_remark {
   font-size: 20px !important;
-  margin-left: 20px!important;
-  margin-top: 30px!important;
+  margin-left: 20px !important;
+  margin-top: 30px !important;
 }
-.icon_pet{
+
+.icon_pet {
   color: #B224EF !important;
 }
 
@@ -50,4 +51,20 @@
   height: 30px !important;
   width: 30px !important;
   margin-left: 30px !important;
+}
+
+.dialog_container {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+.dialog_text {
+  margin-top: 10px !important;
+  font-size: 20px !important;
+  font-weight: 500 !important;
+  color: #666666 !important;
+  padding-top: 20px !important;
 }
