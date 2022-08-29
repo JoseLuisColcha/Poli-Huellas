@@ -21,7 +21,7 @@ export const UserInformation = ({ userId }) => {
     <Grid xs={12} sm={2}>
       <Typography className={styles.text_title}>
         Información y formulario completado del
-        <span className={styles.text_title_span}>adoptante</span>
+        <span className={styles.text_title_span}> solicitante</span>
       </Typography>
       <Grid marginY={2} container direction="column" alignItems="center">
         <Avatar
