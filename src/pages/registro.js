@@ -53,11 +53,11 @@ const Register = () => {
 
   return (
     <Grid container component="main">
-      <Grid item xs={false} sm={4} md={7}>
-        <Image alt="mascota" src={RegisterImage} width={1900} height={1700} />
+      <Grid item xs={12} sm={12} md={7}>
+        <Image alt="mascota" src={RegisterImage} width={2200} height={1945} />
       </Grid>
 
-      <Grid item xs={12} sm={8} md={5} component={Paper}>
+      <Grid item xs={12} sm={12} md={5} component={Paper}>
         <Box
           sx={{
             marginTop: 2,

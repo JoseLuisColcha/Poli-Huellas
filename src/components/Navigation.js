@@ -307,7 +307,9 @@ export default function ResponsiveAppBar(props) {
                 <NextLink href={`/perfil-de-usuario/${session?.uid}`}>
                   <MenuItem onClick={handleCloseUserMenu}>Perfil</MenuItem>
                 </NextLink>
-                <MenuItem onClick={handleLogout}>Cerrar sesión</MenuItem>
+                <NextLink href={Routes.HOME}>
+                  <MenuItem onClick={handleLogout}>Cerrar sesión</MenuItem>
+                </NextLink>
               </Menu>
             </Box>
           </Toolbar>
