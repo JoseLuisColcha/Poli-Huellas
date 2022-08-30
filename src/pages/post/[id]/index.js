@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import { getPost, updatePost } from "@/lib/posts";
-import { Grid, Stack, Box } from "@mui/material";
+import { Grid, Stack, Box, Typography, Container } from "@mui/material";
 import PostCover from "@/components/PostDetails/PostCover";
 import PostInformation from "@/components/PostDetails/PostInformation";
 import Comments from "@/components/PostDetails/Comments";
@@ -120,9 +120,29 @@ function Post() {
                 />
               </Grid>
             </Grid>
-            <Stack marginTop={5}>
-              <Comments postId={id} ownerId={postData.userId} />
-            </Stack>
+            {postData.status === "ACCEPTED" ? (
+              <Stack marginTop={5}>
+                <Comments postId={id} ownerId={postData.userId} />
+              </Stack>
+            ) : postData.status === "REJECTED" ? (
+              <Container>
+                <Typography
+                  variant="h6"
+                  color="red"
+                  textAlign={"center"}
+                  marginTop={2}
+                >
+                  Esta publicación ha sido denegada porque es inapropiada e
+                  incumple nuestras normas comunitarias.
+                </Typography>
+                <Typography variant="h6" color="red" textAlign={"center"}>
+                  En el transcurso del día la publicación será eliminada
+                  completamente del sistema.
+                </Typography>
+              </Container>
+            ) : (
+              ""
+            )}
 
             <PostInfoFormModal
               open={openPostForm}

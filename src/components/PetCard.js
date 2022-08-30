@@ -23,6 +23,7 @@ export const PetCard = (props) => {
                   alt={petName}
                   src={petImage}
                 ></Avatar>
+                <Typography className={styles.title}>{petName}</Typography>
                 <Typography className={styles.text_content} marginY={2}>
                   <span className={styles.label}>Edad: </span> {petAge}
                 </Typography>
