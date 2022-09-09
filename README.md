@@ -2,7 +2,7 @@
 El sistema web permite gestionar la publicación y adopción de mascotas rescatadas de la calle en la ciudad de Quito.
 
 ## Roles de usuario:man_office_worker:
-El sistema de adopción cuenta con dos tipos de roles de usuarios:
+El sistema de adopción cuenta con dos tipos de roles:
 - Rol Ciudadano
 - Rol Administrador
 
