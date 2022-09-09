@@ -23,21 +23,10 @@ git clone https://github.com/JoseLuisColcha/Poli-Huellas.git
 ```bash
 npm install
 ```
-3. Configurar las variables de entorno en este directorio `src/lib/firebase/client.js`.
-```bash
-const firebaseConfig = {
-  apiKey: "[YOUR_apiKey_HERE]",
-  authDomain: "[YOUR_authDomain_HERE]",
-  projectId: "[YOUR_projectId_HERE]",
-  storageBucket: "[YOUR_storageBucket_HERE]",
-  messagingSenderId: "[YOUR_messagingSenderId_HERE]",
-  appId: "[YOUR_appId_HERE]",
-};
-```
-4. Correr el servidor con el siguiente comando.
+3. Correr el servidor con el siguiente comando.
 
 ```bash
 npm run dev
 ```
-5. Abrir [http://localhost:3000](http://localhost:3000) en el navegador y se visualizará el sistema web.
+4. Abrir [http://localhost:3000](http://localhost:3000) en el navegador y se visualizará el sistema web.
 ![polHuellas7](https://user-images.githubusercontent.com/66267613/189255471-7202223c-00dc-4c78-bc0b-7b8caaefeda9.gif) 
