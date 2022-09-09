@@ -28,5 +28,5 @@ npm install
 ```bash
 npm run dev
 ```
-4. Abrir [http://localhost:3000](http://localhost:3000) en el navegador y se visualizará el sistema web.
+4. Abrir [http://localhost:3000](http://localhost:3000) en el navegador y se visualiza el sistema web.
 ![polHuellas7](https://user-images.githubusercontent.com/66267613/189255471-7202223c-00dc-4c78-bc0b-7b8caaefeda9.gif) 
