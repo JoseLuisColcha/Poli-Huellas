@@ -18,7 +18,7 @@ Para la correcta instalación del proyecto se debe seguir los siguientes pasos:
 ```bash
 git clone https://github.com/JoseLuisColcha/Poli-Huellas.git
 ```
-2. Ubicarse en el directorio donde se clono el repositorio e instalar las dependencias.
+2. Ubicarse en el directorio donde se clonó el repositorio e instalar las dependencias.
 
 ```bash
 npm install
