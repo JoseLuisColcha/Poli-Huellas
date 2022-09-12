@@ -18,6 +18,8 @@ import {
 import { auth, db } from "./firebase/client";
 import { useAlert } from "./alert";
 
+import translateMessage from "../constants/messages";
+
 export const SESSION_STATE = {
   NO_KNOWN: undefined,
   NO_LOGGED: null,
@@ -153,10 +155,11 @@ function useAuthProvider() {
     } catch (error) {
       console.log("signin error", { error });
       addAlert({
-        text: "Error al iniciar sesión",
+        text: translateMessage(error.code),
         severity: "error",
         duration: 6000,
       });
+      //alert(translateMessage(error.code));
     }
   }
 
