@@ -19,10 +19,6 @@ import { auth, db } from "./firebase/client";
 import { useAlert } from "./alert";
 
 import translateMessage from "../constants/messages";
-export const SESSION_STATE = {
-  NO_KNOWN: undefined,
-  NO_LOGGED: null,
-};
 
 export const SESSION_STATE = {
   NO_KNOWN: undefined,
