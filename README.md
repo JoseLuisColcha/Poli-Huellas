@@ -7,7 +7,7 @@ El sistema de adopción cuenta con dos tipos de roles:
 - Rol Administrador
 
 ## Anexos :page_facing_up:🎥
-- [Informe Técnico](https://drive.google.com/file/d/1P0rpMF5c0BMJX37FIEYcjRWpPbF9yA_W/view?usp=sharing)
+- [Informe Técnico](https://drive.google.com/file/d/1QH9vZYTtjuxec2bdTiVQyW442_StiqDD/view?usp=sharing)
 - [Manual de usuario](https://www.youtube.com/watch?v=Lx5lvqZ4JeM)
 ## Despliegue del sistema web :earth_americas:
 Para ingresar al sistema web en producción puede visitar el siguiente enlace: https://poli-huellas.vercel.app/
