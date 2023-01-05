@@ -154,7 +154,7 @@ const Register = () => {
               <Grid item>
                 <Link href={Routes.LOGIN}>
                   <a className={styles.text_link}>
-                    Ya tienenes cuenta? Inicia sesión
+                    Ya tienes cuenta? Inicia sesión
                   </a>
                 </Link>
               </Grid>
