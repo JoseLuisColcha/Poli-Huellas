@@ -1,4 +1,4 @@
-# POLI HUELLAS :dog:
+<h1 align="center">:cat: POLI HUELLAS :dog:</h1> 
 El sistema web permite gestionar la publicación y adopción de mascotas rescatadas de la calle en la ciudad de Quito.
 
 ## Roles de usuario:man_office_worker:
