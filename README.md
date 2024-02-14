@@ -1,7 +1,7 @@
 <h1 align="center">:cat: POLI HUELLAS :dog:</h1> 
 El sistema web permite gestionar la publicación y adopción de mascotas rescatadas de la calle en la ciudad de Quito.
 
-## Roles de usuario:man_office_worker:
+## Roles de usuario:🧑‍💼
 El sistema de adopción cuenta con dos tipos de roles:
 - Rol Ciudadano
 - Rol Administrador
@@ -11,7 +11,7 @@ El sistema de adopción cuenta con dos tipos de roles:
 - [Manual de usuario](https://www.youtube.com/watch?v=Lx5lvqZ4JeM)
 ## Despliegue del sistema web :earth_americas:
 Para ingresar al sistema web en producción puede visitar el siguiente enlace: https://poli-huellas.vercel.app/
-## Manual de instalación 	:computer:
+## Manual de instalación 💻
 Para la correcta instalación del proyecto se debe seguir los siguientes pasos:
 
 1. Clonar el proyecto mediante una terminal.
